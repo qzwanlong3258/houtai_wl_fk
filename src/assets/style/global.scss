@@ -1,0 +1,59 @@
+@import "./reset";
+
+@import "./transition";
+
+@import "./variable.scss";
+
+.color-main {
+  color: $hover-color;
+}
+
+.color-success {
+  color: #67C23A;
+}
+
+.color-warning {
+  color: #E6A23C;
+}
+
+.color-danger {
+  color: #F56C6C;
+}
+
+.color-info {
+  color: #909399;
+}
+
+.dialog-btn {
+  border-radius: 20px;
+  width: 206px;
+  height: 40px;
+  text-align: center;
+  background: $hover-color;
+  margin: 20px 80px 0;
+  font-size: 16px;
+  color: #fff;
+}
+.dialog-btn:hover {
+  background: $hover-color;
+  color: #fff;
+}
+
+.title-tip {
+  font-size:18px;
+  font-weight: bold;
+  text-align: center;
+} 
+
+//分页位置
+.pagination-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.cascader-menu-list .cascader-menu-option.selected {
+  color: $hover-color !important;
+}
