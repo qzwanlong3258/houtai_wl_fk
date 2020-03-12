@@ -7,9 +7,9 @@ import store from "../store/index.js"
 axios.defaults.timeout = 50000
 // axios.defaults.baseURL = "http://192.168.3.25:8088"
 //   axios.defaults.baseURL = "http://www.feiaizn.com:8088"
-axios.defaults.baseURL = "/yunliuyan"
+axios.defaults.baseURL = "/feike"
 
-//请求拦截器
+// 请求拦截器
 axios.interceptors.request.use(
   config => {
     const token = getCookie("token")

@@ -20,6 +20,16 @@ module.exports = {
         pathRewrite: {
           '^/yunliuyan': ''
         }
+      },
+      '/feike': {
+        // target: 'http://192.168.5.2:8800',
+        // target: 'http://www.feiaizn.com:8088',
+        // target: 'http://192.168.5.17:8088',
+        target : "http://47.104.232.184:1001",
+        changeOrigin: true,
+        pathRewrite: {
+          '^/feike': ''
+        }
       }
     },
 

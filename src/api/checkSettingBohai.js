@@ -1,11 +1,11 @@
-import request from '@/utils/request'
+import request from '@/utils/requestBohai'
 import { GET_PRECHECK_LIST,SET_PRECHECK_PASS,SET_PRECHECK_FAIL } from '@/assets/constants/api'
 
 //获取用户列表接口
 export function getCheckList(data) {
     return request({
         method: 'GET',
-        url: `${GET_PRECHECK_LIST}?&status=${data.status}`,
+        url: `${GET_PRECHECK_LIST}?page=${data.pageSize}&page=${data.pageNum}&state=${data.state}`,
     })
 }
 

@@ -5,18 +5,18 @@
   </div>
 </template>
 
-</<script>
+<script>
 import { mapActions } from 'vuex'
 import { checkNull } from '@/utils/check'
 import { Loading } from 'element-ui'
 export default {
   data() {
       return {
-         
+
       }
   },
   methods:{
-   
+
   },
 }
 </script>

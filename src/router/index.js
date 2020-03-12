@@ -94,6 +94,22 @@ export default new Router({
       ]
     },
     {
+      path: '/bohaiCheckSetting',
+      name: '渤海银行审批管理',
+      component: Layout,
+      redirect: '/bohaiCheckSetting/loanSetting',
+      meta: { auth: true, description:'渤海银行审批管理',title:'渤海银行审批管理',icon: 'icondkw_daikuan-'},
+      children: [
+        {
+          path: 'loanSetting',
+          name: '渤海银行贷款预审',
+          component: () => import('@/pages/FeiAi/bohaiCheckSetting/LoanSetting'),
+          meta: { auth: true, description:'渤海银行贷款预审',title:'渤海银行贷款预审',icon: 'iconshenheguanli'},
+          hidden: true
+        }
+      ]
+    },
+    {
       path: '/faceStting',
       name: '面签管理',
       component: Layout,
@@ -105,6 +121,21 @@ export default new Router({
           name: '贷款面签',
           component: () => import('@/pages/FeiAi/FaceSetting/FaceLoan'),
           meta: { auth: true, description:'贷款面签',title:'贷款面签',icon: 'iconqianzi'},
+        }
+      ]
+    },
+    {
+      path: '/bohaiFaceSetting',
+      name: '渤海银行面签管理',
+      component: Layout,
+      redirect: '/bohaiFaceSetting/faceLoan',
+      meta: { auth: true, description:'渤海银行面签管理',title:'渤海银行面签管理',icon: 'icontuijian'},
+      children: [
+        {
+          path: 'faceLoan',
+          name: '渤海银行贷款面签',
+          component: () => import('@/pages/FeiAi/bohaiFaceSetting/FaceLoan'),
+          meta: { auth: true, description:'渤海银行贷款面签',title:'渤海银行贷款面签',icon: 'iconqianzi'},
         }
       ]
     },

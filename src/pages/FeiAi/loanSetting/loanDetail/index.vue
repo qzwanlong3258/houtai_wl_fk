@@ -152,13 +152,45 @@
         </div>
       </div>
     </el-card>
+<!--    <el-card class="layout-title" shadow="never">-->
+<!--      <i class="iconfont iconrenshengjieduan" style="margin-top: 5px"></i>-->
+<!--      <span style="margin-top: 5px">放款阶段</span>-->
+<!--      <div class="stage-clonum" v-for="(item,index) in stageList" :key="index">-->
+<!--        <div-->
+<!--          class="stage-name"-->
+<!--        >{{item.period | getStageName}}{{item.period != 0 ? `:${item.periodName}(比率: ${item.percent}%)`:""}}-->
+<!--        </div>-->
+<!--        <div v-if="item.photoList.length">-->
+<!--          <el-row :gutter="20">-->
+<!--            <el-col :span="6" v-for="(v,k) in item.photoList" :key="k">-->
+<!--              <div class="un-handle-item">-->
+<!--                <img :src="v.photo" alt="图片失焦"/>-->
+<!--                <div class="phone-type color-success">{{v.potName}}</div>-->
+<!--              </div>-->
+<!--            </el-col>-->
+<!--          </el-row>-->
+<!--          <div v-if="item.periodStatus == 1" class="todo-btn">-->
+<!--            <el-button size="medium" @click="passLoan(item.period)">同意</el-button>-->
+<!--            <el-button @click="refuse(item.period)" size="medium">拒绝</el-button>-->
+<!--          </div>-->
+<!--          <div v-if="item.periodStatus == 2" class="color-success todo-status">放款成功</div>-->
+<!--          <div v-if="item.periodStatus == 3">-->
+<!--            <div class="color-danger todo-status">放款失败</div>-->
+<!--            <div class="refuse-reason color-danger">原因: 根据图片显示，未达到装修阶段</div>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--        <div v-if="!item.photoList.length">-->
+<!--          <div class="un-handle-content">该阶段尚未开通</div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </el-card>-->
     <el-card class="layout-title" shadow="never">
       <i class="iconfont iconrenshengjieduan" style="margin-top: 5px"></i>
       <span style="margin-top: 5px">放款阶段</span>
       <div class="stage-clonum" v-for="(item,index) in stageList" :key="index">
         <div
           class="stage-name"
-        >{{item.period | getStageName}}{{item.period != 0 ? `:${item.periodName}(比率: ${item.percent}%)`:""}}
+        >{{item.period }}
         </div>
         <div v-if="item.photoList.length">
           <el-row :gutter="20">
@@ -208,7 +240,15 @@
                     "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1573451622870&di=76c38458e71e140fe6dc67d519e79d51&imgtype=0&src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F80a44365136f55c263ec2ffe099bb04938d5707bec82-QHgAi1_fw658",
                 refuseModel: false,
                 refusePeriod: "",
-                stageList: []
+                stageList: [{
+                  period:'223',
+                  photoList:[{
+                    photo:'https://s2.ax1x.com/2019/10/08/ufSasU.jpg',
+                    potName:'qqq'
+                  }],
+                  periodStatus:1,
+
+                }]
             };
         },
         components: {
