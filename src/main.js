@@ -14,6 +14,12 @@ import VCharts from 'v-charts'
 import { pca, pcaa } from 'area-data'
 import 'vue-area-linkage/dist/index.css'
 import VueAreaLinkage from 'vue-area-linkage'
+// 图片放大
+import imageViewer from './components/vue-imageViewer-master/index'
+import handlingTitle from '@/components/handlingTitle/index'
+Vue.component('handlingTitle', handlingTitle)
+Vue.use(imageViewer)
+
 Vue.use(VueAreaLinkage)
 Vue.config.productionTip = false
 Vue.prototype.$pca = pca;

@@ -85,20 +85,20 @@ export default {
       statusList: [
         {
           id: 0,
-          label: "全部"
+          label: "待预审"
         },
         {
           id: 1,
-          label: "待审核"
-        },
-        {
-          id: 2,
           label: "已通过"
         },
         {
-          id: 3,
+          id: 2,
           label: "未通过"
-        }
+        },
+        // {
+        //   id: 3,
+        //   label: "未通过"
+        // }
       ],
       list: [],
       total: null,
@@ -134,8 +134,6 @@ export default {
       console.log(tab)
       if(tab.index == 0){
         this.listQuery.state =1
-
-
       }
       if(tab.index == 1){
         this.listQuery.state =21

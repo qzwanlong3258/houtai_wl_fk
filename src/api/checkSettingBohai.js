@@ -5,7 +5,7 @@ import { GET_PRECHECK_LIST,SET_PRECHECK_PASS,SET_PRECHECK_FAIL } from '@/assets/
 export function getCheckList(data) {
     return request({
         method: 'GET',
-        url: `${GET_PRECHECK_LIST}?page=${data.pageSize}&page=${data.pageNum}&state=${data.state}`,
+        url: `${GET_PRECHECK_LIST}?size=${data.pageSize}&page=${data.pageNum}&state=${data.state}`,
     })
 }
 

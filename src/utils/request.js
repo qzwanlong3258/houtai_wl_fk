@@ -10,23 +10,23 @@ axios.defaults.timeout = 50000
 axios.defaults.baseURL = "/yunliuyan"
 
 //请求拦截器
-axios.interceptors.request.use(
-  config => {
-    const token = getCookie("token")
-    config.data = JSON.stringify(config.data)
-    config.headers = {
-      "Content-Type": "application/json"
-    }
-    config.params = {"token": "123"}
-    if(token) {
-        config.params = {'token':token}
-    }
-    return config
-  },
-  error => {
-    return Message.error(error)
-  }
-);
+// axios.interceptors.request.use(
+//   config => {
+//     const token = getCookie("token")
+//     config.data = JSON.stringify(config.data)
+//     config.headers = {
+//       "Content-Type": "application/json"
+//     }
+//     config.params = {}
+//     if(token) {
+//         config.params = {'token':token}
+//     }
+//     return config
+//   },
+//   error => {
+//     return Message.error(error)
+//   }
+// );
 
 
 //响应拦截器

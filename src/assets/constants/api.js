@@ -54,8 +54,8 @@ module.exports = {
     //审批管理
     // GET_PRECHECK_LIST: '/precheck/list', //获取贷款预审列表
     GET_PRECHECK_LIST: '/info/loadInfo', //获取贷款预审列表
-    SET_PRECHECK_PASS: '/precheck/update/pass', //审批通过
-    SET_PRECHECK_FAIL: '/precheck/update/fail', //审批不通过
+    SET_PRECHECK_PASS: '/info/updateState', //审批通过
+    SET_PRECHECK_FAIL: '/info/updateState', //审批不通过
 
     GET_FACESIGN_LIST: '/facesign/list', //获取贷款面签列表
     SET_FACESIGN_PASS: '/facesign/update/pass', //面签成功
