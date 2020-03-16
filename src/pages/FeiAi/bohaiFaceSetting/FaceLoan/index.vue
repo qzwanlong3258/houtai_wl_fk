@@ -68,27 +68,23 @@
 </template>
 <script>
 import LoveTable from "./components/table";
-import { getFaceList } from "@/api/facesign";
+import { getFaceList } from "@/api/bohaifacesign";
 export default {
   data() {
     return {
       statusList: [
         {
           id: 0,
-          label: "全部"
+          label: "预审成功"
         },
         {
           id: 1,
-          label: "待完成"
+          label: "已通过"
         },
         {
           id: 2,
-          label: "面签成功"
+          label: "未通过"
         },
-        {
-          id: 3,
-          label: "面签失败"
-        }
       ],
       produceType: [
         {
@@ -107,7 +103,7 @@ export default {
         loanerName: "",
         loanQuota: "",
         facesignCity: "",
-        faceStatus: 0,
+        state: 21,
         pageNum: 1,
         pageSize: 5
       }
@@ -130,8 +126,18 @@ export default {
     },
     //切换tab
     tabClickEvent(tab, e) {
-      this.listQuery.faceStatus = tab.index;
-      this.getList();
+      console.log(tab)
+      if(tab.index == 0){
+        this.listQuery.state =21
+      }
+      if(tab.index == 1){
+        this.listQuery.state =31
+
+      }
+      if(tab.index == 2){
+        this.listQuery.state = 32
+
+      }
     },
     handleSizeChange(val) {
       this.listQuery.pageNum = 1;

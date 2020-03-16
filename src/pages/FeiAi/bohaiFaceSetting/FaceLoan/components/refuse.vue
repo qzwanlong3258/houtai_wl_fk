@@ -24,7 +24,7 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { getFailDesign } from "@/api/facesign";
+import { getFailDesign } from "@/api/bohaifacesign";
 export default {
   components: {
     LoveDialog
@@ -50,7 +50,9 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting: function() {
-      getFailDesign({reason:this.reason,orderId:this.refuseId}).then(res=>{
+      getFailDesign({uuid: this.refuseId,
+        state:32,
+        errorMsg: this.reason}).then(res=>{
         if(res.code === 0){
           this.status = !this.status
           this.$message.success('提交成功')

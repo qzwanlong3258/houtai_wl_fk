@@ -24,7 +24,7 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { getFailList } from "@/api/checkSetting";
+import { getFailList } from "@/api/checkSettingBohai";
 export default {
   components: {
     LoveDialog

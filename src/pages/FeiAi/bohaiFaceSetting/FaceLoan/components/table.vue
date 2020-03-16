@@ -1,61 +1,175 @@
 <template>
   <div class="table-container">
     <el-table ref="loanSetting" style="width: 100%" :data="list" border>
-      <el-table-column label="编号" align="center">
-        <template slot-scope="scope">{{scope.row.id}}</template>
+      <el-table-column label="编号" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.id}}</span> </template>
       </el-table-column>
-      <el-table-column label="贷款人" align="center">
-        <template slot-scope="scope">{{scope.row.loanerName}}</template>
+      <el-table-column label="姓名" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"  @click="toDetail(scope.row)"><span @click="toDetail(scope.row)">{{scope.row.name}}</span></template>
       </el-table-column>
-      <el-table-column label="产品类型" align="center">
-        <template>银行产品</template>
+      <el-table-column label="身份证号码" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"  @click="toDetail(scope.row)"><span @click="toDetail(scope.row)">{{scope.row.certificateCode}}</span></template>
       </el-table-column>
-      <el-table-column label="详情信息" align="center">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="viewDetail(scope.row)">查看</el-button>
+      <el-table-column label="婚姻状态" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.marriageState}}</span></template>
+      </el-table-column>
+      <el-table-column label="贷款金额" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanAmount}}</span></template>
+      </el-table-column>
+      <el-table-column label="贷款年限" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanPeriod}}</span></template>
+      </el-table-column>
+      <el-table-column label="还款方式" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.refundType}}</span></template>
+      </el-table-column>
+      <el-table-column label="贷款类型" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanType}}</span></template>
+      </el-table-column>
+      <el-table-column label="联系电话" align="center" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.phone}}</span></template>
+      </el-table-column>
+      <el-table-column label="身份证正面照片" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.cardBeforeImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
         </template>
       </el-table-column>
-      <el-table-column label="申请金额" align="center">
-        <template slot-scope="scope">{{scope.row.loanQuota}}</template>
-      </el-table-column>
-      <el-table-column label="邀请人" align="center">
-        <template slot-scope="scope">{{scope.row.invitor}}</template>
-      </el-table-column>
-      <el-table-column label="面签城市" align="center">
-        <template slot-scope="scope">{{scope.row.facesignCity}}</template>
-      </el-table-column>
-       <el-table-column label="面签银行" align="center">
-        <template slot-scope="scope">{{scope.row.bank}}</template>
-      </el-table-column>
-      <el-table-column label="面签状态" align="center">
-        <template slot-scope="scope">
-          <span :class="scope.row.precheckStatus | statusColor">{{scope.row.precheckStatus | faceStatusName}}</span>
+      <el-table-column label="身份证反面照片" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.cardAfterImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
         </template>
       </el-table-column>
-      <el-table-column v-if='status == 2' label="下发额度" align="center">
-        <template slot-scope="scope">{{scope.row.precheckStatus ==2 ? scope.row.LowerQuota : '0'}}</template>
+      <el-table-column label="户口本首页" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.bookletIndexImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
       </el-table-column>
-      <el-table-column v-if='status == 3' label="原因" align="center">
-        <template slot-scope="scope">{{scope.row.facesignFeedback}}</template>
+      <el-table-column label="户口本本人页" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.bookletThisImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
       </el-table-column>
-      <el-table-column label="操作人" align="center">
-        <template slot-scope="scope">{{scope.row.addName}}</template>
+      <el-table-column label="户口本户主页" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.bookletMainImg" @click="$imageViewer" alt="" width="40" height="40">
+        </template>
       </el-table-column>
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="工作性质" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">{{scope.row.workNature}}</template>
+      </el-table-column>
+      <el-table-column label="收入证明" align="center" show-overflow-tooltip>
+        <template slot-scope="scope" @click="toDetail(scope.row)">
+          <img :src="scope.row.incomeProof" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
+      </el-table-column>
+      <!--      <el-table-column label="工资流水" align="center" show-overflow-tooltip>-->
+      <!--        <template slot-scope="scope">-->
+      <!--          <img :src="scope.row.marriageCertificateType" alt="" width="40" height="40"></template>-->
+      <!--      </el-table-column>-->
+
+
+
+
+      <el-table-column label="营业执照" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
-          <div v-if="scope.row.precheckStatus == 1">
-            <el-button size="mini" @click="agree(scope.row.id)">成功</el-button>
-            <el-button size="mini" type="danger" @click="refuse(scope.row.id)">失败</el-button>
+          <img :src="scope.row.incomeProof" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
+      </el-table-column>
+      <el-table-column label="配偶姓名" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">{{scope.row.marriageName}}</template>
+      </el-table-column>
+      <el-table-column label="配偶身份证号码" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">{{scope.row.marriageCertificateCode}}</template>
+      </el-table-column>
+      <el-table-column label="结婚证" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <img :src="scope.row.marriageCertificateType" @click="$imageViewer" alt="" width="40" height="40"></template>
+      </el-table-column>
+      <el-table-column label="配偶工作性质" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">{{scope.row.marriageWorkNature}}</template>
+      </el-table-column>
+      <el-table-column label="配偶收入证明" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <img :src="scope.row.marriageIncomeProof" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
+      </el-table-column>
+      <el-table-column label="配偶营业执照" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <img :src="scope.row.marriageIncomeProof" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
+      </el-table-column>
+      <el-table-column label="离婚证" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">
+          <img :src="scope.row.divorce" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+        </template>
+      </el-table-column>
+      <el-table-column label="预约时间" align="center" show-overflow-tooltip>
+        <template slot-scope="scope">{{scope.row.faceTime}}</template>
+      </el-table-column>
+
+
+
+
+
+
+
+      <!--      <el-table-column label="编号" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="贷款人" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.loanerName}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="产品类型" align="center">-->
+<!--        <template>银行产品</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="详情信息" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <el-button size="mini" @click="viewDetail(scope.row)">查看</el-button>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="申请金额" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.loanQuota}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="邀请人" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.invitor}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="面签城市" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.facesignCity}}</template>-->
+<!--      </el-table-column>-->
+<!--       <el-table-column label="面签银行" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.bank}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="面签状态" align="center">-->
+<!--        <template slot-scope="scope">-->
+<!--          <span :class="scope.row.precheckStatus | statusColor">{{scope.row.precheckStatus | faceStatusName}}</span>-->
+<!--        </template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column v-if='status == 2' label="下发额度" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.precheckStatus ==2 ? scope.row.LowerQuota : '0'}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column v-if='status == 3' label="原因" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.facesignFeedback}}</template>-->
+<!--      </el-table-column>-->
+<!--      <el-table-column label="操作人" align="center">-->
+<!--        <template slot-scope="scope">{{scope.row.addName}}</template>-->
+<!--      </el-table-column>-->
+      <el-table-column :label="status == 0?'操作':'状态'" width="200" align="center" fixed="right">
+        <template slot-scope="scope">
+          <div v-if="status == 0">
+            <el-button size="mini" @click="agree(scope.row.uuid)">通过</el-button>
+            <el-button size="mini" type="danger" @click="refuse(scope.row.uuid)">不通过</el-button>
           </div>
-          <div v-if="scope.row.precheckStatus != 1">
-            已处理
-          </div>
+<!--          <div v-if="status == 1">通过</div>-->
+<!--          <div v-if="status == 2">不通过</div>-->
+
+          <el-tag v-if="status == 1" size="mini" type="success">通过</el-tag>
+          <el-tag v-if="status == 2" size="mini"  type="danger">不通过</el-tag>
         </template>
       </el-table-column>
     </el-table>
     <love-detail v-if="showModel" :modelStatus="showModel" @closeStatus="closeStatus" :tableList="tableList" />
     <love-refuse v-if="refuseModel" :modelStatus="refuseModel" @closeStatus="closeRefuseStatus" :refuseId="refuseId"  @refuseUpdateList="updataList" />
     <love-agree v-if="agreeModel" :modelStatus="agreeModel" @closeStatus="closeAgressStatus" :agreeId="agreeId" @agreenUpdateList="updataList"/>
+    <check-details ref="checkDetails"></check-details>
   </div>
 </template>
 <script>
@@ -63,6 +177,8 @@ import Vue from 'vue'
 import LoveDetail from "./detail";
 import LoveRefuse from "./refuse";
 import LoveAgree from "./agree";
+import { getPassDesign } from "@/api/bohaifacesign";
+import CheckDetails from './index-details'
 const tableList = [
   {
     name: "编号",
@@ -195,9 +311,13 @@ export default {
   components: {
     LoveDetail,
     LoveRefuse,
-    LoveAgree
+    LoveAgree,
+    CheckDetails
   },
   methods: {
+    toDetail:function(e) {
+      this.$refs.checkDetails.init(e.uuid,e.state)
+    },
      updataList: function(data) {
       if (data.isUpdataList) {
         this.$emit("pupdataList");
@@ -230,7 +350,7 @@ export default {
           item.data = renovationTypeApply(row[item.objName]);
         }else{
           item.data = row[item.objName]
-        }  
+        }
       });
     },
     changeRefuseModel() {
@@ -251,9 +371,27 @@ export default {
       this.changeAgreeModel();
       this.agreeId = "";
     },
-    agree(id) {
-      this.changeAgreeModel();
-      this.agreeId = id;
+    // agree(id) {
+    //   this.changeAgreeModel();
+    //   this.agreeId = id;
+    // }
+    async agree(id) {
+      let e ={}
+      e.uuid=id
+      e.state ='31'
+
+      await getPassDesign(e).then(res=>{
+        if(res.code === 0){
+
+          this.$message.success('提交成功')
+          this.$emit('pupdataList')
+        }
+      });
+        // getFailList
+
+
+
+
     }
   }
 };

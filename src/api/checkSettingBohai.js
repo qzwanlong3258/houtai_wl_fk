@@ -8,7 +8,13 @@ export function getCheckList(data) {
         url: `${GET_PRECHECK_LIST}?size=${data.pageSize}&page=${data.pageNum}&state=${data.state}`,
     })
 }
-
+//获取用户列表接口详情
+export function getCheckListDetail(data) {
+  return request({
+    method: 'GET',
+    url: `${GET_PRECHECK_LIST}?uuid=${data.uuid}&state=${data.state}`,
+  })
+}
 //审批通过
 export function getPassList(data) {
     return request({

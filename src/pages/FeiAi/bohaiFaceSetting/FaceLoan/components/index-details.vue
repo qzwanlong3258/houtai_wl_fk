@@ -129,7 +129,7 @@
 </template>
 
 <script>
-  import { getCheckListDetail } from "@/api/checkSettingBohai";
+  import { getFaceListDetail } from "@/api/bohaifacesign";
   export default {
     components: {},
     data () {
@@ -138,6 +138,7 @@
         },
         thisRunningWater:[],
         spouseRunningWater:[],
+
         visible: false, // 显示弹窗控件，默认false不显示，true显示
         submitAble: true
       }
@@ -156,7 +157,7 @@
         let e ={}
         e.uuid=uuid
         e.state=state
-        getCheckListDetail(e).then(res => {
+        getFaceListDetail(e).then(res => {
           if (res.code === 0) {
             this.dataForm = res.data.list[0];
             let oneArry =[];

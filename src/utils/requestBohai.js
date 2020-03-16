@@ -7,7 +7,7 @@ import store from "../store/index.js"
 axios.defaults.timeout = 50000
 // axios.defaults.baseURL = "http://192.168.3.25:8088"
 //   axios.defaults.baseURL = "http://www.feiaizn.com:8088"
-axios.defaults.baseURL = "/feike"
+axios.defaults.baseURL = window.serverUrl.feike
 
 // 请求拦截器
 // axios.interceptors.request.use(

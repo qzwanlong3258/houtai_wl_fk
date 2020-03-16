@@ -11,22 +11,22 @@
         <template slot-scope="scope"  @click="toDetail(scope.row)"><span @click="toDetail(scope.row)">{{scope.row.certificateCode}}</span></template>
       </el-table-column>
       <el-table-column label="婚姻状态" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.marriageState}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.marriageState}}</span></template>
       </el-table-column>
       <el-table-column label="贷款金额" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.loanAmount}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanAmount}}</span></template>
       </el-table-column>
       <el-table-column label="贷款年限" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.loanPeriod}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanPeriod}}</span></template>
       </el-table-column>
       <el-table-column label="还款方式" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.refundType}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.refundType}}</span></template>
       </el-table-column>
       <el-table-column label="贷款类型" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.loanType}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanType}}</span></template>
       </el-table-column>
       <el-table-column label="联系电话" align="center" show-overflow-tooltip>
-        <template slot-scope="scope">{{scope.row.phone}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.phone}}</span></template>
       </el-table-column>
       <el-table-column label="身份证正面照片" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
@@ -169,14 +169,16 @@
 <!--      <el-table-column label="操作人" align="center">-->
 <!--        <template slot-scope="scope">{{scope.row.precheckDoer}}</template>-->
 <!--      </el-table-column>-->
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column :label="status == 0?'操作':'状态'" width="200" align="center" fixed="right">
         <template slot-scope="scope">
           <div v-if="status == 0">
             <el-button size="mini" @click="agree(scope.row.uuid)">通过</el-button>
             <el-button size="mini" type="danger" @click="refuse(scope.row.uuid)">不通过</el-button>
           </div>
-          <div v-if="status == 1">通过</div>
-          <div v-if="status == 2">不通过</div>
+<!--          <div v-if="status == 1">通过</div>-->
+<!--          <div v-if="status == 2">不通过</div>-->
+          <el-tag v-if="status == 1" size="mini" type="success">通过</el-tag>
+          <el-tag v-if="status == 2" size="mini"  type="danger">不通过</el-tag>
         </template>
       </el-table-column>
     </el-table>
@@ -349,6 +351,7 @@ export default {
 
   methods: {
     toDetail:function(e) {
+
       this.$refs.checkDetails.init(e.uuid,e.state)
     },
     changeShowModel: function() {

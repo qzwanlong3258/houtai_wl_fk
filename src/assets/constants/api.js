@@ -57,9 +57,9 @@ module.exports = {
     SET_PRECHECK_PASS: '/info/updateState', //审批通过
     SET_PRECHECK_FAIL: '/info/updateState', //审批不通过
 
-    GET_FACESIGN_LIST: '/facesign/list', //获取贷款面签列表
-    SET_FACESIGN_PASS: '/facesign/update/pass', //面签成功
-    SET_FACESIGN_FAIL: '/facesign/update/fail', //面签失败
+    GET_FACESIGN_LIST: '/info/loadInfo', //获取贷款面签列表
+    SET_FACESIGN_PASS: '/info/updateState', //面签成功
+    SET_FACESIGN_FAIL: '/info/updateState', //面签失败
 
     //放款管理
     GET_LOAN_LIST: '/precheck/list', //获取放款申请列表
