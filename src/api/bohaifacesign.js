@@ -1,4 +1,4 @@
-import request from '@/utils/requestBohai'
+import request from '@/utils/request'
 import { GET_FACESIGN_LIST,SET_FACESIGN_PASS,SET_FACESIGN_FAIL } from '@/assets/constants/api'
 
 //获取贷款面签列表接口

@@ -45,8 +45,10 @@ export default {
         };
         this.login(data).then(res => {
           if (res.code === 0) {
-            this.getRouter({ id: res.data.roleId }).then(res => {
+            this.getRouter({ id: Number(res.data.role[0])  }).then(res => {
               if (res.code === 0) {
+                console.log(this.$router.options.routes)
+                // setCookie('token',)
                 this.$router.push({ path: "/feiai" });
               }
             });

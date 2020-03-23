@@ -14,23 +14,23 @@ module.exports = {
       '/yunliuyan': {
        // target: 'http://192.168.5.2:8800',
        // target: 'http://www.feiaizn.com:8088',
-       // target: 'http://192.168.5.17:8088',
-        target : "http://47.104.232.184:8088",
+       target: 'http://192.168.3.25:8088',
+        // target : "http://47.104.232.184:8088",
         changeOrigin: true,
         pathRewrite: {
           '^/yunliuyan': ''
         }
       },
-      '/feike': {
-        // target: 'http://192.168.5.2:8800',
-        // target: 'http://www.feiaizn.com:8088',
-        // target: 'http://192.168.3.25:1001',
-        target : "http://47.104.232.184:1001",
-        changeOrigin: true,
-        pathRewrite: {
-          '^/feike': ''
-        }
-      }
+      // '/feike': {
+      //   // target: 'http://192.168.5.2:8800',
+      //   // target: 'http://www.feiaizn.com:8088',
+      //   // target: 'http://192.168.3.25:1001',
+      //   target : "http://47.104.232.184:1001",
+      //   changeOrigin: true,
+      //   pathRewrite: {
+      //     '^/feike': ''
+      //   }
+      // }
     },
 
     // Various Dev Server settings

@@ -1,4 +1,4 @@
-import request from '@/utils/requestBohai'
+import request from '@/utils/request'
 import { GET_PRECHECK_LIST,SET_PRECHECK_PASS,SET_PRECHECK_FAIL } from '@/assets/constants/api'
 
 //获取用户列表接口
@@ -23,7 +23,6 @@ export function getPassList(data) {
         data
     })
 }
-
 //审批不通过
 export function getFailList(data) {
     return request({

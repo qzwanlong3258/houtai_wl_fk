@@ -7,33 +7,26 @@ import store from "../store/index.js"
 axios.defaults.timeout = 50000
 // axios.defaults.baseURL = "http://192.168.3.25:8088"
 //   axios.defaults.baseURL = "http://www.feiaizn.com:8088"
-axios.defaults.baseURL = window.serverUrl.yunliuyan
+axios.defaults.baseURL = "/yunliuyan"
+// axios.defaults.baseURL = "http://47.104.232.184:8088"
 
 //请求拦截器
-// axios.interceptors.request.use(
-//   config => {
-//     const token = getCookie("token")
-//     config.data = JSON.stringify(config.data)
-//
-//     config.params = {}
-//     if(token) {
-//         config.headers = {
-//         "Content-Type": "application/json"
-//         }
-//         config.params = {'token':token}
-//     }
-//     if (config.url === 'refresh') {
-//       config.headers = {
-//         'refresh-token': sessionStorage.getItem('refresh_token'),
-//         'Content-Type': 'application/x-www-form-urlencoded'
-//       }
-//     }
-//     return config
-//   },
-//   error => {
-//     return Message.error(error)
-//   }
-// );
+axios.interceptors.request.use(
+  config => {
+    const token = getCookie('token')
+    config.headers = {
+      'Content-Type': 'application/json'
+    }
+    // config.params = {'token': '123'}
+    if(token) {
+      config.params = {'token':token}
+    }
+    return config
+  },
+  error => {
+    return Message.error(error)
+  }
+);
 
 
 //响应拦截器

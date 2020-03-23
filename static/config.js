@@ -3,10 +3,10 @@
  */
 ;(function () {
   // window.SITE_CONFIG = {}
-  window.serverUrl = {
-    yunliuyan: 'http://47.104.232.184:8088',            // 非客
-    feike: 'http://47.104.232.184:1001'                 // 渤海
-  }
+  // window.serverUrl = {
+  //   yunliuyan: 'http://47.104.232.184:8088',            // 非客
+  //   feike: 'http://47.104.232.184:1001'                 // 渤海
+  // }
   // // api接口请求地址
   // // window.SITE_CONFIG['baseUrl'] = 'http://192.168.0.169:5656'
   // window.SITE_CONFIG['baseUrl'] = 'http://192.168.0.168:5555'
