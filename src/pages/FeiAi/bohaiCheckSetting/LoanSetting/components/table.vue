@@ -30,17 +30,17 @@
       </el-table-column>
       <el-table-column label="身份证正面照片" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
-          <img :src="scope.row.cardBeforeImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+          <img :src="scope.row.cardBeforeImg" @click="$imageViewer" alt="" width="40" height="40" >
         </template>
       </el-table-column>
       <el-table-column label="身份证反面照片" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
-          <img :src="scope.row.cardAfterImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+          <img :src="scope.row.cardAfterImg" @click="$imageViewer" alt="" width="40" height="40" >
         </template>
       </el-table-column>
       <el-table-column label="户口本首页" align="center" show-overflow-tooltip>
         <template slot-scope="scope">
-          <img :src="scope.row.bookletIndexImg" @click="$imageViewer" alt="" width="40" height="40" v-if="">
+          <img :src="scope.row.bookletIndexImg" @click="$imageViewer" alt="" width="40" height="40">
         </template>
       </el-table-column>
       <el-table-column label="户口本本人页" align="center" show-overflow-tooltip>

@@ -60,6 +60,12 @@ export default new Router({
           component: () => import('@/pages/FeiAi/BaseSetting/PhoneType'),
           meta: { auth: true, description:'拍照类型',title:'拍照类型',icon: 'iconchuangxinchanpin'},
         },
+        {
+          path: 'city',
+          name: '城市管理',
+          component: () => import('@/pages/FeiAi/BaseSetting/CitySetting'),
+          meta: { auth: true, description:'拍照类型',title:'拍照类型',icon: 'iconchuangxinchanpin'},
+        },
       ]
     },
     {

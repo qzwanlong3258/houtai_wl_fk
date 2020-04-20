@@ -20,7 +20,11 @@ import { GET_ROLE_LIST,
     GET_POT_LIST,
     SET_POT_ADD,
     SET_POT_EXIT,
-    SET_POT_DELETE } from '@/assets/constants/api'
+    SET_POT_DELETE,
+    GET_CITY_LIST,
+   GET_BUTTON_LIST
+
+} from '@/assets/constants/api'
 
 //获取角色列表
 export function getRoleList(data) {
@@ -218,4 +222,19 @@ export function setPotDelete(data) {
         url: SET_POT_DELETE,
         data
     })
+}
+
+//城市列表及按钮
+export function getCityList() {
+  return request({
+    method: 'GET',
+    url: GET_CITY_LIST
+  })
+}
+//所有按钮
+export function getButtonList() {
+  return request({
+    method: 'GET',
+    url: GET_BUTTON_LIST
+  })
 }

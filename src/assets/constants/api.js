@@ -36,6 +36,9 @@ module.exports = {
    // SET_BANK_EXIT: '/bank/update', //编辑银行
    // SET_BANK_DELETE: '/bank/delete', //删除银行
 
+  GET_CITY_LIST:'/city/loadAllCity',//城市及按钮
+  GET_BUTTON_LIST:'/city/loadButton',//所有按钮
+
    //阶段管理
    GET_PERIOD_LIST: '/period/query', //获取阶段列表
    SET_PERIOD_ADD: '/period/insert', //新增阶段
