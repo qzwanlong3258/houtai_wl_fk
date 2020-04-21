@@ -64,7 +64,13 @@ export default new Router({
           path: 'city',
           name: '城市管理',
           component: () => import('@/pages/FeiAi/BaseSetting/CitySetting'),
-          meta: { auth: true, description:'拍照类型',title:'拍照类型',icon: 'iconchuangxinchanpin'},
+          meta: { auth: true, description:'城市管理',title:'城市管理',icon: 'iconchuangxinchanpin'},
+        },
+        {
+          path: 'news',
+          name: '新闻管理',
+          component: () => import('@/pages/FeiAi/BaseSetting/NewsSetting'),
+          meta: { auth: true, description:'新闻管理',title:'新闻管理',icon: 'iconchuangxinchanpin'},
         },
       ]
     },

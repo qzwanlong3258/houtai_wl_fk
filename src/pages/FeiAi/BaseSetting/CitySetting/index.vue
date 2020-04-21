@@ -34,7 +34,7 @@
             <el-card class="layout-title-button" style="position: relative" shadow="never">
               <i class="el-icon-tickets" style="margin-top: -15px"></i>
               <span style="margin-top: 5px">按钮管理</span>
-              <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
+              <el-button class="btn-add" @click="showModelEventButton()" size="mini">添加</el-button>
             </el-card>
             <div class="table2box">
               <el-table
@@ -65,8 +65,8 @@
 <!--                </el-table-column>-->
                 <el-table-column label="操作" width="300" align="center">
                   <template slot-scope="btnScope">
-                    <el-button size="mini" @click="showModelEvent(btnScope.row)">编辑</el-button>
-                    <el-button size="mini" type="danger" @click="handleDelete(btnScope.row)">删除</el-button>
+                    <el-button size="mini" @click="showModelEventButton(buttonList.find(item => item.id == btnScope.row.id))">编辑</el-button>
+                    <el-button size="mini" type="danger" @click="handleDeleteButton(buttonList.find(item => item.id == btnScope.row.id))">删除</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -89,30 +89,40 @@
     </div>-->
     <change-model
       v-if="showModel"
+      ref="showModel"
       :modelStatus="showModel"
       @updateList="getList"
       @closeStatus="closeStatus"
       :contentList="contentList"
     />
+    <change-model-button
+      v-if="showModelButton"
+      :modelStatus="showModelButton"
+      @updateList="getList"
+      @closeStatus="closeStatusButton"
+      :contentList="contentListButton"
+    />
   </div>
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getCityList, setAdminDelete,getButtonList} from "@/api/baseSetting";
+import ChangeModelButton from "./components/addbutton";
+import { getCityList, setAdminDelete,getButtonList,deleteButton,deleteCity} from "@/api/baseSetting";
 const contentList = {
   id: "",
+  button: "",
+  cname:''
+};
+const contentListButton = {
+  url: "",
   name: "",
-  phone: "",
-  userName: "",
-  password: "",
-  roleId: "",
-  role: "",
-  addName: ""
+  icon:""
 };
 export default {
   name: "userList",
   components: {
-    ChangeModel
+    ChangeModel,
+    ChangeModelButton
   },
   data() {
     return {
@@ -125,7 +135,9 @@ export default {
         pageSize: 5
       },
       showModel: false,
-      contentList
+      showModelButton:false,
+      contentList,
+      contentListButton
     };
   },
   created() {
@@ -151,23 +163,64 @@ export default {
     changeShowModel: function() {
       this.showModel = !this.showModel;
     },
+    changeShowModelButton: function() {
+      this.showModelButton = !this.showModelButton;
+    },
     closeStatus: function() {
       this.changeShowModel();
       this.contentList = {
         id: "",
-        name: "",
-        phone: "",
-        userName: "",
-        password: "",
-        roleId: "",
-        role: "",
-        addName: ""
+        cname:'',
+        button: "",
+        // phone: "",
+        // userName: "",
+        // password: "",
+        // roleId: "",
+        // role: "",
+        // addName: ""
       };
+    },
+    closeStatusButton: function() {
+      this.changeShowModelButton();
+      this.contentListButton = {
+        url: "",
+        name: "",
+        icon:""
+
+      };
+    },
+    showModelEventButton: function(row) {
+      this.changeShowModelButton();
+      if (row) {
+        this.contentListButton = row;
+        this.contentListButton.name = row.bname
+
+        // console.log(this.contentList)
+      }else {
+        this.contentListButton = {
+          url: "",
+          name: "",
+          icon:""
+        };
+      }
     },
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
-        this.contentList = row;
+        this.contentList.id = row.uuid;
+        this.contentList.cname = row.name
+        if(row.button){
+          this.contentList.button = row.button.map(res=>{
+            return res.id
+          }).toString();
+        }
+        // console.log(this.contentList)
+      }else {
+        this.contentList = {
+          id: "",
+          cname:'',
+          button: ""
+        };
       }
     },
     getList() {
@@ -185,15 +238,15 @@ export default {
               ...res
             }
           })
-          console.log(this.list)
+          // console.log(this.list)
         }
       });
       getButtonList().then( res=>{
         if (res.code === 0) {
-          console.log(res)
+          // console.log(res)
 
           this.buttonList = res.data.list
-          console.log(this.buttonList)
+          // console.log(this.buttonList)
         }
       })
     },
@@ -206,15 +259,36 @@ export default {
       this.listQuery.pageNum = val;
       this.getList();
     },
-    //删除角色
+    //删除城市
     handleDelete: function(row) {
-      this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该城市, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          setAdminDelete({ id: row.id }).then(res => {
+          deleteCity({ uuid: row.uuid }).then(res => {
+            if (res.code === 0) {
+              this.getList();
+              this.$message.success("删除成功");
+            }
+          });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
+    },
+    handleDeleteButton: function(row) {
+      this.$confirm("此操作将永久删除该按钮, 是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          deleteButton({ id: row.id }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");

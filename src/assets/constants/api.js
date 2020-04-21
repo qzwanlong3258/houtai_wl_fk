@@ -38,6 +38,21 @@ module.exports = {
 
   GET_CITY_LIST:'/city/loadAllCity',//城市及按钮
   GET_BUTTON_LIST:'/city/loadButton',//所有按钮
+  ADD_CITY:'/city/insertCity',//增加城市
+  UPDATE_CITY:'/city/updateCity',//修改城市
+
+  ADD_BUTTON:'/city/appendButton',//增加按钮
+  UPDATE_BUTTON:'/city/updateButton',//修改按钮
+  DELETE_BUTTON:'/city/deleteButton',//删除按钮
+  DELETE_CITY:'/city/deleteCity',//删除城市
+
+  GET_NEWS_LIST:'/news/loadNews',//新闻列表
+  ADD_NEWS:'/news/insertNews',//增加新闻
+  UPDATE_NEWS:'/news/updateNews',//编辑新闻
+  DELETE_NEWS:'/news/deleteNews',//删除新闻
+  UP_NEWS:'/news/topNews',//置顶新闻
+  DETAIL_NEWS:'/news/loadNewsDetails',//新闻详情
+
 
    //阶段管理
    GET_PERIOD_LIST: '/period/query', //获取阶段列表
@@ -69,4 +84,6 @@ module.exports = {
     GET_LOAN_STAGELIST: '/loan/queryOne', //按申请订单编号获取阶段计划列表
     SET_LOAN_NOPASS: '/loan/noPass', //阶段不通过
     SET_LOAN_PASS: '/loan/pass', //阶段通过
+  //上传照片
+    UPLOAD_PIC:'/ftp/upload'
 }

@@ -22,8 +22,19 @@ import { GET_ROLE_LIST,
     SET_POT_EXIT,
     SET_POT_DELETE,
     GET_CITY_LIST,
-   GET_BUTTON_LIST
-
+   GET_BUTTON_LIST,
+  ADD_CITY,
+UPDATE_CITY,
+  ADD_BUTTON,
+  UPDATE_BUTTON,
+  DELETE_BUTTON,
+  DELETE_CITY,
+  GET_NEWS_LIST,
+  ADD_NEWS,
+  UPDATE_NEWS,
+  DELETE_NEWS,
+  UP_NEWS,
+  DETAIL_NEWS
 } from '@/assets/constants/api'
 
 //获取角色列表
@@ -236,5 +247,105 @@ export function getButtonList() {
   return request({
     method: 'GET',
     url: GET_BUTTON_LIST
+  })
+}
+//增加城市
+export function addCity(data) {
+  return request({
+    method: 'POST',
+    url: ADD_CITY,
+    data
+  })
+}
+
+//修改城市
+export function updateCity(data) {
+  return request({
+    method: 'POST',
+    url: UPDATE_CITY,
+    data
+  })
+}
+//增加按钮
+
+export function addButton(data) {
+  return request({
+    method: 'POST',
+    url: ADD_BUTTON,
+    data
+  })
+}
+//修改按钮
+
+export function updateButton(data) {
+  return request({
+    method: 'POST',
+    url: UPDATE_BUTTON,
+    data
+  })
+}
+
+//删除按钮
+export function deleteButton(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_BUTTON,
+    data
+  })
+}
+//删除城市
+export function deleteCity(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_CITY,
+    data
+  })
+}
+//新闻列表
+export function getNewsList(data) {
+  return request({
+    method: 'GET',
+    url: GET_NEWS_LIST
+  })
+}
+//新增新闻
+export function addNews(data) {
+  return request({
+    method: 'POST',
+    url: ADD_NEWS,
+    data
+  })
+}
+//修改新闻
+export function updateNews(data) {
+  return request({
+    method: 'POST',
+    url: UPDATE_NEWS,
+    data
+  })
+}
+
+//删除新闻
+export function deleteNews(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_NEWS,
+    data
+  })
+}
+
+//置顶新闻
+export function upNews(data) {
+  return request({
+    method: 'POST',
+    url: UP_NEWS,
+    data
+  })
+}
+//新闻列表
+export function detailNews(data) {
+  return request({
+    method: 'GET',
+    url: DETAIL_NEWS
   })
 }
