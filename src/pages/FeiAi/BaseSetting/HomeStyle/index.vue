@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
-      <span style="margin-top: 5px">新闻管理</span>
+      <span style="margin-top: 5px">首页主题管理</span>
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
@@ -10,37 +10,21 @@
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="新闻内容" align="center" width="400" min-width="350" show-overflow-tooltip>
-          <template slot-scope="scope">{{scope.row.content}}</template>
-        </el-table-column>
-        <el-table-column label="创建时间" align="center">
-          <template slot-scope="scope">{{scope.row.createTime|time}}</template>
-        </el-table-column>
-        <el-table-column label="状态" align="center">
+        <el-table-column label="图片" align="center">
           <template slot-scope="scope">
-        <div @click="addOrUpdateHandle(scope.row.id)">
-          <el-tag v-if="scope.row.show === 1" size="mini" type="success">有效</el-tag>
-          <el-tag v-else size="mini" type="danger">失效</el-tag>
-        </div>
+            <img  @click="$imageViewer" :src="scope.row.img"  min-width="20" height="40"  >
           </template>
         </el-table-column>
-<!--        <el-table-column label="用户名" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.userName}}</template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column label="密码" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.password}}</template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column label="角色名称" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.role}}</template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column label="操作人" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.addName}}</template>-->
-<!--        </el-table-column>-->
+        <el-table-column label="链接" align="center">
+          <template slot-scope="scope">{{scope.row.url}}</template>
+        </el-table-column>
+        <el-table-column label="分类" align="center">
+          <template slot-scope="scope">{{scope.row.type==1?'轮播图':'广告位'}}</template>
+        </el-table-column>
         <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
-            <el-button size="mini" type="text" @click="upHandle(scope.row)">置顶</el-button>
-            <el-button size="mini" type="text" @click="showModelEvent(scope.row)">编辑</el-button>
-            <el-button size="mini" type="text" @click="handleDelete(scope.row)">删除</el-button>
+            <el-button size="mini" @click="showModelEvent(scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -68,11 +52,11 @@
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getNewsList, deleteNews ,upNews } from "@/api/baseSetting";
+import { getHomeStyle, deleteHomeStyle } from "@/api/baseSetting";
 const contentList = {
   id: "",
-  content: "",
-  top: true,
+  img: "",
+  url: ""
 };
 export default {
   name: "userList",
@@ -95,38 +79,7 @@ export default {
   created() {
     this.getList();
   },
-  filters:{
-    time(val){
-      if(!val){
-        return ''
-      }
-      var time = new Date(val);
-
-      function timeAdd0(str) {
-        if (str < 10) {
-          str = '0' + str;
-        }
-        return str
-      }
-      var y = time.getFullYear();
-      var m = time.getMonth() + 1;
-      var d = time.getDate();
-      var h = time.getHours();
-      var mm = time.getMinutes();
-      var s = time.getSeconds();
-      return y + '-' + timeAdd0(m) + '-' + timeAdd0(d) + ' ' + timeAdd0(h) + ':' + timeAdd0(mm) + ':' + timeAdd0(s);
-    }
-  },
   methods: {
-    upHandle(e){
-      let a={
-        id:e.id
-      }
-      upNews(a).then(res=>{
-        this.$message.success("置顶成功");
-        this.getList()
-      })
-    },
     changeShowModel: function() {
       this.showModel = !this.showModel;
     },
@@ -134,16 +87,20 @@ export default {
       this.changeShowModel();
       this.contentList = {
         id: "",
-        content: "",
-        top: true,
-
+        img: "",
+        url: ""
       };
     },
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
-        this.contentList.id = row.id;
-        this.contentList.content = row.content;
+        this.contentList = row;
+      } else {
+        this.contentList = {
+          id: "",
+          img: "",
+          url: ""
+        };
       }
     },
     getList() {
@@ -151,7 +108,7 @@ export default {
         pageSize: this.listQuery.pageSize,
         pageNum: this.listQuery.pageNum
       };
-      getNewsList(data).then(res => {
+      getHomeStyle(data).then(res => {
         if (res.code === 0) {
           this.total = res.data.total;
           this.list = res.data.list;
@@ -169,13 +126,13 @@ export default {
     },
     //删除角色
     handleDelete: function(row) {
-      this.$confirm("此操作将永久删除该新闻, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该图片及链接, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          deleteNews({ id: row.id }).then(res => {
+          deleteHomeStyle({ id: row.id }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");

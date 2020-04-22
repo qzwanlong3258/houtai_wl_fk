@@ -48,6 +48,7 @@ export default {
             this.getRouter({ id: Number(res.data.role[0])  }).then(res => {
               if (res.code === 0) {
                 console.log(this.$router.options.routes)
+                // console.log(res)
                 // setCookie('token',)
                 this.$router.push({ path: "/feiai" });
               }

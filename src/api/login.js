@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { GET_UER_LOGIN, CLEAR_USER_TOKEN, GET_USER_PERMISSION,SET_UPDATA_CODE,SET_UPDATA_PHONE,SET_UPDATA_AVATAR,SET_UPDATA_PASSWORD } from '@/assets/constants/api'
+import { GET_UER_LOGIN, CLEAR_USER_TOKEN, GET_USER_PERMISSION,SET_UPDATA_CODE,SET_UPDATA_PHONE,SET_UPDATA_AVATAR,SET_UPDATA_PASSWORD,SET_UPDATA_USER,GET_USER_CONTENT } from '@/assets/constants/api'
 import {getCookie} from '@/utils/cookie'
 //登录
 export function getUserLogin(data) {
@@ -65,4 +65,20 @@ export function changeUserAvatar(data) {
         url: SET_UPDATA_AVATAR,
         data,
     })
+}
+//修改用户信息
+export function changeUserInfor(data) {
+  return request({
+    method: 'POST',
+    url: SET_UPDATA_USER,
+    data,
+  })
+}
+//获取用户信息
+export function getUserInfor(data) {
+  return request({
+    method: 'GET',
+    url: GET_USER_CONTENT,
+    data,
+  })
 }

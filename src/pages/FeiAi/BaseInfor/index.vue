@@ -3,22 +3,32 @@
     <div class="base-information">
       <div class="layout-title">信息详情</div>
       <div class="safe-setting">
+<!--        <div class="infor-input">-->
+<!--          <span>-->
+<!--            角色：-->
+<!--            <span class="value-show" style="color: #666">{{userInformation.roleName}}</span>-->
+<!--          </span>-->
+<!--          <span class="search-value" @click="changePhoneFun">修改</span>-->
+<!--        </div>-->
         <div class="infor-input">
           <span>
-            角色：
-            <span class="value-show" style="color: #666">{{userInformation.roleName}}</span>
+            昵称：
+            <span class="value-show" style="color: #666">{{userInformation.nickName}}</span>
           </span>
+          <span class="search-value" @click="changeNickNameFun">修改</span>
         </div>
         <div class="infor-input">
           <span>
             用户名：
             <span class="value-show" style="color: #666">{{userInformation.username}}</span>
           </span>
+          <span class="search-value" @click="changeUserNameFun">修改</span>
         </div>
         <div class="infor-input">
           <span>
             登录密码：
-            <span class="value-show" style="color: #666">******</span>
+            <span class="value-show" style="color: #666" @click="showClick"><span style="color: #666">{{show? userInformation.password.replace(/./g, "*"):userInformation.password}}</span> <span style="font-size: 9px;color: #666" v-if="show">(点击显示)</span></span>
+
           </span>
           <span class="search-value" @click="changePasswordFun">修改</span>
         </div>
@@ -29,17 +39,17 @@
           </span>
           <span class="search-value" @click="changePhoneFun">修改</span>
         </div>
-        <!-- <div class="infor-input">
+         <div class="infor-input">
           <span>
             密保邮箱：
             <span class="value-show" style="color: #666">{{userInformation.email}}</span>
           </span>
           <span class="search-value" @click="changeEmailFun">修改</span>
-        </div>-->
-        <!-- <div class="infor-input">
+        </div>
+        <div class="infor-input">
           <span>
             头像：
-            <img class="head-photo" :src="userInformation.icon" alt="图片失焦" />
+            <img class="head-photo" :src="userInformation.avatarUrl" alt="图片失焦" />
           </span>
           <el-upload
             class="upload-value"
@@ -48,7 +58,7 @@
             :on-success="handleAvatarSuccess"
             :before-upload="beforeAvatarUpload"
           >修改</el-upload>
-        </div> -->
+        </div>
       </div>
     </div>
     <div style="height: 60px"></div>
@@ -72,17 +82,17 @@
           <i class="iconfont icon-PCchawanwu_yanzhengma"></i>
           <input style="width: 90%" type="text" v-model="newPhone" placeholder="请输入新的密保手机" />
         </div>
-        <div style="width: 90%;margin-left: 6%;" class="change-ps-input">
-          <i class="iconfont icon-PCchawanwu_shurumima"></i>
-          <input style="width: 60%" type="text" v-model="newCode" placeholder="请输入六位验证码" />
-          <div class="check-code" @click="getCodeEvent">
-            <span>{{codeValue}}</span>
-          </div>
-        </div>
+<!--        <div style="width: 90%;margin-left: 6%;" class="change-ps-input">-->
+<!--          <i class="iconfont icon-PCchawanwu_shurumima"></i>-->
+<!--          <input style="width: 60%" type="text" v-model="newCode" placeholder="请输入六位验证码" />-->
+<!--          <div class="check-code" @click="getCodeEvent">-->
+<!--            <span>{{codeValue}}</span>-->
+<!--          </div>-->
+<!--        </div>-->
       </div>
       <el-button @click="saveNewPhone" type="info" class="dialog-btn">确认修改</el-button>
     </love-dialog>
-    <!-- <love-dialog class="palyer-dialog" :visible.sync="changeEmail" :width="400" :height="178">
+     <love-dialog class="palyer-dialog" :visible.sync="changeEmail" :width="400" :height="178">
       <div class="input-box">
         <div style="width: 90%;margin-left: 6%;" class="change-ps-input">
           <i class="iconfont icon-PCchawanwu_yanzhengma"></i>
@@ -90,17 +100,36 @@
         </div>
       </div>
       <el-button @click="saveNewEmail" type="info" class="dialog-btn">确认</el-button>
-    </love-dialog>-->
+    </love-dialog>
+    <love-dialog class="palyer-dialog" :visible.sync="changeNickName" :width="400" :height="178">
+      <div class="input-box">
+        <div style="width: 90%;margin-left: 6%;" class="change-ps-input">
+          <i class="iconfont icon-PCchawanwu_yanzhengma"></i>
+          <input style="width: 90%" type="text" v-model="newNickName" placeholder="请输入新的用户名" />
+        </div>
+      </div>
+      <el-button @click="saveNewNickName" type="info" class="dialog-btn" >确认</el-button>
+    </love-dialog>
+    <love-dialog class="palyer-dialog" :visible.sync="changeUserName" :width="400" :height="178">
+      <div class="input-box">
+        <div style="width: 90%;margin-left: 6%;" class="change-ps-input">
+          <i class="iconfont icon-PCchawanwu_yanzhengma"></i>
+          <input style="width: 90%" type="text" v-model="newUserName" placeholder="请输入新的用户名" />
+        </div>
+      </div>
+      <el-button @click="saveNewUserName" type="info" class="dialog-btn" >确认</el-button>
+    </love-dialog>
   </div>
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import avatar from "@/assets/image/avatar.jpeg";
 import {
   changeUserPassword,
   getCode,
   changeUserPhone,
-  changeUserAvatar
+  changeUserAvatar,
+  changeUserInfor,
+  getUserInfor
 } from "@/api/login";
 import {
   checkPassword,
@@ -110,9 +139,11 @@ import {
 } from "@/utils/check.js";
 import { mapMutations, mapActions } from "vuex";
 import { getCookie } from "@/utils/cookie";
+import { uploadPic } from "@/api/uploadPic";
 export default {
   data() {
     return {
+      show:true,
       codeValue: "获取验证码",
       changePassword: false,
       oldPassword: "",
@@ -123,15 +154,23 @@ export default {
       newCode: "",
       changeEmail: false,
       newEmail: "",
-      avatar,
-      userInformation: {}
+      newNickName:'',
+      newUserName:'',
+      avatar:'',
+      userInformation: {},
+      changeNickName:false,
+      changeUserName:false
     };
   },
   components: {
     LoveDialog
   },
+
   methods: {
     ...mapActions(["clearToken"]),
+    showClick(){
+      this.show= !this.show
+    },
     //验证码倒计时
     getCodeTime: function(options) {
       var that = this;
@@ -190,9 +229,24 @@ export default {
         return;
       }
       if (temp) {
-        changeUserPassword({
-          oldPassword: this.oldPassword,
-          newPassword: this.newPassword
+        // changeUserPassword({
+        //   oldPassword: this.oldPassword,
+        //   newPassword: this.newPassword
+        // }).then(res => {
+        //   if (res.code === 0) {
+        //     this.$message.success(`密码修改成功`);
+        //     this.clearToken().then(res => {
+        //       if (res.code === 0) {
+        //         this.$router.push({ path: "/login" });
+        //       } else {
+        //         this.$Message.error(res.msg);
+        //       }
+        //     });
+        //     this.changePasswordFun();
+        //   }
+        // });
+        changeUserInfor({
+          password: this.newPassword,
         }).then(res => {
           if (res.code === 0) {
             this.$message.success(`密码修改成功`);
@@ -213,59 +267,99 @@ export default {
       this.changePhone = !this.changePhone;
     },
     saveNewPhone: function() {
-      let temp = true;
-      //验证手机号码
-      let checkPhoneObj = checkPhone(this.newPhone);
-      if (!checkPhoneObj.status) {
-        temp = false;
-        this.$message.error(checkPhoneObj.msg);
-        return;
+      let e={
+        phone:this.newPhone
       }
-      //验证注册验证码
-      let checkCodeObj = checkCode(this.newCode);
-      if (!checkCodeObj.status) {
-        temp = false;
-        this.$message.error(checkCodeObj.msg);
-        return;
-      }
-      if (temp) {
-        changeUserPhone({ phone: this.newPhone, code: this.newCode }).then(
-          res => {
-            if (res.code === 0) {
-              this.clearToken().then(res => {
-                if (res.code === 0) {
-                  this.$router.push({ path: "/login" });
-                } else {
-                  this.$Message.error(res.msg);
-                }
-              });
-              this.$message.success(`手机修改成功,请重新登录`);
-              this.changePhoneFun();
-            }
-          }
-        );
-      }
+
+      changeUserInfor(e).then(res=>{
+        this.changePhoneFun()
+        this.getData()
+        this.$message.success("修改手机号成功");
+      })
+      // let temp = true;
+      // //验证手机号码
+      // let checkPhoneObj = checkPhone(this.newPhone);
+      // if (!checkPhoneObj.status) {
+      //   temp = false;
+      //   this.$message.error(checkPhoneObj.msg);
+      //   return;
+      // }
+      // //验证注册验证码
+      // let checkCodeObj = checkCode(this.newCode);
+      // if (!checkCodeObj.status) {
+      //   temp = false;
+      //   this.$message.error(checkCodeObj.msg);
+      //   return;
+      // }
+      // if (temp) {
+      //   changeUserPhone({ phone: this.newPhone, code: this.newCode }).then(
+      //     res => {
+      //       if (res.code === 0) {
+      //         this.clearToken().then(res => {
+      //           if (res.code === 0) {
+      //             this.$router.push({ path: "/login" });
+      //           } else {
+      //             this.$Message.error(res.msg);
+      //           }
+      //         });
+      //         this.$message.success(`手机修改成功,请重新登录`);
+      //         this.changePhoneFun();
+      //       }
+      //     }
+      //   );
+      // }
     },
-    // //修改邮箱
-    // changeEmailFun: function() {
-    //   this.changeEmail = !this.changeEmail;
-    // },
-    // saveNewEmail: function() {
-    //   let temp = true;
-    //   let checkEmailObj = checkEmail(this.newEmail);
-    //   if (!checkEmailObj.status) {
-    //     temp = false;
-    //     this.$message.error(checkEmailObj.msg);
-    //     return;
-    //   }
-    //   if (temp) {
-    //     this.$message.success(`验证已发送您的邮箱，请查看`);
-    //     this.changeEmailFun();
-    //   }
-    // },
-    handleAvatarSuccess(res, file) {
-      this.avatar = URL.createObjectURL(file.raw);
-      changeUserAvatar({ avator: this.avatar }).then(res => {
+    //修改邮箱
+    changeEmailFun: function() {
+      this.changeEmail = !this.changeEmail;
+    },
+    saveNewEmail: function() {
+      let e={
+        email:this.newEmail
+      }
+
+      changeUserInfor(e).then(res=>{
+        this.changeEmailFun()
+        this.getData()
+        this.$message.success("修改邮箱成功");
+      })
+      // let temp = true;
+      // let checkEmailObj = checkEmail(this.newEmail);
+      // if (!checkEmailObj.status) {
+      //   temp = false;
+      //   this.$message.error(checkEmailObj.msg);
+      //   return;
+      // }
+      // if (temp) {
+      //   this.$message.success(`验证已发送您的邮箱，请查看`);
+      //   this.changeEmailFun();
+      // }
+    },
+    //修改昵称
+    changeNickNameFun(){
+      this.changeNickName = !this.changeNickName;
+    },
+    saveNewNickName(){
+      let e={
+        nickName:this.newNickName
+      }
+
+      changeUserInfor(e).then(res=>{
+        this.changeNickNameFun()
+        this.getData()
+        this.$message.success("修改昵称成功");
+      })
+    },
+    //修改用户名
+    changeUserNameFun(){
+      this.changeUserName = !this.changeUserName;
+    },
+    saveNewUserName(){
+      let e={
+        username:this.newUserName
+      }
+
+      changeUserInfor(e).then(res=>{
         if (res.code === 0) {
           this.clearToken().then(res => {
             if (res.code === 0) {
@@ -274,9 +368,12 @@ export default {
               this.$Message.error(res.msg);
             }
           });
-          this.$message.success(`头像修改成功,请重新登录`);
+          this.$message.success(`用户名修改成功,请重新登录`);
         }
-      });
+      })
+    },
+    handleAvatarSuccess(res, file) {
+
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === "image/jpeg";
@@ -288,11 +385,42 @@ export default {
       if (!isLt2M) {
         this.$message.error("上传头像图片大小不能超过 2MB!");
       }
+      let fd = new FormData();
+      fd.append('file',file);//传文件
+      // fd.append('id',this.srid);//传其他参数
+      uploadPic(fd).then(res=>{
+        this.userInformation.avatarUrl=res.data
+        console.log(res)
+        let e={
+          avatarUrl:this.userInformation.avatarUrl
+        }
+
+
+        changeUserInfor(e).then(res => {
+          if (res.code === 0) {
+            this.clearToken().then(res => {
+              if (res.code === 0) {
+                this.$router.push({ path: "/login" });
+              } else {
+                this.$Message.error(res.msg);
+              }
+            });
+            this.$message.success(`头像修改成功,请重新登录`);
+          }
+        });
+      })
+
       return isJPG && isLt2M;
-    }
+    },
+    getData(){
+      getUserInfor().then(res=>{
+        this.userInformation=res.data.list[0]
+      })
+    },
   },
   mounted() {
-    this.userInformation = JSON.parse(getCookie("user"));
+    this.getData()
+    // this.userInformation = JSON.parse(getCookie("user"));
   }
 };
 </script>
@@ -368,10 +496,10 @@ export default {
         height: 40px;
         @include rounded(50%);
         background-color: #666;
-        margin-top: -40px;
+        margin-top: -20px;
         cursor: pointer;
         position: absolute;
-        margin-left: 60px;
+        margin-left: 30px;
       }
       .value-show {
         margin-top: 36px;

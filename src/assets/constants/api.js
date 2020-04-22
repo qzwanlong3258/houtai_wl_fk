@@ -14,6 +14,9 @@ module.exports = {
     SET_UPDATA_PHONE: '/person/update/phone',
     SET_UPDATA_AVATAR: '/person/update/avator',
 
+  SET_UPDATA_USER:'/user/updateUserInfo',
+  GET_USER_CONTENT:'/user/loadUserInfo',
+
     //基础设置
     GET_ROLE_LIST: '/role/list', //获取角色列表
     GET_PERMISSION_LIST: '/permission/list', //获取角色权限
@@ -53,6 +56,12 @@ module.exports = {
   UP_NEWS:'/news/topNews',//置顶新闻
   DETAIL_NEWS:'/news/loadNewsDetails',//新闻详情
 
+  GET_HOME_STYLE:'/picture/loadPicture',
+  ADD_HOME_STYLE:'/picture/insertPicture',
+  UPDATE_HOME_STYLE:'/picture/updatePicture',
+  DELETE_HOME_STYLE:'/picture/deletePicture',
+
+
 
    //阶段管理
    GET_PERIOD_LIST: '/period/query', //获取阶段列表
@@ -68,6 +77,10 @@ module.exports = {
 
     //用户管理
     GET_MEMBER_LIST: '/member/list',  //获取用户列表接口
+    GET_TESTONETEST_LIST: '/test/loadTest',  //获取测一测问题
+    ADD_TESTONETEST:'/test/insertTest',//增加问题
+    UPDATE_TESTONETEST:'/test/updateTest',//修改问题
+    DELETE_TESTONETEST:'/test/deleteTest',//删除问题
 
     //审批管理
     // GET_PRECHECK_LIST: '/precheck/list', //获取贷款预审列表

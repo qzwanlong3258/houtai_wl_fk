@@ -34,7 +34,11 @@ UPDATE_CITY,
   UPDATE_NEWS,
   DELETE_NEWS,
   UP_NEWS,
-  DETAIL_NEWS
+  DETAIL_NEWS,
+  GET_HOME_STYLE,
+  ADD_HOME_STYLE,
+  UPDATE_HOME_STYLE,
+  DELETE_HOME_STYLE
 } from '@/assets/constants/api'
 
 //获取角色列表
@@ -347,5 +351,42 @@ export function detailNews(data) {
   return request({
     method: 'GET',
     url: DETAIL_NEWS
+  })
+}
+//首页主题
+
+export function getHomeStyle(data) {
+  return request({
+    method: 'GET',
+    url: GET_HOME_STYLE
+  })
+}
+//首页主题之新增
+
+export function addHomeStyle(data) {
+  return request({
+    method: 'POST',
+    url: ADD_HOME_STYLE,
+    data
+  })
+}
+
+//首页主题之修改
+
+export function updateHomeStyle(data) {
+  return request({
+    method: 'POST',
+    url: UPDATE_HOME_STYLE,
+    data
+  })
+}
+
+//首页主题之修改
+
+export function deleteHomeStyle(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_HOME_STYLE,
+    data
   })
 }

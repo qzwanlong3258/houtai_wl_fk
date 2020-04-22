@@ -64,7 +64,7 @@ export default new Router({
           path: 'city',
           name: '城市管理',
           component: () => import('@/pages/FeiAi/BaseSetting/CitySetting'),
-          meta: { auth: true, description:'城市管理',title:'城市管理',icon: 'iconchuangxinchanpin'},
+          meta: { auth: true, description:'城市管理',title:'城市管理',icon: 'iconrenshengjieduan'},
         },
         {
           path: 'news',
@@ -72,6 +72,12 @@ export default new Router({
           component: () => import('@/pages/FeiAi/BaseSetting/NewsSetting'),
           meta: { auth: true, description:'新闻管理',title:'新闻管理',icon: 'iconchuangxinchanpin'},
         },
+        {
+          path: 'homeStyle',
+          name: '首页主题管理',
+          component: () => import('@/pages/FeiAi/BaseSetting/HomeStyle'),
+          meta: { auth: true, description:'首页主题管理',title:'首页主题管理',icon: 'iconrenshengjieduan'},
+        }
       ]
     },
     {
@@ -86,6 +92,12 @@ export default new Router({
           name: '用户信息',
           component: () => import('@/pages/FeiAi/UserInfor/appletUser'),
           meta: { auth: true, description:'用户信息',title:'用户信息',icon: 'iconyonghuxinxi'},
+        },
+        {
+          path: 'testonetest',
+          name: '测一测',
+          component: () => import('@/pages/FeiAi/UserInfor/TestOneTest'),
+          meta: { auth: true, description:'测一测',title:'测一测',icon: 'icontuijian'},
         }
       ]
     },

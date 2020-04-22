@@ -9,15 +9,15 @@
         <div @mouseenter="toggle=true">
           <img
             class="head-photo"
-            :src="userInfo.icon"
+            :src="userInfo.user.avatarUrl"
             alt="图片失焦"
           />
-          <span class="user-name">{{userInfo.nickName}}</span>
+          <span class="user-name">{{userInfo.user.nickName}}</span>
         </div>
         <transition name="fade">
           <div class="util-group" :class="{active: toggle}" @mouseleave="toggle=false">
             <dl>
-              <dt>{{userInfo.roleName}}</dt>
+              <dt>{{userInfo.user.username}}</dt>
               <dt @click='goUserInfoView'>基本信息</dt>
               <dt @click="goLogin">退出</dt>
             </dl>
@@ -37,7 +37,7 @@ export default {
     };
   },
   computed: {
-    
+
   },
   methods: {
     ...mapActions(["clearToken"]),
@@ -55,7 +55,9 @@ export default {
     }
   },
   created(){
+
     this.userInfo = JSON.parse(sessionStorage.getItem('user'))
+    console.log(this.userInfo)
   }
 };
 </script>
