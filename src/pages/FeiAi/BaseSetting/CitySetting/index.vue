@@ -63,7 +63,7 @@
 <!--                <el-table-column label="角色名称" align="center">-->
 <!--                  <template slot-scope="btnScope">{{btnScope.row.role}}</template>-->
 <!--                </el-table-column>-->
-                <el-table-column label="操作" width="300" align="center">
+                <el-table-column label="" :render-header="renderHeader" width="300" align="center">
                   <template slot-scope="btnScope">
                     <el-button size="mini" @click="showModelEventButton(buttonList.find(item => item.id == btnScope.row.id))">编辑</el-button>
                     <el-button size="mini" type="danger" @click="handleDeleteButton(buttonList.find(item => item.id == btnScope.row.id))">删除</el-button>
@@ -144,6 +144,42 @@ export default {
     this.getList();
   },
   methods: {
+    renderHeader (h, {column}) {
+      return h(
+        'div',
+        [
+          h('div', '操作'),
+
+          h('div',[
+            h('i', {
+              class:'el-icon-warning',
+              style:'color:#e6a23c;'
+            }),
+            h('span', {
+              style:{
+                'margin-right':'10px',
+                'color':'#e6a23c',
+                'cursor':'pointer'
+              },
+            },'编辑和删除将会对所有同类型按钮进行操作'),
+
+          ]),
+          // h('el-checkbox',{
+          //   style:'margin-left:5px',
+          //   on:{
+          //     change:this.select // 选中事件
+          //   }}),
+          // h('img', {
+          //   // src: './image/header.png',
+          //   // class:'el-icon-location',
+          //   style: 'width:120px;height:50px;',
+          //   attrs: {
+          //     src: require('./image/header.png')
+          //   }
+          // })
+        ]
+      )
+    },
     getRowKeys(row) {
             return row.id
           },
@@ -191,9 +227,11 @@ export default {
     },
     showModelEventButton: function(row) {
       this.changeShowModelButton();
+      console.log(row)
       if (row) {
+        //
         this.contentListButton = row;
-        this.contentListButton.name = row.bname
+        // this.contentListButton.name = row.bname
 
         // console.log(this.contentList)
       }else {

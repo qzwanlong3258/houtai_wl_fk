@@ -27,6 +27,7 @@ import { mapActions } from "vuex";
 import { checkNull } from "@/utils/check";
 import { Loading } from "element-ui";
 import { setCookie } from "@/utils/cookie";
+import { postUserInfo } from "@/api/userInfo";
 export default {
   data() {
     return {
@@ -45,10 +46,24 @@ export default {
         };
         this.login(data).then(res => {
           if (res.code === 0) {
-            this.getRouter({ id: Number(res.data.role[0])  }).then(res => {
+            let user= {
+              username: res.data.user.username,
+              password: res.data.user.password,
+              avatarUrl: res.data.user.avatarUrl,
+              nickName: res.data.user.nickName,
+              phone: res.data.user.phone,
+              email: res.data.user.email
+            }
+
+            // console.log(user)
+
+            postUserInfo(user).then(res=>{
+              // console.log(1)
+            })
+            this.getRouter({ id: Number(res.data.role[0])  }).then( res => {
               if (res.code === 0) {
                 console.log(this.$router.options.routes)
-                // console.log(res)
+
                 // setCookie('token',)
                 this.$router.push({ path: "/feiai" });
               }

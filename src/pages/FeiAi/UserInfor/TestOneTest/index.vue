@@ -15,9 +15,13 @@
             >{{scope.row.expansion ? '收起' : '展开'}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.tid}}</template>
+        <el-table-column
+          type="index"
+          label="编号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.tid}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="问题" align="center">
           <template slot-scope="scope">{{scope.row.content}}</template>
         </el-table-column>
@@ -33,7 +37,7 @@
             <el-card class="layout-title-button" shadow="never" style="position: relative">
               <i class="el-icon-tickets" style="margin-top: 5px"></i>
               <span style="margin-top: 5px">选项管理</span>
-              <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
+              <el-button class="btn-add" @click="showModelEventChoose(scope.row,true)" size="mini">添加</el-button>
             </el-card>
             <div class="table2box">
               <el-table
@@ -54,13 +58,13 @@
                   </template>
                 </el-table-column>
 
-                <!--                <el-table-column label="角色名称" align="center">-->
-                <!--                  <template slot-scope="btnScope">{{btnScope.row.role}}</template>-->
-                <!--                </el-table-column>-->
+                                <el-table-column label="分数" align="center">
+                                  <template slot-scope="btnScope">{{btnScope.row.score}}</template>
+                                </el-table-column>
                 <el-table-column label="操作" width="300" align="center">
                   <template slot-scope="btnScope">
-                    <el-button size="mini" @click="showModelEventChoose">编辑</el-button>
-                    <el-button size="mini" type="danger" @click="handleDeleteChoose">删除</el-button>
+                    <el-button size="mini" @click="showModelEventChoose(btnScope.row)">编辑</el-button>
+                    <el-button size="mini" type="danger" @click="handleDeleteChoose(btnScope.row)">删除</el-button>
                   </template>
                 </el-table-column>
               </el-table>
@@ -88,37 +92,49 @@
       @closeStatus="closeStatus"
       :contentList="contentList"
     />
+    <change-model-test
+      v-if="showModelTest"
+      :modelStatus="showModelTest"
+      @updateList="getList"
+      @closeStatus="closeStatusTest"
+      :contentList="contentListTest"
+    />
   </div>
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getTestOneTest } from "@/api/userInfo";
+import { getTestOneTest ,deleteTestOneTest,deleteTestOneTestItem } from "@/api/userInfo";
+import ChangeModelTest from "./components/addtest";
 const contentList = {
   id: "",
+  content:''
+};
+const contentListTest = {
+  id: "",
   name: "",
-  phone: "",
-  userName: "",
-  password: "",
-  roleId: "",
-  role: "",
-  addName: ""
+  img: "",
+  score: ""
 };
 export default {
   name: "userList",
   components: {
-    ChangeModel
+    ChangeModel,
+    ChangeModelTest
   },
   data() {
     return {
       list: [],
       total: null,
       listLoading: false,
+      showModelTest:false,
       listQuery: {
         pageNum: 1,
         pageSize: 5
       },
       showModel: false,
-      contentList
+      contentList,
+      contentListTest,
+
     };
   },
   created() {
@@ -135,10 +151,10 @@ export default {
         if (row.tid != item.tid) {
           $table.toggleRowExpansion(item, false);
           item.expansion = false;
-          console.log(this.list)
+          // console.log(this.list)
         } else {
           item.expansion = !item.expansion;
-          console.log(this.list)
+          // console.log(this.list)
         }
       });
       $table.toggleRowExpansion(row);
@@ -146,35 +162,56 @@ export default {
     changeShowModel: function() {
       this.showModel = !this.showModel;
     },
+    changeShowModelTest: function() {
+      this.showModelTest = !this.showModelTest;
+    },
     closeStatus: function() {
       this.changeShowModel();
       this.contentList = {
         id: "",
+        content:''
+      };
+    },
+    closeStatusTest: function() {
+      this.changeShowModelTest();
+      this.contentListTest = {
+        id: "",
         name: "",
-        phone: "",
-        userName: "",
-        password: "",
-        roleId: "",
-        role: "",
-        addName: ""
+        img: "",
+        score: ""
       };
     },
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
-        this.contentList = row;
+        this.contentList.id = row.tid;
+        this.contentList.content = row.content;
       } else {
-        this.contentList = {
+        this.contentList =  {
+          id: "",
+          content:''
         };
       }
     },
-    showModelEventChoose: function(row) {
-      this.changeShowModel();
+    showModelEventChoose: function(row,add) {
+      this.changeShowModelTest();
+      console.log(row)
       if (row) {
-        this.contentList = row;
-      } else {
-        this.contentList = {
-        };
+        if(add){
+          this.contentListTest = {
+            id: row.tid,
+          };
+
+        } else {
+          this.contentListTest.name = row.cname;
+          this.contentListTest.score = row.score;
+          this.contentListTest.img = row.img;
+          this.contentListTest.id=row.cid
+          this.contentListTest.add=true
+
+        }
+
+
       }
     },
     getList() {
@@ -211,7 +248,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          setAdminDelete({ id: row.id }).then(res => {
+          deleteTestOneTest({ id: row.tid }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");
@@ -233,7 +270,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          setAdminDelete({ id: row.id }).then(res => {
+          deleteTestOneTestItem({ id: row.cid }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");

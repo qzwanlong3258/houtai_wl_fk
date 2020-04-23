@@ -233,7 +233,7 @@
       <div style="height: 34px;"></div>
     </div>
   </div>
-</template> 
+</template>
 
 <script>
 import { str2Date } from "@/utils/date";
@@ -320,6 +320,7 @@ export default {
     this.initOrderCountDate()
     this.getData()
     this.getTopData()
+    this.upUser()
   },
   methods: {
     //得到除图形之外的数据
@@ -350,6 +351,9 @@ export default {
         this.dataEmpty = false;
         this.loading = false;
       }, 1000);
+    },
+    upUser(){
+
     }
   }
 };

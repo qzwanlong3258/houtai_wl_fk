@@ -141,7 +141,7 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
-        if (this.params.id) {
+        if (this.params.name) {
           //编辑
           updateButton(this.params).then(res => {
             if (res.code === 0) {
@@ -163,7 +163,15 @@
       }
     },
     created() {
-      this.params = this.contentList
+      if(this.contentList.bname){
+        let e ={
+          name:this.contentList.bname,
+          ...this.contentList
+        }
+        this.params = e
+      }
+
+      console.log(this.contentList)
       // this.getRoleList();
       this.status = this.modelStatus;
     },

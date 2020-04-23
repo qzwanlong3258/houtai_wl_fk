@@ -21,7 +21,9 @@ export default new Router({
       component: () => import('@/pages/FeiAi/BaseInfor'),
       meta: { auth: true, description:'基本信息',title:'基本信息'},
       hidden: true
-    }]
+    }
+
+      ]
     },
     {
       path: '/baseSetting',
@@ -92,6 +94,12 @@ export default new Router({
           name: '用户信息',
           component: () => import('@/pages/FeiAi/UserInfor/appletUser'),
           meta: { auth: true, description:'用户信息',title:'用户信息',icon: 'iconyonghuxinxi'},
+        },
+        {
+          path: 'loginLog',
+          name: '登录日志',
+          component: () => import('@/pages/FeiAi/UserInfor/loginLog'),
+          meta: { auth: true, description:'登录日志',title:'登录日志',icon: 'iconyonghuxinxi'},
         },
         {
           path: 'testonetest',

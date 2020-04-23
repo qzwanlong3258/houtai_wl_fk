@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { GET_MEMBER_LIST ,GET_TESTONETEST_LIST, UPDATE_TESTONETEST} from '@/assets/constants/api'
+import { GET_MEMBER_LIST ,GET_TESTONETEST_LIST,ADD_TESTONETEST, UPDATE_TESTONETEST,DELETE_TESTONETEST,ADD_TESTONETEST_ITEM,UPDATE_TESTONETEST_ITEM,DELETE_TESTONETEST_ITEM,GET_USER_INFORLOG,POST_USER_INFORLOG} from '@/assets/constants/api'
 
 //获取用户列表接口
 export function getMemberList(data) {
@@ -36,8 +36,56 @@ export function updateTestOneTest(data) {
 export function deleteTestOneTest(data) {
   return request({
     method: 'POST',
-    url: UPDATE_TESTONETEST,
+    url: DELETE_TESTONETEST,
     data
   })
 }
+//新增问题选项
+export function addTestOneTestItem(data) {
+  return request({
+    method: 'POST',
+    url: ADD_TESTONETEST_ITEM,
+    data
+  })
+}
+//修改问题选项
+export function updateTestOneTestItem(data) {
+  return request({
+    method: 'POST',
+    url: UPDATE_TESTONETEST_ITEM,
+    data
+  })
+}
+//删除问题选项
+export function deleteTestOneTestItem(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_TESTONETEST_ITEM,
+    data
+  })
+}
+//删除问题选项
+export function get(data) {
+  return request({
+    method: 'POST',
+    url: DELETE_TESTONETEST_ITEM,
+    data
+  })
+}
+//获取用户信息
+export function getUserInfo(data) {
+  return request({
+    method: 'GET',
+    url: GET_USER_INFORLOG,
+  })
+}
+//修改用户信息
+export function postUserInfo(data) {
+  return request({
+    method: 'POST',
+    url: POST_USER_INFORLOG,
+    data
+  })
+}
+
 

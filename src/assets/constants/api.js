@@ -81,6 +81,13 @@ module.exports = {
     ADD_TESTONETEST:'/test/insertTest',//增加问题
     UPDATE_TESTONETEST:'/test/updateTest',//修改问题
     DELETE_TESTONETEST:'/test/deleteTest',//删除问题
+    ADD_TESTONETEST_ITEM:'/test/insertTestChoose',//增加问题
+    UPDATE_TESTONETEST_ITEM:'/test/updateTestChooose',//修改问题选项
+    DELETE_TESTONETEST_ITEM:'/test/deleteTestChoose',//删除问题选项
+
+    GET_USER_INFORLOG:'/user/loadUserInfo',//获取用户信息
+    POST_USER_INFORLOG:'/user/updateUserInfo',//提交用户信息
+
 
     //审批管理
     // GET_PRECHECK_LIST: '/precheck/list', //获取贷款预审列表

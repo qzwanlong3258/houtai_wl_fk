@@ -7,16 +7,16 @@
       :width="500"
       :height="420"
     >
-      <div class="title-tip">设置图片及链接</div>
-<!--      <div class="change-ps-input">-->
-<!--        <span class="role-tip">名称：</span>-->
-<!--        <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入图标名称" />-->
-<!--      </div>-->
+      <div class="title-tip">设置选项</div>
+      <div class="change-ps-input">
+        <span class="role-tip">名称：</span>
+        <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入选项名称" />
+      </div>
       <div class="change-ps-input">
         <span class="role-tip">图片：</span>
         <el-input class="input-box" style="width: 196px" type="text" readonly >
           <template slot="prepend" style="background: #ffffff">
-            <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
+<!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
             <img v-if="params.img"  @click="$imageViewer" :src="params.img"  min-width="20" height="26"  >
           </template>
           <template slot="append">
@@ -36,31 +36,29 @@
 
       </div>
       <div class="change-ps-input">
-        <span class="role-tip">链接：</span>
+        <span class="role-tip">分数：</span>
         <el-input
           class="input-box"
-          type="text"
-          v-model="params.url"
-          placeholder="请输入路由"
+          type="number"
+          v-model="params.score"
+          placeholder="请输入选项分数"
         />
       </div>
-
-      <!--      <div class="change-ps-input">-->
-      <!--        <span class="role-tip">密码：</span>-->
-      <!--        <el-input-->
-      <!--          class="input-box"-->
-      <!--          type="text"-->
-      <!--          v-model="params.password"-->
-      <!--          placeholder="请输入登录密码"-->
-      <!--        />-->
-      <!--      </div>-->
-            <div class="change-ps-input" style="border: none" v-if="!this.params.id">
-              <span class="role-tip">角色：</span>
-              <div style="margin-top: 15px;display: flex" class="input-box">
-                <el-radio v-model="params.type" label="1" border size="small">轮播图</el-radio>
-                <el-radio v-model="params.type" label="2" border size="small">广告位</el-radio>
-              </div>
-            </div>
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">密码：</span>-->
+<!--        <el-input-->
+<!--          class="input-box"-->
+<!--          type="text"-->
+<!--          v-model="params.password"-->
+<!--          placeholder="请输入登录密码"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <div class="change-ps-input" style="border: none">-->
+<!--        <span class="role-tip">角色：</span>-->
+<!--        <el-select v-model="params.roleId" size="small" placeholder="请选择" class="select-box">-->
+<!--          <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>-->
+<!--        </el-select>-->
+<!--      </div>-->
       <el-button
         @click="saveSetting"
         style="margin-left: 140px;position: fixed;bottom: 30px;"
@@ -73,7 +71,7 @@
 
 <script>
   import LoveDialog from "@/components/NoLoveDialog";
-  import {  addHomeStyle, updateHomeStyle  } from "@/api/baseSetting";
+  import {  addTestOneTestItem,updateTestOneTestItem  } from "@/api/userInfo";
   import { uploadPic } from "@/api/uploadPic";
   import axios from "axios"
   export default {
@@ -93,12 +91,11 @@
       return {
         status: true,
         params: {
-          url: "",
+          score: "",
           name: "",
-          icon:"",
-          type:1
-
-        }
+          img:""
+        },
+        show:false
 
       };
     },
@@ -106,7 +103,7 @@
       handleAvatarSuccess(res, file) {
 
       },
-      beforeAvatarUpload(file) {
+       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
         const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -120,9 +117,9 @@
         let fd = new FormData();
         fd.append('file',file);//传文件
         // fd.append('id',this.srid);//传其他参数
-        uploadPic(fd).then(res=>{
-          this.params.img=res.data
-          console.log(res)
+         uploadPic(fd).then(res=>{
+           this.params.img=res.data
+           console.log(res)
         })
         // axios.post(`${axios.defaults.baseURL}/ftp/upload`,fd).then(function(res){
         //   // alert('成功');
@@ -144,9 +141,9 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
-        if (this.params.id) {
+        if (this.show) {
           //编辑
-          updateHomeStyle(this.params).then(res => {
+          updateTestOneTestItem(this.params).then(res => {
             if (res.code === 0) {
               this.$message.success("编辑成功");
               this.$emit("updateList");
@@ -155,7 +152,11 @@
           });
         } else {
           //添加
-          addHomeStyle(this.params).then(res => {
+          let e ={
+            uuid:this.params.id,
+            ...this.params
+          }
+          addTestOneTestItem(e).then(res => {
             if (res.code === 0) {
               this.$message.success("添加成功");
               this.$emit("updateList");
@@ -166,7 +167,14 @@
       }
     },
     created() {
-      this.params = this.contentList
+      if(this.contentList.add){
+        this.params = this.contentList
+        this.show=true
+      } else {
+        this.params.id=this.contentList.id
+
+      }
+
       // this.getRoleList();
       this.status = this.modelStatus;
     },
