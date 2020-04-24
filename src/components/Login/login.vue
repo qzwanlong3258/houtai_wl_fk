@@ -46,18 +46,7 @@ export default {
         };
         this.login(data).then(res => {
           if (res.code === 0) {
-            let user= {
-              username: res.data.user.username,
-              password: res.data.user.password,
-              avatarUrl: res.data.user.avatarUrl,
-              nickName: res.data.user.nickName,
-              phone: res.data.user.phone,
-              email: res.data.user.email
-            }
-
-            // console.log(user)
-
-            postUserInfo(user).then(res=>{
+            postUserInfo().then(res=>{
               // console.log(1)
             })
             this.getRouter({ id: Number(res.data.role[0])  }).then( res => {

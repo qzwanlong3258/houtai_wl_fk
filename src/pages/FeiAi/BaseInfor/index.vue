@@ -272,9 +272,19 @@ export default {
       }
 
       changeUserInfor(e).then(res=>{
-        this.changePhoneFun()
-        this.getData()
-        this.$message.success("修改手机号成功");
+        // this.changePhoneFun()
+        // this.getData()
+        // this.$message.success("修改手机号成功");
+        if (res.code === 0) {
+          this.clearToken().then(res => {
+            if (res.code === 0) {
+              this.$router.push({ path: "/login" });
+            } else {
+              this.$Message.error(res.msg);
+            }
+          });
+          this.$message.success(`手机修改成功,请重新登录`);
+        }
       })
       // let temp = true;
       // //验证手机号码
@@ -345,9 +355,19 @@ export default {
       }
 
       changeUserInfor(e).then(res=>{
-        this.changeNickNameFun()
-        this.getData()
-        this.$message.success("修改昵称成功");
+        // this.changeNickNameFun()
+        // this.getData()
+        // this.$message.success("修改昵称成功");
+        if (res.code === 0) {
+          this.clearToken().then(res => {
+            if (res.code === 0) {
+              this.$router.push({ path: "/login" });
+            } else {
+              this.$Message.error(res.msg);
+            }
+          });
+          this.$message.success(`昵称修改成功,请重新登录`);
+        }
       })
     },
     //修改用户名

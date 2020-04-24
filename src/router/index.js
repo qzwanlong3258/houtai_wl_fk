@@ -172,7 +172,43 @@ export default new Router({
       ]
     },
     {
+      path: '/shopManage',
+      name: '装企管理',
+      component: Layout,
+      redirect: '/ShopManage/ShopCheck',
+      meta: { auth: true, description:'装企管理',title:'装企管理',icon: 'icontuijian'},
+      children: [
+        {
+          path: 'shopCheck',
+          name: '装企审核',
+          component: () => import('@/pages/FeiAi/ShopManage/ShopCheck'),
+          meta: { auth: true, description:'装企审核',title:'装企审核',icon: 'iconqianzi'},
+        }
+      ]
+    },
+    {
       path: '/loanSetting',
+      name: '放款管理',
+      component: Layout,
+      redirect: '/loanSetting/loanList',
+      meta: { auth: true, description:'放款管理',title:'放款管理',icon: 'icontuijian'},
+      children: [
+        {
+          path: 'loanList',
+          name: '放款申请',
+          component: () => import('@/pages/FeiAi/loanSetting/loanList'),
+          meta: { auth: true, description:'放款申请',title:'放款申请',icon: 'iconfangkuanxinxi'},
+        },
+        {
+          path: 'loanDetail',
+          name: '申请详情',
+          component: () => import('@/pages/FeiAi/loanSetting/loanDetail'),
+          meta: { auth: true, description:'申请详情',title:'申请详情',icon: 'iconfangkuanxinxi'},
+        },
+      ]
+    },
+    {
+      path: '/bankManage',
       name: '放款管理',
       component: Layout,
       redirect: '/loanSetting/loanList',

@@ -85,8 +85,8 @@ module.exports = {
     UPDATE_TESTONETEST_ITEM:'/test/updateTestChooose',//修改问题选项
     DELETE_TESTONETEST_ITEM:'/test/deleteTestChoose',//删除问题选项
 
-    GET_USER_INFORLOG:'/user/loadUserInfo',//获取用户信息
-    POST_USER_INFORLOG:'/user/updateUserInfo',//提交用户信息
+    GET_USER_INFORLOG:'/user/loadLoginLog',//获取用户信息
+    POST_USER_INFORLOG:'/user/loginlog',//提交用户信息
 
 
     //审批管理
@@ -105,5 +105,8 @@ module.exports = {
     SET_LOAN_NOPASS: '/loan/noPass', //阶段不通过
     SET_LOAN_PASS: '/loan/pass', //阶段通过
   //上传照片
-    UPLOAD_PIC:'/ftp/upload'
+    UPLOAD_PIC:'/ftp/upload',
+  //装企管理
+    GET_SHOP:'/decorate/loadDecorate',
+    POST_SHOP:'/decorate/updateDecorateState'
 }

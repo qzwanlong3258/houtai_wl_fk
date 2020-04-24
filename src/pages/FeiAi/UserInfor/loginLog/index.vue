@@ -2,17 +2,17 @@
   <div class="app-container">
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
-      <span style="margin-top: 5px">成员管理</span>
+      <span style="margin-top: 5px">登录日志</span>
 <!--      <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>-->
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
-<!--        <el-table-column label="编号" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
-<!--        </el-table-column>-->
-        <el-table-column label="用户名" align="center">
-          <template slot-scope="scope">{{scope.row.username}}</template>
+        <el-table-column label="编号" align="center">
+          <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
+<!--        <el-table-column label="用户名" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.username}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="昵称" align="center">
           <template slot-scope="scope">{{scope.row.nickName}}</template>
         </el-table-column>
@@ -22,7 +22,7 @@
           </template>
         </el-table-column>
         <el-table-column label="登录时间" align="center">
-          <template slot-scope="scope">{{scope.row.create_time|time}}</template>
+          <template slot-scope="scope">{{scope.row.loginTime|time}}</template>
         </el-table-column>
 <!--        <el-table-column label="角色名称" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.role}}</template>-->
@@ -38,7 +38,7 @@
 <!--        </el-table-column>-->
       </el-table>
     </div>
-    <!-- <div class="pagination-container">
+     <div class="pagination-container">
       <el-pagination
         background
         @size-change="handleSizeChange"
@@ -49,7 +49,7 @@
         :current-page.sync="listQuery.pageNum"
         :total="total"
       ></el-pagination>
-    </div>-->
+    </div>
     <change-model
       v-if="showModel"
       :modelStatus="showModel"
@@ -61,7 +61,7 @@
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getUserInfo, setAdminDelete } from "@/api/userInfo";
+import { getUserInfo} from "@/api/userInfo";
 const contentList = {
   id: "",
   name: "",
@@ -109,7 +109,7 @@ export default {
       var y = time.getFullYear();
       var m = time.getMonth() + 1;
       var d = time.getDate();
-      var h = time.getHours();
+      var h = time.getHours() - 1;
       var mm = time.getMinutes();
       var s = time.getSeconds();
       return y + '-' + timeAdd0(m) + '-' + timeAdd0(d) + ' ' + timeAdd0(h) + ':' + timeAdd0(mm) + ':' + timeAdd0(s);
@@ -145,7 +145,7 @@ export default {
       };
       getUserInfo(data).then(res => {
         if (res.code === 0) {
-          this.total = res.data.total;
+          this.total = Number(res.data.count);
           this.list = res.data.list;
         }
       });

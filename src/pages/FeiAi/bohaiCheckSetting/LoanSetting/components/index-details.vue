@@ -43,26 +43,26 @@
        <handling-title title="  信息采集 "></handling-title>
         <tr>
           <td class="zebra-table-label" width="150">身份证正面照片</td>
-          <td><div class="pre-font"> <img :src="dataForm.cardBeforeImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.cardBeforeImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">身份证反面照片</td>
-          <td><div class="pre-font"><img :src="dataForm.cardAfterImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.cardAfterImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">户口本首页</td>
-          <td colspan="3"><div class="pre-font"><img :src="dataForm.bookletIndexImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td colspan="3"><div class="pre-font"><img :src="dataForm.bookletIndexImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
         <tr>
 
           <td class="zebra-table-label" width="150">户口本本人页</td>
-          <td><div class="pre-font"><img :src="dataForm.bookletThisImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.bookletThisImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">户口本户主页</td>
-          <td><div class="pre-font"><img :src="dataForm.bookletMainImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.bookletMainImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">身份证正面照片</td>
-          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">身份证反面照片</td>
-          <td><div class="pre-font"><img :src="dataForm.cardAfterImg" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.cardAfterImg" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">工作性质</td>
@@ -70,13 +70,13 @@
         </tr>
         <tr v-if="dataForm.workNature =='企业职员'">
           <td class="zebra-table-label" width="150">收入证明</td>
-          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">工资流水</td>
           <td><div class="pre-font"><img  :src="item.img" v-for="(item,index) in dataForm.thisRunningWater" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
         </tr>
         <tr v-if="dataForm.workNature =='法人'">
           <td class="zebra-table-label" width="150">营业执照</td>
-          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.incomeProof" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">工资流水</td>
           <td><div class="pre-font"><img  :src="item.img" v-for="(item,index) in dataForm.thisRunningWater" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
         </tr>
@@ -91,26 +91,26 @@
         <tr>
 
           <td class="zebra-table-label" width="150">结婚证</td>
-          <td><div class="pre-font"><img :src="dataForm.marriageCertificateType" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.marriageCertificateType" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">配偶工作性质</td>
           <td><div class="zebra-table-scoll">{{dataForm.marriageWorkNature ? dataForm.marriageWorkNature : '—'}}</div></td>
         </tr>
 
         <tr v-if="dataForm.marriageWorkNature =='企业职员'">
           <td class="zebra-table-label" width="150">收入证明</td>
-          <td><div class="pre-font"> <img :src="dataForm.marriageIncomeProof" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.marriageIncomeProof" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">工资流水</td>
           <td><div class="pre-font"><img  :src="item.img" v-for="(item,index) in dataForm.spouseRunningWater" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
         </tr>
         <tr v-if="dataForm.marriageWorkNature =='法人'">
           <td class="zebra-table-label" width="150">营业执照</td>
-          <td><div class="pre-font"> <img :src="dataForm.marriageIncomeProof" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.marriageIncomeProof" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">工资流水</td>
           <td><div class="pre-font"><img :src="item.img" v-for="(item,index) in dataForm.spouseRunningWater" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">离婚证</td>
-          <td colspan="3"><div class="pre-font">{{dataForm.divorce ? dataForm.divorce : '—'}}</div></td>
+          <td colspan="3"><div class="pre-font"> <img :src="dataForm.divorce"  @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">预约时间</td>

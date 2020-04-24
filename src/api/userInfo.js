@@ -76,7 +76,7 @@ export function get(data) {
 export function getUserInfo(data) {
   return request({
     method: 'GET',
-    url: GET_USER_INFORLOG,
+    url:`${GET_USER_INFORLOG}?size=${data.pageSize}&page=${data.pageNum}`,
   })
 }
 //修改用户信息
