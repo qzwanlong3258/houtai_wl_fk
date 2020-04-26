@@ -18,7 +18,7 @@
         </el-table-column>
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
-        <div @click="addOrUpdateHandle(scope.row.id)">
+        <div >
           <el-tag v-if="scope.row.show === 1" size="mini" type="success">有效</el-tag>
           <el-tag v-else size="mini" type="danger">失效</el-tag>
         </div>

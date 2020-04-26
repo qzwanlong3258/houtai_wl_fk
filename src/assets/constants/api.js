@@ -14,8 +14,8 @@ module.exports = {
     SET_UPDATA_PHONE: '/person/update/phone',
     SET_UPDATA_AVATAR: '/person/update/avator',
 
-  SET_UPDATA_USER:'/user/updateUserInfo',
-  GET_USER_CONTENT:'/user/loadUserInfo',
+    SET_UPDATA_USER:'/user/updateUserInfo',
+    GET_USER_CONTENT:'/user/loadUserInfo',
 
     //基础设置
     GET_ROLE_LIST: '/role/list', //获取角色列表
@@ -34,7 +34,7 @@ module.exports = {
     SET_BANK_ADD: '/bank/insert', //添加银行
     SET_BANK_EXIT: '/bank/update', //编辑银行
     SET_BANK_DELETE: '/bank/delete', //删除银行
-    //GET_BANK_LIST: '/bank/list', //获取银行列表
+
   //  SET_BANK_ADD: '/bank/add', //添加银行
    // SET_BANK_EXIT: '/bank/update', //编辑银行
    // SET_BANK_DELETE: '/bank/delete', //删除银行
@@ -88,6 +88,11 @@ module.exports = {
     GET_USER_INFORLOG:'/user/loadLoginLog',//获取用户信息
     POST_USER_INFORLOG:'/user/loginlog',//提交用户信息
 
+    GET_USER_LIST:'/invite/loadUserList',//获取用户列表
+    GET_USER_INVITE:'/invite/loadApplyUserList',//获取邀请用户
+
+    GET_MEMBER_STATUS:'/members/loadCard',//会员状态
+
 
     //审批管理
     // GET_PRECHECK_LIST: '/precheck/list', //获取贷款预审列表
@@ -108,5 +113,13 @@ module.exports = {
     UPLOAD_PIC:'/ftp/upload',
   //装企管理
     GET_SHOP:'/decorate/loadDecorate',
-    POST_SHOP:'/decorate/updateDecorateState'
+    POST_SHOP:'/decorate/updateDecorateState',
+
+  //银行管理
+    GET_BANK_LIST_BK:'/bank/loadBank',
+    ADD_BANK_BK:'/bank/insertBank',
+    PUT_BANK_BK:'/bank/updateBank',
+    DELETE_BANK_BK:'/bank/deleteBank',
+    UP_BANK_BK:'/bank/updateBankState',
+  GET_BANK_USER_LIST_BK:'/bank/loadBankUser'
 }

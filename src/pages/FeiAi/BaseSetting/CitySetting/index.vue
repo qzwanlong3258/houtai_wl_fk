@@ -107,7 +107,7 @@
 <script>
 import ChangeModel from "./components/add";
 import ChangeModelButton from "./components/addbutton";
-import { getCityList, setAdminDelete,getButtonList,deleteButton,deleteCity} from "@/api/baseSetting";
+import { getCityList,getButtonList,deleteButton,deleteCity} from "@/api/baseSetting";
 const contentList = {
   id: "",
   button: "",

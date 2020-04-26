@@ -106,6 +106,18 @@ export default new Router({
           name: '测一测',
           component: () => import('@/pages/FeiAi/UserInfor/TestOneTest'),
           meta: { auth: true, description:'测一测',title:'测一测',icon: 'icontuijian'},
+        },
+        {
+          path: 'inviteInfo',
+          name: '邀请信息',
+          component: () => import('@/pages/FeiAi/UserInfor/InviteInfo'),
+          meta: { auth: true, description:'邀请信息',title:'邀请信息',icon: 'icontuijian'},
+        },
+        {
+          path: 'memberStatus',
+          name: '会员状态',
+          component: () => import('@/pages/FeiAi/UserInfor/MemberStatus'),
+          meta: { auth: true, description:'会员状态',title:'会员状态',icon: 'icontuijian'},
         }
       ]
     },
@@ -186,6 +198,22 @@ export default new Router({
         }
       ]
     },
+    {
+      path: '/BankManageAll',
+      name: '银行',
+      component: Layout,
+      redirect: '/BankManageAll/BankManage',
+      meta: { auth: true, description:'银行',title:'银行',icon: 'icontuijian'},
+      children: [
+        {
+          path: 'BankManage',
+          name: '装企审核',
+          component: () => import('@/pages/FeiAi/BankManageAll/BankManage'),
+          meta: { auth: true, description:'银行管理',title:'银行管理',icon: 'iconqianzi'},
+        }
+      ]
+    },
+
     {
       path: '/loanSetting',
       name: '放款管理',

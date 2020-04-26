@@ -28,7 +28,7 @@
             </el-select>
           </el-form-item>
           <el-form-item label="装修公司名称：">
-            <el-input style="width: 203px" v-model="listQuery.name" placeholder="贷款人"></el-input>
+            <el-input style="width: 203px" v-model="listQuery.name" placeholder="装修公司名称"></el-input>
           </el-form-item>
 <!--          <el-form-item label="贷款额度：">-->
 <!--            <el-input style="width: 203px" v-model="listQuery.loanQuota" placeholder="贷款额度"></el-input>-->
