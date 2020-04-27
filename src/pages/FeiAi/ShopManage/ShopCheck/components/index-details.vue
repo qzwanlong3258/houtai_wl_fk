@@ -3,8 +3,8 @@
     title="装企审核"
     :close-on-click-modal="false"
     :visible.sync="visible"
-    width="50%"
-    top="50px"
+    width="48%"
+    top="180px"
     class="corpContact-detail">
     <div v-loading="!submitAble">
       <table class="zebra-table zebra-table-space" style="margin-bottom: -2px;">

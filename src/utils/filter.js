@@ -82,7 +82,7 @@ Vue.filter('renovationStatusApply', function (value) {
         return "毛坯房";
     } else if (value == 2) {
         return "翻新房";
-    } 
+    }
 })
 
 /**
@@ -98,7 +98,7 @@ Vue.filter('renovationScheduleApply', function (value) {
         return "木工";
     } else if(value == 4) {
         return "完工"
-    } 
+    }
 })
 
 /**
@@ -120,7 +120,7 @@ Vue.filter('renovationTypeApply', function (value) {
         return "两室一厅二卫"
     } else if(value == 7) {
         return "其他"
-    } 
+    }
 })
 
 /**
@@ -134,3 +134,29 @@ Vue.filter('renovationTypeApply', function (value) {
          return `第${value}阶段`
      }
  })
+
+/**
+ * 阶段名称，0:初始阶段；n(n>0)：第n阶段
+ */
+
+Vue.filter('Time',function(val){
+  if(!val){
+    return ''
+  }
+  var time = new Date(val);
+
+  function timeAdd0(str) {
+    if (str < 10) {
+      str = '0' + str;
+    }
+    return str
+  }
+  var y = time.getFullYear();
+  var m = time.getMonth() + 1;
+  var d = time.getDate();
+  var h = time.getHours() - 1;
+  var mm = time.getMinutes();
+  var s = time.getSeconds();
+  return y + '-' + timeAdd0(m) + '-' + timeAdd0(d) + ' ' + timeAdd0(h) + ':' + timeAdd0(mm) + ':' + timeAdd0(s);
+})
+

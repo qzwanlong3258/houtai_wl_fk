@@ -112,14 +112,33 @@ module.exports = {
   //上传照片
     UPLOAD_PIC:'/ftp/upload',
   //装企管理
-    GET_SHOP:'/decorate/loadDecorate',
+    GET_SHOP:'/decorate/loadDecorate',//获取装企申请
     POST_SHOP:'/decorate/updateDecorateState',
 
   //银行管理
-    GET_BANK_LIST_BK:'/bank/loadBank',
+    GET_BANK_LIST_BK:'/bank/loadBank',//获取银行
     ADD_BANK_BK:'/bank/insertBank',
     PUT_BANK_BK:'/bank/updateBank',
     DELETE_BANK_BK:'/bank/deleteBank',
     UP_BANK_BK:'/bank/updateBankState',
-  GET_BANK_USER_LIST_BK:'/bank/loadBankUser'
+  GET_BANK_USER_LIST_BK:'/bank/loadBankUser',
+
+  //营销管理
+  GET_RECOMMENDCENT:'/activity/loadActivity',//获取活动
+  ADD_RECOMMENDCENT:'/activity/insertActivity',
+  PUT_RECOMMENDCENT:'/activity/updateActivity',
+  DELETE_RECOMMENDCENT:'/activity/deleteActivity',
+
+  GET_POST:'/posters/loadPosters',//获取海报
+  ADD_POST:'/posters/insertPosters',
+  DET_POST:'/posters/deletePosters',
+
+  GET_GOOD:'/goods/loadGoods',//获取商品
+  ADD_GOOD:'/goods/insertGoods',
+  PUT_GOOD:'/goods/updateGoods',
+  DET_GOOD:'/goods/deleteGoods',
+  GET_GOOD_DETAIL:'/goods/loadGoodsDetails',
+
+
+
 }

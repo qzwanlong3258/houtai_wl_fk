@@ -54,7 +54,7 @@
                 </el-table-column>
                 <el-table-column label="图片" align="center">
                   <template slot-scope="btnScope">
-                    <img :src="btnScope.row.img"  @click="$imageViewer" alt="" width="40" height="40" >
+                    <img :src="btnScope.row.img"  @click="$imageViewer" alt="" min-width="20" height="40" >
                   </template>
                 </el-table-column>
 

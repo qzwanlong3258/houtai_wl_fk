@@ -207,9 +207,30 @@ export default new Router({
       children: [
         {
           path: 'BankManage',
-          name: '装企审核',
+          name: '银行管理',
           component: () => import('@/pages/FeiAi/BankManageAll/BankManage'),
           meta: { auth: true, description:'银行管理',title:'银行管理',icon: 'iconqianzi'},
+        }
+      ]
+    },
+    {
+      path: '/MarketManage',
+      name: '营销管理',
+      component: Layout,
+      redirect: '/MarketManage/recommend',
+      meta: { auth: true, description:'营销管理',title:'营销管理',icon: 'icontuijian'},
+      children: [
+        {
+          path: 'recommemdCenter',
+          name: '活动管理',
+          component: () => import('@/pages/FeiAi/MarketManage/recommendCenter'),
+          meta: { auth: true, description:'活动管理',title:'活动管理',icon: 'iconqianzi'},
+        },
+        {
+          path: 'distributionCenter',
+          name: '分销中心',
+          component: () => import('@/pages/FeiAi/MarketManage/distributionCenter'),
+          meta: { auth: true, description:'分销中心',title:'分销中心',icon: 'iconqianzi'},
         }
       ]
     },
