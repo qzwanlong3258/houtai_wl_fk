@@ -1,19 +1,27 @@
 import request from '@/utils/request'
-import { GET_FACESIGN_LIST,SET_FACESIGN_PASS,SET_FACESIGN_FAIL } from '@/assets/constants/api'
+import { GET_FACESIGN_LIST_OLD,SET_FACESIGN_PASS_OLD,SET_FACESIGN_FAIL_OLD } from '@/assets/constants/api'
 
-//获取贷款面签列表接口
+
+//获取用户列表接口
 export function getFaceList(data) {
-    return request({
-        method: 'GET',
-        url: `${GET_FACESIGN_LIST}?pageSize=${data.pageSize}&pageNum=${data.pageNum}&loanerName=${data.loanerName}&loanQuota=${data.loanQuota}&facesignCity=${data.facesignCity}&faceStatus=${data.faceStatus}`
-    })
+  return request({
+    method: 'GET',
+    url: `${GET_FACESIGN_LIST_OLD}?size=${data.pageSize}&page=${data.pageNum}&state=${data.state}&name=${data.name}`,
+  })
+}
+//获取用户列表接口
+export function getFaceListAll(data) {
+  return request({
+    method: 'GET',
+    url: `${GET_FACESIGN_LIST_OLD}?size=${data.pageSize}&page=${data.pageNum}&state=${data.state}&bdate=${data.bdate}&edate=${data.edate}&name=${data.name}`,
+  })
 }
 
 //面签成功
 export function getPassDesign(data) {
     return request({
         method: 'POST',
-        url: SET_FACESIGN_PASS,
+        url: SET_FACESIGN_PASS_OLD,
         data
     })
 }
@@ -22,7 +30,7 @@ export function getPassDesign(data) {
 export function getFailDesign(data) {
     return request({
         method: 'POST',
-        url: SET_FACESIGN_FAIL,
+        url: SET_FACESIGN_FAIL_OLD,
         data
     })
 }

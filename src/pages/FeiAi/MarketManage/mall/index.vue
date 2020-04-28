@@ -2,52 +2,36 @@
   <div class="app-container">
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
-      <span style="margin-top: 5px">成员管理</span>
+      <span style="margin-top: 5px">积分商城</span>
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
-<!--      "password": "123123",密码 <string>-->
-<!--      "create_time": 1587920548000,创建时间 <number>-->
-<!--      "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/gwVXwVRiczoXicb4CbtQprTPibB1ekaMibT0cZ6Lz1MiccWaXuBeQdwrJsMPRA2NKlpYOMrnEmTy16y3PsPnrbPo8SQ/132",头像 <string>-->
-<!--      "phone": "123",手机号 <string>-->
-<!--      "nickName": "测试用11",昵称 <string>-->
-<!--      "id": 15,用户id <number>-->
-<!--      "email": "email123",邮箱 <string>-->
-<!--      "username": "admin1"登录名 <string>-->
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
         <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.id}}</div></template>
         </el-table-column>
-        <el-table-column label="昵称" align="center">
-          <template slot-scope="scope">{{scope.row.nickName}}</template>
+        <el-table-column label="商品名称" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.name}}</div></template>
         </el-table-column>
-        <el-table-column label="头像" align="center">
-          <template slot-scope="scope">
-            <img :src="scope.row.avatarUrl" class="head-photo" alt=""  >
-          </template>
+        <el-table-column label="商品价格" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.price}}</div></template>
         </el-table-column>
-        <el-table-column label="电话" align="center">
-          <template slot-scope="scope">{{scope.row.phone}}</template>
+        <el-table-column label="商品原价" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.originalPrice}}</div></template>
         </el-table-column>
-        <el-table-column label="用户名" align="center">
-          <template slot-scope="scope">{{scope.row.username}}</template>
+        <el-table-column label="商品库存" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.count}}</div></template>
         </el-table-column>
-        <el-table-column label="密码" align="center">
-          <template slot-scope="scope">{{scope.row.password}}</template>
+        <el-table-column label="兑换次数" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.buyCounts}}</div></template>
         </el-table-column>
-        <el-table-column label="邮箱" align="center">
-          <template slot-scope="scope">{{scope.row.email}}</template>
+        <el-table-column label="商品类型" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.type==1?'积分商品':'推广商品'}}</div></template>
         </el-table-column>
-        <el-table-column label="登录时间" align="center" width="160">
-          <template slot-scope="scope">{{scope.row.create_time|time}}</template>
+        <el-table-column label="创建时间" width="160" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.createDate|Time}}</div></template>
         </el-table-column>
-<!--        <el-table-column label="角色名称" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.role}}</template>-->
-<!--        </el-table-column>-->
-<!--        <el-table-column label="操作人" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.addName}}</template>-->
-<!--        </el-table-column>-->
-        <el-table-column label="操作" width="200" align="center">
+        <el-table-column label="操作" width="150" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="showModelEvent(scope.row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
@@ -55,7 +39,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <div class="pagination-container">
+     <div class="pagination-container">
       <el-pagination
         background
         @size-change="handleSizeChange"
@@ -74,25 +58,29 @@
       @closeStatus="closeStatus"
       :contentList="contentList"
     />
+    <check-details ref="checkDetails"></check-details>
   </div>
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getAdminList, setAdminDelete } from "@/api/baseSetting";
+import { getGood, detGood } from "@/api/market";
+import CheckDetails from './components/index-details'
 const contentList = {
   id: "",
   name: "",
-  phone: "",
-  userName: "",
-  password: "",
-  roleId: "",
-  role: "",
-  addName: ""
+  price: "",
+  originalPrice: "",
+  count: "",
+  Details: "",
+  Showimg: "",
+  goodImgList:[],
+  playImgList:[]
 };
 export default {
   name: "userList",
   components: {
-    ChangeModel
+    ChangeModel,
+    CheckDetails
   },
   data() {
     return {
@@ -101,7 +89,8 @@ export default {
       listLoading: false,
       listQuery: {
         pageNum: 1,
-        pageSize: 5
+        pageSize: 5,
+
       },
       showModel: false,
       contentList
@@ -111,6 +100,9 @@ export default {
     this.getList();
   },
   methods: {
+    toDetail:function(e) {
+      this.$refs.checkDetails.init(e)
+    },
     changeShowModel: function() {
       this.showModel = !this.showModel;
     },
@@ -119,26 +111,36 @@ export default {
       this.contentList = {
         id: "",
         name: "",
-        phone: "",
-        userName: "",
-        password: "",
-        roleId: "",
-        role: "",
-        addName: ""
+        price: "",
+        originalPrice: "",
+        count: "",
+        Details: "",
+        Showimg: "",
+        goodImgList:[],
+        playImgList:[]
       };
     },
     showModelEvent: function(row) {
+
       this.changeShowModel();
+      console.log(this.showModel)
       if (row) {
+        // if(!this.showModel){
+        //   this.changeShowModel();
+        // }
+        // this.$forceUpdate()
         this.contentList = row;
+      } else{
+        this.contentList = contentList;
       }
     },
     getList() {
       let data = {
         pageSize: this.listQuery.pageSize,
-        pageNum: this.listQuery.pageNum
+        pageNum: this.listQuery.pageNum,
+        type:1
       };
-      getAdminList(data).then(res => {
+      getGood(data).then(res => {
         if (res.code === 0) {
           this.total =Number(res.data.count);
           this.list = res.data.list;
@@ -157,13 +159,13 @@ export default {
     },
     //删除角色
     handleDelete: function(row) {
-      this.$confirm("此操作将永久删除该角色, 是否继续?", "提示", {
+      this.$confirm("此操作将永久删除该商品, 是否继续?", "提示", {
         confirmButtonText: "确定",
         cancelButtonText: "取消",
         type: "warning"
       })
         .then(() => {
-          setAdminDelete({ id: row.id }).then(res => {
+          detGood({ id: row.uuid }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");
@@ -193,11 +195,6 @@ export default {
   }
 }
 .avatar-box {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.head-photo {
   width: 50px;
   height: 50px;
   border-radius: 50%;

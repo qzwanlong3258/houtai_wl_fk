@@ -8,7 +8,7 @@
       :height="620"
     >
 
-      <div class="title-tip">设置推广商品</div>
+      <div class="title-tip">设置积分商品</div>
       <div class="change-ps-input">
         <span class="role-tip">商品名称：</span>
         <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入商品名称" />
@@ -239,7 +239,7 @@ export default {
         //添加
         let e={
 
-          type: 2,
+          type: 1,
           name: this.params.name,
           count: this.params.count,
           originalPrice: this.params.originalPrice,

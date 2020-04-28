@@ -1,6 +1,7 @@
 import request from '@/utils/request'
 import { GET_MEMBER_LIST ,GET_TESTONETEST_LIST,ADD_TESTONETEST, UPDATE_TESTONETEST,DELETE_TESTONETEST,ADD_TESTONETEST_ITEM,UPDATE_TESTONETEST_ITEM,DELETE_TESTONETEST_ITEM,GET_USER_INFORLOG,POST_USER_INFORLOG,
-  GET_USER_LIST ,GET_USER_INVITE, GET_MEMBER_STATUS
+  GET_USER_LIST ,GET_USER_INVITE, GET_MEMBER_STATUS,GET_MEASUREHOME,
+  PUT_MEASUREHOME_STATE
 } from '@/assets/constants/api'
 
 //获取用户列表接口
@@ -112,5 +113,22 @@ export function getMemberStatus(data) {
     url:`${GET_MEMBER_STATUS}?page=${data.page}&size=${data.size}&name=${data.name}`,
   })
 }
+//约量房
+
+export function getMeasureHome(data) {
+  return request({
+    method: 'GET',
+    url: GET_MEASUREHOME,
+  })
+}
+//
+export function putMeasureHome(data) {
+  return request({
+    method: 'POST',
+    url: PUT_MEASUREHOME_STATE,
+    data
+  })
+}
+
 
 

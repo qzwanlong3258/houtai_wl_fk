@@ -44,7 +44,7 @@
         <el-table-column label="积分" align="center">
           <template slot-scope="scope">{{scope.row.integral}}</template>
         </el-table-column>
-        <el-table-column label="邀请角色" align="center">
+        <el-table-column label="角色" align="center">
           <template slot-scope="scope">{{scope.row.applyRoleName}}</template>
         </el-table-column>
 <!--        <el-table-column label="状态" align="center">-->

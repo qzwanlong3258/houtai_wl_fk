@@ -4,20 +4,20 @@
       class="palyer-dialog"
       :visible.sync="status"
       @beforeClose="beforeClose"
-      :width="600"
-      :height="600"
+      :width="500"
+      :height="420"
     >
-      <div class="title-tip">设置活动</div>
+      <div class="title-tip">设置按钮</div>
       <div class="change-ps-input">
-        <span class="role-tip">活动名称：</span>
-        <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入活动名称" />
+        <span class="role-tip">名称：</span>
+        <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入图标名称" />
       </div>
       <div class="change-ps-input">
         <span class="role-tip">图片：</span>
         <el-input class="input-box" style="width: 196px" type="text" readonly >
           <template slot="prepend" style="background: #ffffff">
-            <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
-            <img v-if="params.img"  @click="$imageViewer" :src="params.img"  min-width="20" height="26"  >
+<!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
+            <img v-if="params.icon"  @click="$imageViewer" :src="params.icon"  min-width="20" height="26"  >
           </template>
           <template slot="append">
 
@@ -35,77 +35,33 @@
         </el-input>
 
       </div>
-      <div class="change-ps-input" style="border: none">
-        <span class="role-tip">角色：</span>
-        <el-select v-model="params.roleid" size="small" placeholder="请选择" class="select-box">
-          <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>
-        </el-select>
-      </div>
       <div class="change-ps-input">
-        <span class="role-tip">奖励积分：</span>
+        <span class="role-tip">路由：</span>
         <el-input
           class="input-box"
           type="text"
-          v-model="params.money"
-          placeholder="请输入奖励积分"
+          v-model="params.url"
+          placeholder="请输入路由"
         />
       </div>
-      <div class="change-ps-input">
-        <span class="role-tip">活动描述：</span>
-        <el-input
-          class="input-box"
-          type="text"
-          v-model="params.describe"
-          placeholder="请输入活动描述"
-        />
-      </div>
-      <div class="change-ps-input">
-        <span class="role-tip">邀请数量：</span>
-        <el-input
-          class="input-box"
-          type="text"
-          v-model="params.count"
-          placeholder="请输入活动描述"
-        />
-      </div>
-      <div class="change-ps-input">
-        <span class="role-tip">开始时间：</span>
-        <el-date-picker
-          v-model="params.bdate"
-          format="yyyy-MM-dd HH:mm:ss"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          type="datetime"
-          placeholder="选择开始时间">
-        </el-date-picker>
-      </div>
-      <div class="change-ps-input">
-        <span class="role-tip">结束时间：</span>
-        <el-date-picker
-          v-model="params.edate"
-          format="yyyy-MM-dd HH:mm:ss"
-          value-format="yyyy-MM-dd HH:mm:ss"
-          type="datetime"
-          placeholder="选择结束时间">
-        </el-date-picker>
-      </div>
-      <!--      <div class="change-ps-input">-->
-      <!--        <span class="role-tip">密码：</span>-->
-      <!--        <el-input-->
-      <!--          class="input-box"-->
-      <!--          type="text"-->
-      <!--          v-model="params.password"-->
-      <!--          placeholder="请输入登录密码"-->
-      <!--        />-->
-      <!--      </div>-->
-      <!--      <div class="change-ps-input" style="border: none">-->
-      <!--        <span class="role-tip">角色：</span>-->
-      <!--        <el-select v-model="params.roleId" size="small" placeholder="请选择" class="select-box">-->
-      <!--          <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>-->
-      <!--        </el-select>-->
-      <!--      </div>-->
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">密码：</span>-->
+<!--        <el-input-->
+<!--          class="input-box"-->
+<!--          type="text"-->
+<!--          v-model="params.password"-->
+<!--          placeholder="请输入登录密码"-->
+<!--        />-->
+<!--      </div>-->
+<!--      <div class="change-ps-input" style="border: none">-->
+<!--        <span class="role-tip">角色：</span>-->
+<!--        <el-select v-model="params.roleId" size="small" placeholder="请选择" class="select-box">-->
+<!--          <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>-->
+<!--        </el-select>-->
+<!--      </div>-->
       <el-button
         @click="saveSetting"
-        style="margin-left: 180px;position: fixed;bottom: 30px;"
+        style="margin-left: 140px;position: fixed;bottom: 30px;"
         type="info"
         class="dialog-btn"
       >确定</el-button>
@@ -115,8 +71,7 @@
 
 <script>
   import LoveDialog from "@/components/NoLoveDialog";
-  import {  addRecommendCenter, putRecommendCenter  } from "@/api/market";
-  import { getAdminRole } from "@/api/baseSetting";
+  import {  addButton, updateButton  } from "@/api/baseSetting";
   import { uploadPic } from "@/api/uploadPic";
   import axios from "axios"
   export default {
@@ -141,20 +96,6 @@
           icon:""
 
         },
-        roleList:[
-          // {
-          //   id:'2',
-          //   role:'会员'
-          // },
-          // {
-          //   id:'3',
-          //   role:'设计师'
-          // },
-          // {
-          //   id:'1',
-          //   role:'客户'
-          // }
-        ]
 
       };
     },
@@ -162,7 +103,7 @@
       handleAvatarSuccess(res, file) {
 
       },
-      beforeAvatarUpload(file) {
+       beforeAvatarUpload(file) {
         const isJPG = file.type === 'image/jpeg';
         const isLt2M = file.size / 1024 / 1024 < 2;
 
@@ -176,9 +117,9 @@
         let fd = new FormData();
         fd.append('file',file);//传文件
         // fd.append('id',this.srid);//传其他参数
-        uploadPic(fd).then(res=>{
-          this.params.img=res.data
-          console.log(res)
+         uploadPic(fd).then(res=>{
+           this.params.icon=res.data
+           console.log(res)
         })
         // axios.post(`${axios.defaults.baseURL}/ftp/upload`,fd).then(function(res){
         //   // alert('成功');
@@ -192,12 +133,7 @@
       getRoleList: function() {
         getAdminRole().then(res => {
           if (res.code === 0) {
-            this.roleList = res.data.list.map(res=>{
-              return {
-                id:res.id.toString(),
-                role:res.role
-              }
-            });
+            this.roleList = res.data.list;
           }
         });
       },
@@ -205,9 +141,9 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
-        if (this.params.id) {
+        if (this.params.name) {
           //编辑
-          putRecommendCenter(this.params).then(res => {
+          updateButton(this.params).then(res => {
             if (res.code === 0) {
               this.$message.success("编辑成功");
               this.$emit("updateList");
@@ -216,7 +152,7 @@
           });
         } else {
           //添加
-          addRecommendCenter(this.params).then(res => {
+          addButton(this.params).then(res => {
             if (res.code === 0) {
               this.$message.success("添加成功");
               this.$emit("updateList");
@@ -227,12 +163,16 @@
       }
     },
     created() {
-      if(this.contentList.id){
-        this.params = this.contentList
+      if(this.contentList.bname){
+        let e ={
+          name:this.contentList.bname,
+          ...this.contentList
+        }
+        this.params = e
       }
 
-      // console.log(this.contentList)
-      this.getRoleList();
+      console.log(this.contentList)
+      // this.getRoleList();
       this.status = this.modelStatus;
     },
     mounted() {}
@@ -246,7 +186,7 @@
     display: flex;
     justify-content: center;
     .role-tip {
-      width: 120px;
+      width: 60px;
       text-align: right;
     }
     span {

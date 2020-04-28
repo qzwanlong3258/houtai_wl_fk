@@ -2,7 +2,7 @@ import request from '@/utils/request'
 import { GET_BANK_LIST_BK,ADD_BANK_BK,PUT_BANK_BK,DELETE_BANK_BK,UP_BANK_BK ,GET_BANK_USER_LIST_BK} from '@/assets/constants/api'
 
 //获取首页数据
-export function getList(data) {
+export function getBankList(data) {
   return request({
     method: 'GET',
     url:  `${GET_BANK_LIST_BK}?page=${data.page}&size=${data.size}&name=${data.name}`,

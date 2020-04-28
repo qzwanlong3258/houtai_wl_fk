@@ -2,36 +2,36 @@
   <div class="app-container">
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
-      <span style="margin-top: 5px">成员管理</span>
+      <span style="margin-top: 5px">推广商品</span>
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
         <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.id}}</div></template>
         </el-table-column>
         <el-table-column label="商品名称" align="center">
-          <template slot-scope="scope">{{scope.row.name}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.name}}</div></template>
         </el-table-column>
         <el-table-column label="商品价格" align="center">
-          <template slot-scope="scope">{{scope.row.price}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.price}}</div></template>
         </el-table-column>
         <el-table-column label="商品原价" align="center">
-          <template slot-scope="scope">{{scope.row.originalPrice}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.originalPrice}}</div></template>
         </el-table-column>
         <el-table-column label="商品库存" align="center">
-          <template slot-scope="scope">{{scope.row.count}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.count}}</div></template>
         </el-table-column>
         <el-table-column label="兑换次数" align="center">
-          <template slot-scope="scope">{{scope.row.buyCounts}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.buyCounts}}</div></template>
         </el-table-column>
         <el-table-column label="商品类型" align="center">
-          <template slot-scope="scope">{{scope.row.type==1?'积分商品':'推广商品'}}</template>
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.type==1?'积分商品':'推广商品'}}</div></template>
         </el-table-column>
-        <el-table-column label="创建时间" align="center">
-          <template slot-scope="scope">{{scope.row.createDate|Time}}</template>
+        <el-table-column label="创建时间" width="160" align="center">
+          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.createDate|Time}}</div></template>
         </el-table-column>
-        <el-table-column label="操作" width="300" align="center">
+        <el-table-column label="操作" width="150" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="showModelEvent(scope.row)">编辑</el-button>
             <el-button size="mini" type="danger" @click="handleDelete(scope.row)">删除</el-button>
@@ -39,7 +39,7 @@
         </el-table-column>
       </el-table>
     </div>
-    <!-- <div class="pagination-container">
+     <div class="pagination-container">
       <el-pagination
         background
         @size-change="handleSizeChange"
@@ -50,7 +50,7 @@
         :current-page.sync="listQuery.pageNum"
         :total="total"
       ></el-pagination>
-    </div>-->
+    </div>
     <change-model
       v-if="showModel"
       :modelStatus="showModel"
@@ -58,11 +58,13 @@
       @closeStatus="closeStatus"
       :contentList="contentList"
     />
+    <check-details ref="checkDetails"></check-details>
   </div>
 </template>
 <script>
 import ChangeModel from "./components/add";
 import { getGood, detGood } from "@/api/market";
+import CheckDetails from './components/index-details'
 const contentList = {
   id: "",
   name: "",
@@ -77,7 +79,8 @@ const contentList = {
 export default {
   name: "userList",
   components: {
-    ChangeModel
+    ChangeModel,
+    CheckDetails
   },
   data() {
     return {
@@ -96,6 +99,9 @@ export default {
     this.getList();
   },
   methods: {
+    toDetail:function(e) {
+      this.$refs.checkDetails.init(e)
+    },
     changeShowModel: function() {
       this.showModel = !this.showModel;
     },
@@ -113,26 +119,33 @@ export default {
         playImgList:[]
       };
     },
-    showModelEvent:  function(row) {
+    showModelEvent: function(row) {
+
       this.changeShowModel();
+      console.log(this.showModel)
       if (row) {
+        // if(!this.showModel){
+        //   this.changeShowModel();
+        // }
+        // this.$forceUpdate()
         this.contentList = row;
       } else{
-
         this.contentList = contentList;
       }
     },
     getList() {
       let data = {
         pageSize: this.listQuery.pageSize,
-        pageNum: this.listQuery.pageNum
+        pageNum: this.listQuery.pageNum,
+        type:2
       };
       getGood(data).then(res => {
         if (res.code === 0) {
-          this.total = res.data.total;
+          this.total =Number(res.data.count);
           this.list = res.data.list;
         }
       });
+      this.showModel=false
     },
     handleSizeChange(val) {
       this.listQuery.pageNum = 1;
@@ -151,7 +164,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          detGood({ id: row.id }).then(res => {
+          detGood({ id: row.uuid }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");

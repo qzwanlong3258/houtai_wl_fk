@@ -2,60 +2,76 @@
   <div class="table-container">
     <el-table ref="loanSetting" style="width: 100%" :data="list" border>
       <el-table-column label="编号" align="center">
-        <template slot-scope="scope">{{scope.row.id}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.id}}</span></template>
       </el-table-column>
       <el-table-column label="贷款人" align="center">
-        <template slot-scope="scope">{{scope.row.loanerName}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanerName}}</span></template>
       </el-table-column>
-      <el-table-column label="产品类型" align="center">
-        <template>银行产品</template>
-      </el-table-column>
-      <el-table-column label="详情信息" align="center">
-        <template slot-scope="scope">
-          <el-button size="mini" @click="viewDetail(scope.row)">查看</el-button>
-        </template>
-      </el-table-column>
+      <!--      <el-table-column label="详情信息" align="center">-->
+      <!--        <template slot-scope="scope">-->
+      <!--          <el-button size="mini" @click="viewDetail(scope.row)">查看</el-button>-->
+      <!--        </template>-->
+      <!--      </el-table-column>-->
       <el-table-column label="申请金额" align="center">
-        <template slot-scope="scope">{{scope.row.loanQuota}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanMoney}}</span></template>
       </el-table-column>
-      <el-table-column label="邀请人" align="center">
-        <template slot-scope="scope">{{scope.row.invitor}}</template>
-      </el-table-column>
+      <!--      <el-table-column label="邀请人" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.invitor}}</template>-->
+      <!--      </el-table-column>-->
       <el-table-column label="面签城市" align="center">
-        <template slot-scope="scope">{{scope.row.facesignCity}}</template>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.cityName}}</span></template>
       </el-table-column>
-       <el-table-column label="面签银行" align="center">
-        <template slot-scope="scope">{{scope.row.bank}}</template>
+      <el-table-column label="贷款日期" align="center" width="160">
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.lastTime|Time}}</span></template>
       </el-table-column>
-      <el-table-column label="面签状态" align="center">
+      <!--      <el-table-column v-if="status == 2" label="面签银行" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.bank}}</template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column v-if="status == 2" label="面签人员" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.facesingnerName}}</template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column v-if="status == 2" label="面签状态" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.precheckStatus | faceStatusName}}</template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column v-if="status == 2" label="下发款额" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.LowerQuota}}</template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column v-if="status == 2" label="反馈" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.feiaiFacesignFeedback}}</template>-->
+      <!--      </el-table-column>-->
+      <!--      <el-table-column v-if="status == 3" label="原因" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.feiaiOrderFeedback}}</template>-->
+      <!--      </el-table-column>-->
+      <el-table-column v-if="status == 1" label="面签状态" align="center">
         <template slot-scope="scope">
-          <span :class="scope.row.precheckStatus | statusColor">{{scope.row.precheckStatus | faceStatusName}}</span>
+          <span :class="scope.row.state | statusColor">{{scope.row.state|faceStatusName}}</span>
         </template>
       </el-table-column>
-      <el-table-column v-if='status == 2' label="下发额度" align="center">
-        <template slot-scope="scope">{{scope.row.precheckStatus ==2 ? scope.row.LowerQuota : '0'}}</template>
-      </el-table-column>
-      <el-table-column v-if='status == 3' label="原因" align="center">
-        <template slot-scope="scope">{{scope.row.facesignFeedback}}</template>
-      </el-table-column>
-      <el-table-column label="操作人" align="center">
-        <template slot-scope="scope">{{scope.row.addName}}</template>
-      </el-table-column>
+      <!--      <el-table-column label="操作人" align="center">-->
+      <!--        <template slot-scope="scope">{{scope.row.precheckDoer}}</template>-->
+      <!--      </el-table-column>-->
       <el-table-column label="操作" width="200" align="center">
         <template slot-scope="scope">
-          <div v-if="scope.row.precheckStatus == 1">
-            <el-button size="mini" @click="agree(scope.row.id)">成功</el-button>
-            <el-button size="mini" type="danger" @click="refuse(scope.row.id)">失败</el-button>
+          <div v-if="status == 1">
+            <el-button size="mini" @click="agree(scope.row.id)">通过</el-button>
+            <el-button size="mini" type="danger" @click="refuse(scope.row.id)">不通过</el-button>
           </div>
-          <div v-if="scope.row.precheckStatus != 1">
-            已处理
-          </div>
+          <!--          <div v-if="status == 1">通过</div>-->
+          <!--          <div v-if="status == 2">不通过</div>-->
+          <el-tag v-if="status == 2" size="mini" type="success">通过</el-tag>
+          <el-tag v-if="status == 3" size="mini"  type="danger">不通过</el-tag>
+          <!--          <div v-if="scope.row.state == 1">-->
+          <!--            <el-button size="mini" @click="agree(scope.row.id)">通过</el-button>-->
+          <!--            <el-button size="mini" type="danger" @click="refuse(scope.row.id)">不通过</el-button>-->
+          <!--          </div>-->
+          <!--          <div v-if="scope.row.precheckStatus != 1">已处理</div>-->
         </template>
       </el-table-column>
     </el-table>
     <love-detail v-if="showModel" :modelStatus="showModel" @closeStatus="closeStatus" :tableList="tableList" />
     <love-refuse v-if="refuseModel" :modelStatus="refuseModel" @closeStatus="closeRefuseStatus" :refuseId="refuseId"  @refuseUpdateList="updataList" />
     <love-agree v-if="agreeModel" :modelStatus="agreeModel" @closeStatus="closeAgressStatus" :agreeId="agreeId" @agreenUpdateList="updataList"/>
+    <check-details ref="checkDetails"></check-details>
   </div>
 </template>
 <script>
@@ -63,6 +79,8 @@ import Vue from 'vue'
 import LoveDetail from "./detail";
 import LoveRefuse from "./refuse";
 import LoveAgree from "./agree";
+import { getPassDesign } from "@/api/facesign";
+import CheckDetails from './index-details'
 const tableList = [
   {
     name: "编号",
@@ -195,9 +213,14 @@ export default {
   components: {
     LoveDetail,
     LoveRefuse,
-    LoveAgree
+    LoveAgree,
+    CheckDetails
   },
   methods: {
+    toDetail:function(e) {
+
+      this.$refs.checkDetails.init(e)
+    },
      updataList: function(data) {
       if (data.isUpdataList) {
         this.$emit("pupdataList");
@@ -230,7 +253,7 @@ export default {
           item.data = renovationTypeApply(row[item.objName]);
         }else{
           item.data = row[item.objName]
-        }  
+        }
       });
     },
     changeRefuseModel() {
@@ -252,8 +275,16 @@ export default {
       this.agreeId = "";
     },
     agree(id) {
-      this.changeAgreeModel();
-      this.agreeId = id;
+      // this.changeAgreeModel();
+      // this.agreeId = id;
+      getPassDesign({
+        id: id,
+        state: 4,
+      }).then(res=>{
+        if(res.code === 0){
+          this.$message.success('提交成功')
+        }
+      })
     }
   }
 };

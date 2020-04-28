@@ -43,14 +43,15 @@
         <el-table-column label=""  :render-header="renderHeader" align="center">
           <template slot-scope="scope"> <div @click="toDetail(scope.row)" title="点击查看">{{scope.row.count}}</div></template>
         </el-table-column>
+
+        <el-table-column label="地址" align="center">
+          <template slot-scope="scope">{{scope.row.address}}</template>
+        </el-table-column>
         <el-table-column label="状态" align="center">
           <template slot-scope="scope"><div >
             <el-tag v-if="scope.row.isdelete == 0" size="mini" type="success">启用</el-tag>
             <el-tag v-else size="mini" type="danger">停用</el-tag>
           </div></template>
-        </el-table-column>
-        <el-table-column label="地址" align="center">
-          <template slot-scope="scope">{{scope.row.address}}</template>
         </el-table-column>
         <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
@@ -86,7 +87,7 @@
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getList, deleteBank,upBank } from "@/api/bank";
+import { getBankList, deleteBank,upBank } from "@/api/bank";
 import CheckDetails from './components/index-details'
 const contentList = {
   id:'',
@@ -221,7 +222,7 @@ export default {
         page: this.listQuery.page,
         name: this.listQuery.name
       };
-      getList(data).then(res => {
+      getBankList(data).then(res => {
         if (res.code === 0) {
           this.total =Number(res.data.count) ;
           console.log(res.data.list)
@@ -236,6 +237,7 @@ export default {
           this.list = res.data.list;
         }
       });
+      this.showModel=false
     },
     handleSizeChange(val) {
       this.listQuery.page = 1;

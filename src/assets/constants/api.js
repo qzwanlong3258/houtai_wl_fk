@@ -24,10 +24,10 @@ module.exports = {
     SET_ROLE_EXIT: '/role/update', //编辑角色接口
     SET_ROLE_DELETE: '/role/delete', //删除角色接口
 
-    GET_ADMIN_LIST: '/admin/list', //获取成员列表
-    SET_ADMIN_ADD: '/admin/add', //添加成员
+    GET_ADMIN_LIST: '/user/loadUserInfoAll', //获取成员列表
+    SET_ADMIN_ADD: '/user/insertUser', //添加成员
     GET_ADMIN_ROLE: '/role/list', //获取角色
-    SET_ADMIN_EXIT: '/admin/update', //编辑成员
+    SET_ADMIN_EXIT: '/user/updateUser', //编辑成员
     SET_ADMIN_DELETE: '/admin/delete', //删除成员
 
     GET_BANK_LIST: '/bank/list', //获取银行列表
@@ -93,8 +93,13 @@ module.exports = {
 
     GET_MEMBER_STATUS:'/members/loadCard',//会员状态
 
+    GET_MEASUREHOME:'/make/loadMake',//约量房
+    PUT_MEASUREHOME_STATE:'/make/updateMake',//改状态
 
-    //审批管理
+
+
+
+    // 渤海银行审批管理
     // GET_PRECHECK_LIST: '/precheck/list', //获取贷款预审列表
     GET_PRECHECK_LIST: '/info/loadInfo', //获取贷款预审列表
     SET_PRECHECK_PASS: '/info/updateState', //审批通过
@@ -103,6 +108,18 @@ module.exports = {
     GET_FACESIGN_LIST: '/info/loadInfo', //获取贷款面签列表
     SET_FACESIGN_PASS: '/info/updateState', //面签成功
     SET_FACESIGN_FAIL: '/info/updateState', //面签失败
+
+  //审批管理
+  GET_PRECHECK_LIST_OLD: '/order/loadOrder', //获取贷款预审列表
+  SET_PRECHECK_PASS_OLD: '/order/updateOrderState', //审批通过
+  SET_PRECHECK_FAIL_OLD: '/order/updateOrderState', //审批不通过
+  SET_PRECHECK_FACE_OLD: '/order/orderVisa', //审批通过
+  SET_PRECHECK_BANK_OLD: '/order/orderBank', //指派银行
+  SET_PRECHECK_FACE:'/order/loadVisa' ,//    获取面签员
+
+  GET_FACESIGN_LIST_OLD: '/order/loadOrder', //获取贷款面签列表
+  SET_FACESIGN_PASS_OLD: '/order/updateOrderState', //面签成功
+  SET_FACESIGN_FAIL_OLD: '/order/updateOrderState', //面签失败
 
     //放款管理
     GET_LOAN_LIST: '/precheck/list', //获取放款申请列表

@@ -114,6 +114,7 @@ export default {
           this.list = res.data.list;
         }
       });
+      this.showModel=false
     },
     handleSizeChange(val) {
       this.listQuery.pageNum = 1;

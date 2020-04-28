@@ -50,7 +50,10 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting: function(){
-      getPassDesign({money: this.money,orderId: this.agreeId}).then(res=>{
+      getPassDesign({
+        id: this.agreeId,
+        state: 4,
+      }).then(res=>{
         if(res.code === 0){
           this.status = !this.status
           this.$message.success('提交成功')
@@ -60,7 +63,8 @@ export default {
     }
   },
   created(){
-    this.status = this.modelStatus
+    this.saveSetting()
+    // this.status = this.modelStatus
   }
 };
 </script>

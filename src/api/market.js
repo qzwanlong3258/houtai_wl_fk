@@ -73,7 +73,7 @@ export function detPost(data) {
 export function getGood(data) {
   return request({
     method: 'GET',
-    url:GET_GOOD  ,
+    url:  `${GET_GOOD}?size=${data.pageSize}&page=${data.pageNum}&type=${data.type}` ,
   })
 }
 

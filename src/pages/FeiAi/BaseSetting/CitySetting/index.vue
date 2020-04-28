@@ -287,6 +287,8 @@ export default {
           // console.log(this.buttonList)
         }
       })
+      this.showModel=false
+      this.showModelButton=false
     },
     handleSizeChange(val) {
       this.listQuery.pageNum = 1;

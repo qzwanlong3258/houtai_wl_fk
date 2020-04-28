@@ -31,6 +31,10 @@ Vue.filter('statusColor', function (value) {
         return "color-success";
     } else if (value == 3) {
         return "color-danger";
+    } else if (value == 4) {
+      return "color-success";
+    } else if (value == 5) {
+      return "color-danger";
     }
 })
 
@@ -51,11 +55,11 @@ Vue.filter('statusName', function (value) {
  * 面签状态枚举:1待完成 2面签成功3面签失败
  */
 Vue.filter('faceStatusName', function (value) {
-    if (value == 1) {
+    if (value == 2) {
         return "待完成";
-    } else if (value == 2) {
+    } else if (value == 4) {
         return "面签成功";
-    } else if (value == 3) {
+    } else if (value == 5) {
         return "面签失败";
     }
 })
@@ -72,6 +76,20 @@ Vue.filter('marriageStatus', function (value) {
         return "离婚";
     }
 })
+/**
+ * 婚姻状态1：已婚； 2：未婚; 3:离婚
+ */
+
+Vue.filter('marry', function (value) {
+  if (value == 0) {
+    return "未婚";
+  } else if (value == 1) {
+    return "已婚";
+  } else if (value == 2) {
+    return "离婚";
+  }
+})
+
 
 /**
  * 装修情况 1：毛坯房； 2：翻新房

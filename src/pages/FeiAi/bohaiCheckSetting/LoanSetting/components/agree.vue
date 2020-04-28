@@ -73,7 +73,7 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { getPassList } from "@/api/checkSetting";
+import { getPassList  } from "@/api/checkSetting";
 import { getBankList, getAdminList } from "@/api/baseSetting";
 export default {
   components: {

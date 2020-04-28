@@ -38,7 +38,8 @@ UPDATE_CITY,
   GET_HOME_STYLE,
   ADD_HOME_STYLE,
   UPDATE_HOME_STYLE,
-  DELETE_HOME_STYLE
+  DELETE_HOME_STYLE,
+
 } from '@/assets/constants/api'
 
 //获取角色列表
@@ -87,11 +88,10 @@ export function setRoleDelete(data) {
 }
 
 //获取成员列表
-export function getAdminList(params) {
+export function getAdminList(data) {
     return request({
         method: 'GET',
-        url: GET_ADMIN_LIST,
-        params
+        url: `${GET_ADMIN_LIST}?size=${data.pageSize}&page=${data.pageNum}`,
     })
 }
 
@@ -380,9 +380,6 @@ export function updateHomeStyle(data) {
     data
   })
 }
-
-//首页主题之修改
-
 export function deleteHomeStyle(data) {
   return request({
     method: 'POST',
@@ -390,3 +387,4 @@ export function deleteHomeStyle(data) {
     data
   })
 }
+

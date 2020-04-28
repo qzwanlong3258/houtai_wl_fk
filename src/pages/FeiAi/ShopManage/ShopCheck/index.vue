@@ -76,7 +76,7 @@ export default {
       statusList: [
         {
           id: 0,
-          label: "装企预审"
+          label: "装企审核"
         },
         {
           id: 1,
@@ -170,7 +170,7 @@ export default {
         name: "",
         pageNum: 1,
         pageSize: 5,
-        state:1
+        state:this.listQuery.state
       };
       this.getList();
     }

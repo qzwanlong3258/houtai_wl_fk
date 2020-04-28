@@ -118,6 +118,12 @@ export default new Router({
           name: '会员状态',
           component: () => import('@/pages/FeiAi/UserInfor/MemberStatus'),
           meta: { auth: true, description:'会员状态',title:'会员状态',icon: 'icontuijian'},
+        },
+        {
+          path: 'measureHome',
+          name: '约量房',
+          component: () => import('@/pages/FeiAi/UserInfor/measureHome'),
+          meta: { auth: true, description:'约量房',title:'约量房',icon: 'icontuijian'},
         }
       ]
     },
@@ -231,6 +237,12 @@ export default new Router({
           name: '分销中心',
           component: () => import('@/pages/FeiAi/MarketManage/distributionCenter'),
           meta: { auth: true, description:'分销中心',title:'分销中心',icon: 'iconqianzi'},
+        },
+        {
+          path: 'mall',
+          name: '积分商城',
+          component: () => import('@/pages/FeiAi/MarketManage/mall'),
+          meta: { auth: true, description:'积分商城',title:'积分商城',icon: 'iconqianzi'},
         }
       ]
     },

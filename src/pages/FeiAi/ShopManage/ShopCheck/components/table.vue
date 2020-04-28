@@ -13,7 +13,7 @@
       <el-table-column label="公司名称" align="center" show-overflow-tooltip>
         <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.name}}</span> </template>
       </el-table-column>
-      <el-table-column label="营业执照编号" align="center" show-overflow-tooltip>
+      <el-table-column label="营业执照编号" width="150" align="center" show-overflow-tooltip>
         <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.businesslicenseCode}}</span> </template>
       </el-table-column>
       <el-table-column label="手机号" align="center" show-overflow-tooltip>

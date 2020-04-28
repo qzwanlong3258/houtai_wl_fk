@@ -10,19 +10,19 @@
       <div class="title-tip">
         通过
       </div>
-      <div class="setting-perssion">
-        <div class="role-tip" style="margin-left: 30px">产品类型：</div>
-        <div class="content-box">
-          <el-select v-model="typeId" size="small" placeholder="请选择">
-            <el-option
-              v-for="item in produceType"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </div>
-      </div>
+<!--      <div class="setting-perssion">-->
+<!--        <div class="role-tip" style="margin-left: 30px">产品类型：</div>-->
+<!--        <div class="content-box">-->
+<!--          <el-select v-model="typeId" size="small" placeholder="请选择">-->
+<!--            <el-option-->
+<!--              v-for="item in produceType"-->
+<!--              :key="item.id"-->
+<!--              :label="item.name"-->
+<!--              :value="item.id"-->
+<!--            ></el-option>-->
+<!--          </el-select>-->
+<!--        </div>-->
+<!--      </div>-->
       <div class="setting-perssion">
         <div class="role-tip" style="margin-left: 30px">选择银行：</div>
         <div class="content-box">
@@ -30,7 +30,7 @@
             <el-option
               v-for="item in bankSelect"
               :key="item.id"
-              :label="item.bankName+'('+item.bankAddress.join('/')+')'"
+              :label="item.name+'('+item.address+')'"
               :value="item.id"
             ></el-option>
           </el-select>
@@ -43,25 +43,25 @@
             <el-option
               v-for="item in faceSelect"
               :key="item.id"
-              :label="item.name"
+              :label="item.nickName"
               :value="item.id"
             ></el-option>
           </el-select>
         </div>
       </div>
-       <div v-if="typeId == 2" class="setting-perssion">
-        <div class="role-tip" style="margin-left: 30px">指派拍照：</div>
-        <div class="content-box">
-          <el-select v-model="takePhoneId" size="small" placeholder="请选择">
-            <el-option
-              v-for="item in faceSelect"
-              :key="item.id"
-              :label="item.name"
-              :value="item.id"
-            ></el-option>
-          </el-select>
-        </div>
-      </div>
+<!--       <div v-if="typeId == 2" class="setting-perssion">-->
+<!--        <div class="role-tip" style="margin-left: 30px">指派拍照：</div>-->
+<!--        <div class="content-box">-->
+<!--          <el-select v-model="takePhoneId" size="small" placeholder="请选择">-->
+<!--            <el-option-->
+<!--              v-for="item in faceSelect"-->
+<!--              :key="item.id"-->
+<!--              :label="item.name"-->
+<!--              :value="item.id"-->
+<!--            ></el-option>-->
+<!--          </el-select>-->
+<!--        </div>-->
+<!--      </div>-->
       <el-button
         @click="getList"
         style="margin-left: 140px;position: fixed;bottom: 30px;"
@@ -73,8 +73,10 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { getPassList } from "@/api/checkSetting";
-import { getBankList, getAdminList } from "@/api/baseSetting";
+import { getPassList ,passFace,passBank,getface} from "@/api/checkSetting";
+// import { getBankList, getAdminList } from "@/api/baseSetting";
+import { getBankList } from "@/api/bank";
+
 export default {
   components: {
     LoveDialog
@@ -84,9 +86,9 @@ export default {
       type: Boolean
     },
     agreeId: {
-      type: Number,
-      default: ""
+      type: Number
     }
+
   },
   data() {
     return {
@@ -114,13 +116,18 @@ export default {
     beforeClose: function() {
       this.status = !this.status
     },
-    getList(){
+     getList(){
+       passFace({
+        orderid: this.agreeId,
+        visaid: this.signAdminId
+      })
+       passBank({
+        id: this.agreeId,
+        bankid:this.bankId
+      })
       let param = {
-        bankId: this.bankId,
-        signAdminId: this.signAdminId,
-        takePhoneId: this.takePhoneId,
-        checkId: this.agreeId,
-        type: this.typeId
+        id: this.agreeId,
+        state: 2,
       }
       getPassList(param).then(res=>{
         if(res.code === 0){
@@ -132,16 +139,25 @@ export default {
     }
   },
   created() {
-    this.status = this.modelStatus
-    getBankList({ page: 1, size: 100 }).then(res => {
+
+    getBankList({ page: 1, size: 100 ,name:''}).then(res => {
       if (res.code === 0) {
-        res.data.list&&res.data.list.map(item => {
-          item.bankAddress = JSON.parse(item.bankAddress);
-        });
-        this.bankSelect = res.data.list;
+        // res.data.list&&res.data.list.map(item => {
+        //   item.bankAddress = JSON.parse(item.bankAddress);
+        // });
+        let e=[]
+        res.data.list.map(item=>{
+          if(item.isdelete==0){
+            e.push(item)
+          }
+        })
+        this.bankSelect = e;
+        console.log(this.bankSelect)
+        console.log(e)
       }
     });
-    getAdminList({ pageNum: 1, pageSize: 100 }).then(res=>{
+    this.status = this.modelStatus
+    getface().then(res=>{
       if(res.code === 0){
         this.faceSelect = res.data.list
       }

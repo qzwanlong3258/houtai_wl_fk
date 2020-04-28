@@ -51,8 +51,9 @@ export default {
     },
     saveSetting: function() {
       let param = {
-        checkId: this.refuseId,
-        reason: this.reason
+        id: this.refuseId,
+        error: this.reason,
+        state:3
       };
       getFailList(param).then(res=>{
         if(res.code === 0){

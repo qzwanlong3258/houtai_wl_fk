@@ -6,7 +6,7 @@
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="testList" style="width: 100%" :data="list" :row-key="getRowKeys"  v-loading="listLoading" border>
+      <el-table ref="testList" style="width: 100%" height="500" :data="list" :row-key="getRowKeys"  v-loading="listLoading" border>
         <el-table-column prop="cangku_name" align="center" width="50" label=" ">
           <template slot-scope="scope">
             <span
@@ -230,6 +230,8 @@ export default {
           });
         }
       });
+      this.showModel=false
+      this.showModelTest=false
     },
     handleSizeChange(val) {
       this.listQuery.pageNum = 1;
