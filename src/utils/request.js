@@ -7,8 +7,8 @@ import store from "../store/index.js"
 axios.defaults.timeout = 50000
 // axios.defaults.baseURL = "http://192.168.3.25:8088"
 //   axios.defaults.baseURL = "http://www.feiaizn.com:8088"
-axios.defaults.baseURL = "/yunliuyan"
-// axios.defaults.baseURL = "http://47.104.232.184:8088"
+// axios.defaults.baseURL = "/yunliuyan"
+axios.defaults.baseURL = "http://47.104.232.184:8088"
 
 //请求拦截器
 axios.interceptors.request.use(

@@ -7,21 +7,21 @@
             <div class="total-frame">
               <i class="iconfont icondingdan total-icon"></i>
               <div class="total-title">今日贷款笔数</div>
-              <div class="total-value">{{topData.loanStatistics.todayOrders}}</div>
+              <div class="total-value">{{top.toDayCount}}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjinqian total-icon"></i>
               <div class="total-title">今日贷款总额</div>
-              <div class="total-value">￥{{topData.loanStatistics.todayLoans}}</div>
+              <div class="total-value">￥{{top.toDayloanMoney}}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjifen1 total-icon"></i>
               <div class="total-title">贷款总额</div>
-              <div class="total-value">{{topData.loanStatistics.loansMoney}}</div>
+              <div class="total-value">{{top.loanMoney}}</div>
             </div>
           </el-col>
         </el-row>
@@ -33,19 +33,19 @@
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">待预审贷款申请</span>
-                <span style="float: right" class="color-danger">({{topData.processed.preendOrders}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPre}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">已通过贷款申请</span>
-                <span style="float: right" class="color-danger">({{topData.processed.passOrders}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPreOK}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">未通过贷款申请</span>
-                <span style="float: right" class="color-danger">({{topData.processed.refuseOrders}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPreNO}})</span>
               </div>
             </el-col>
           </el-row>
@@ -56,7 +56,7 @@
                 <span
                   style="float: right"
                   class="color-danger"
-                >({{topData.processed.penddingOrders}})</span>
+                >({{midTop.stayPreOK}})</span>
               </div>
             </el-col>
             <el-col :span="8">
@@ -65,13 +65,13 @@
                 <span
                   style="float: right"
                   class="color-danger"
-                >({{topData.processed.successOrders}})</span>
+                >({{midTop.stayVisaOK}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">贷款面签失败数</span>
-                <span style="float: right" class="color-danger">({{topData.processed.failOrders}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayVisaNO}})</span>
               </div>
             </el-col>
           </el-row>
@@ -85,27 +85,27 @@
               <div style="padding: 40px">
                 <el-row>
                   <el-col
-                    :span="6"
+                    :span="8"
                     class="color-danger overview-item-value"
-                  >{{topData.bankStatistics.using}}</el-col>
+                  >{{bank.ALL}}</el-col>
                   <el-col
-                    :span="6"
+                    :span="8"
                     class="color-danger overview-item-value"
-                  >{{topData.bankStatistics.stopping}}</el-col>
+                  >{{bank.NO}}</el-col>
+<!--                  <el-col-->
+<!--                    :span="6"-->
+<!--                    class="color-danger overview-item-value"-->
+<!--                  >{{topData.bankStatistics.deleted}}</el-col>-->
                   <el-col
-                    :span="6"
+                    :span="8"
                     class="color-danger overview-item-value"
-                  >{{topData.bankStatistics.deleted}}</el-col>
-                  <el-col
-                    :span="6"
-                    class="color-danger overview-item-value"
-                  >{{topData.bankStatistics.allBank}}</el-col>
+                  >{{bank.OK}}</el-col>
                 </el-row>
                 <el-row class="font-medium">
-                  <el-col :span="6" class="overview-item-title">正在用</el-col>
-                  <el-col :span="6" class="overview-item-title">已停用</el-col>
-                  <el-col :span="6" class="overview-item-title">已删除</el-col>
-                  <el-col :span="6" class="overview-item-title">全部银行</el-col>
+                  <el-col :span="8" class="overview-item-title">正在用</el-col>
+                  <el-col :span="8" class="overview-item-title">已停用</el-col>
+<!--                  <el-col :span="6" class="overview-item-title">已删除</el-col>-->
+                  <el-col :span="8" class="overview-item-title">全部银行</el-col>
                 </el-row>
               </div>
             </div>
@@ -118,19 +118,19 @@
                   <el-col
                     :span="6"
                     class="color-danger overview-item-value"
-                  >{{topData.userStatistics.role}}</el-col>
+                  >{{user.role}}</el-col>
                   <el-col
                     :span="6"
                     class="color-danger overview-item-value"
-                  >{{topData.userStatistics.admin}}</el-col>
+                  >{{user.user}}</el-col>
                   <el-col
                     :span="6"
                     class="color-danger overview-item-value"
-                  >{{topData.userStatistics.member}}</el-col>
+                  >{{user.user}}</el-col>
                   <el-col
                     :span="6"
                     class="color-danger overview-item-value"
-                  >{{topData.userStatistics.shop}}</el-col>
+                  >{{user.decorate}}</el-col>
                 </el-row>
                 <el-row class="font-medium">
                   <el-col :span="6" class="overview-item-title">角色</el-col>
@@ -143,93 +143,93 @@
           </el-col>
         </el-row>
       </div>
-      <div class="statistics-layout">
-        <div class="layout-title">贷款统计</div>
-        <el-row>
-          <el-col :span="4">
-            <div style="padding: 20px">
-              <div>
-                <div style="color: #909399;font-size: 14px">本月贷款总数</div>
-                <div
-                  style="color: #606266;font-size: 24px;padding: 10px 0"
-                >{{topData.vchat.monthCounts}}</div>
-                <div>
-                  <span
-                    class="color-success"
-                    style="font-size: 14px"
-                  >{{topData.vchat.addMonthOrderRate}}</span>
-                  <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-                </div>
-              </div>
-              <div style="margin-top: 20px;">
-                <div style="color: #909399;font-size: 14px">本周贷款总数</div>
-                <div
-                  style="color: #606266;font-size: 24px;padding: 10px 0"
-                >{{topData.vchat.weakCounts}}</div>
-                <div>
-                  <span
-                    class="color-success"
-                    style="font-size: 14px"
-                  >{{topData.vchat.addWeakOrderRate}}</span>
-                  <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-                </div>
-              </div>
-              <div style="margin-top: 20px;">
-                <div style="color: #909399;font-size: 14px">本月贷款总额</div>
-                <div
-                  style="color: #606266;font-size: 24px;padding: 10px 0"
-                >{{topData.vchat.monthMoney}}</div>
-                <div>
-                  <span
-                    class="color-success"
-                    style="font-size: 14px"
-                  >{{topData.vchat.addMonthMoneyRate}}</span>
-                  <span style="color: #C0C4CC;font-size: 14px">同比上月</span>
-                </div>
-              </div>
-              <div style="margin-top: 20px;">
-                <div style="color: #909399;font-size: 14px">本周贷款总额</div>
-                <div
-                  style="color: #606266;font-size: 24px;padding: 10px 0"
-                >{{topData.vchat.weakMoney}}</div>
-                <div>
-                  <span
-                    class="color-success"
-                    style="font-size: 14px"
-                  >{{topData.vchat.addWeakMoneyRate}}</span>
-                  <span style="color: #C0C4CC;font-size: 14px">同比上周</span>
-                </div>
-              </div>
-            </div>
-          </el-col>
-          <el-col :span="20">
-            <div style="padding: 10px;border-left:1px solid #DCDFE6">
-              <el-date-picker
-                style="float: right;z-index: 1"
-                size="small"
-                v-model="orderCountDate"
-                type="daterange"
-                align="right"
-                unlink-panels
-                range-separator="至"
-                start-placeholder="开始日期"
-                end-placeholder="结束日期"
-                @change="handleDateChange"
-                :picker-options="pickerOptions"
-              ></el-date-picker>
-              <div>
-                <ve-line
-                  :data="chartData"
-                  :legend-visible="false"
-                  :loading="loading"
-                  :data-empty="dataEmpty"
-                  :settings="chartSettings"
-                ></ve-line>
-              </div>
-            </div>
-          </el-col>
-        </el-row>
-      </div>
+<!--      <div class="statistics-layout">-->
+<!--        <div class="layout-title">贷款统计</div>-->
+<!--        <el-row>-->
+<!--          <el-col :span="4">-->
+<!--            <div style="padding: 20px">-->
+<!--              <div>-->
+<!--                <div style="color: #909399;font-size: 14px">本月贷款总数</div>-->
+<!--                <div-->
+<!--                  style="color: #606266;font-size: 24px;padding: 10px 0"-->
+<!--                >{{topData.vchat.monthCounts}}</div>-->
+<!--                <div>-->
+<!--                  <span-->
+<!--                    class="color-success"-->
+<!--                    style="font-size: 14px"-->
+<!--                  >{{topData.vchat.addMonthOrderRate}}</span>-->
+<!--                  <span style="color: #C0C4CC;font-size: 14px">同比上月</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div style="margin-top: 20px;">-->
+<!--                <div style="color: #909399;font-size: 14px">本周贷款总数</div>-->
+<!--                <div-->
+<!--                  style="color: #606266;font-size: 24px;padding: 10px 0"-->
+<!--                >{{topData.vchat.weakCounts}}</div>-->
+<!--                <div>-->
+<!--                  <span-->
+<!--                    class="color-success"-->
+<!--                    style="font-size: 14px"-->
+<!--                  >{{topData.vchat.addWeakOrderRate}}</span>-->
+<!--                  <span style="color: #C0C4CC;font-size: 14px">同比上周</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div style="margin-top: 20px;">-->
+<!--                <div style="color: #909399;font-size: 14px">本月贷款总额</div>-->
+<!--                <div-->
+<!--                  style="color: #606266;font-size: 24px;padding: 10px 0"-->
+<!--                >{{topData.vchat.monthMoney}}</div>-->
+<!--                <div>-->
+<!--                  <span-->
+<!--                    class="color-success"-->
+<!--                    style="font-size: 14px"-->
+<!--                  >{{topData.vchat.addMonthMoneyRate}}</span>-->
+<!--                  <span style="color: #C0C4CC;font-size: 14px">同比上月</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--              <div style="margin-top: 20px;">-->
+<!--                <div style="color: #909399;font-size: 14px">本周贷款总额</div>-->
+<!--                <div-->
+<!--                  style="color: #606266;font-size: 24px;padding: 10px 0"-->
+<!--                >{{topData.vchat.weakMoney}}</div>-->
+<!--                <div>-->
+<!--                  <span-->
+<!--                    class="color-success"-->
+<!--                    style="font-size: 14px"-->
+<!--                  >{{topData.vchat.addWeakMoneyRate}}</span>-->
+<!--                  <span style="color: #C0C4CC;font-size: 14px">同比上周</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </el-col>-->
+<!--          <el-col :span="20">-->
+<!--            <div style="padding: 10px;border-left:1px solid #DCDFE6">-->
+<!--              <el-date-picker-->
+<!--                style="float: right;z-index: 1"-->
+<!--                size="small"-->
+<!--                v-model="orderCountDate"-->
+<!--                type="daterange"-->
+<!--                align="right"-->
+<!--                unlink-panels-->
+<!--                range-separator="至"-->
+<!--                start-placeholder="开始日期"-->
+<!--                end-placeholder="结束日期"-->
+<!--                @change="handleDateChange"-->
+<!--                :picker-options="pickerOptions"-->
+<!--              ></el-date-picker>-->
+<!--              <div>-->
+<!--                <ve-line-->
+<!--                  :data="chartData"-->
+<!--                  :legend-visible="false"-->
+<!--                  :loading="loading"-->
+<!--                  :data-empty="dataEmpty"-->
+<!--                  :settings="chartSettings"-->
+<!--                ></ve-line>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--          </el-col>-->
+<!--        </el-row>-->
+<!--      </div>-->
       <div style="height: 34px;"></div>
     </div>
   </div>
@@ -237,7 +237,7 @@
 
 <script>
 import { str2Date } from "@/utils/date";
-import { getHomeData, getEchatData } from "@/api/home";
+import { getHomeData, getEchatData,getHomeTop,getHomeMidTop,getHomeBank,getHomeUser} from "@/api/home";
 export default {
   name: "home",
   data() {
@@ -279,6 +279,14 @@ export default {
           weakMoney: 0,
         }
       },
+      top:{
+        toDayCount: "",
+        loanMoney: "",
+        toDayloanMoney: ""
+      },
+      midTop:{},
+      bank:{},
+      user:{},
       pickerOptions: {
         shortcuts: [
           {
@@ -317,12 +325,27 @@ export default {
     };
   },
   created() {
-    this.initOrderCountDate()
-    this.getData()
-    this.getTopData()
-    this.upUser()
+    this.getList()
+    // this.initOrderCountDate()
+    // this.getData()
+    // this.getTopData()
+    // this.upUser()
   },
   methods: {
+    getList(){
+      getHomeTop().then(res=>{
+        this.top = res.data
+      })
+      getHomeMidTop().then(res=>{
+        this.midTop = res.data
+      })
+      getHomeBank().then(res=>{
+        this.bank = res.data
+      })
+      getHomeUser().then(res=>{
+        this.user = res.data
+      })
+    },
     //得到除图形之外的数据
     getTopData() {
       getHomeData().then(res=>{

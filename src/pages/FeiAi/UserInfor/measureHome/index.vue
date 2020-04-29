@@ -6,7 +6,7 @@
 <!--      <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>-->
     </el-card>
     <div class="table-container">
-      <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" :row-key="getRowKeys" row-click="toggleRowExpansion" border>
+      <el-table ref="userList" style="width: 100%" :data="list" height="500" v-loading="listLoading" :row-key="getRowKeys" row-click="toggleRowExpansion" border>
         <el-table-column prop="cangku_name" align="center" width="50" label=" ">
           <template slot-scope="scope">
             <span

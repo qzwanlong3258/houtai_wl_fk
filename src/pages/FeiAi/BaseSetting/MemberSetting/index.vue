@@ -38,12 +38,12 @@
         <el-table-column label="邮箱" align="center">
           <template slot-scope="scope">{{scope.row.email}}</template>
         </el-table-column>
-        <el-table-column label="登录时间" align="center" width="160">
+        <el-table-column label="创建时间" align="center" width="160">
           <template slot-scope="scope">{{scope.row.create_time|time}}</template>
         </el-table-column>
-<!--        <el-table-column label="角色名称" align="center">-->
-<!--          <template slot-scope="scope">{{scope.row.role}}</template>-->
-<!--        </el-table-column>-->
+        <el-table-column label="角色名称" align="center">
+          <template slot-scope="scope">{{scope.row.role}}</template>
+        </el-table-column>
 <!--        <el-table-column label="操作人" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.addName}}</template>-->
 <!--        </el-table-column>-->
@@ -81,13 +81,14 @@ import ChangeModel from "./components/add";
 import { getAdminList, setAdminDelete } from "@/api/baseSetting";
 const contentList = {
   id: "",
-  name: "",
+  nickName: "",
   phone: "",
-  userName: "",
+  username: "",
   password: "",
+  avatarUrl:'',
+  email:'',
   roleId: "",
-  role: "",
-  addName: ""
+  role: ""
 };
 export default {
   name: "userList",
@@ -118,30 +119,49 @@ export default {
       this.changeShowModel();
       this.contentList = {
         id: "",
-        name: "",
+        nickName: "",
         phone: "",
-        userName: "",
+        username: "",
         password: "",
+        avatarUrl:'',
+        email:'',
         roleId: "",
-        role: "",
-        addName: ""
+        role: ""
       };
     },
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
         this.contentList = row;
+      } else {
+        this.contentList = contentList
       }
     },
     getList() {
-      let data = {
-        pageSize: this.listQuery.pageSize,
-        pageNum: this.listQuery.pageNum
-      };
-      getAdminList(data).then(res => {
+
+      getAdminList(this.listQuery).then(res => {
         if (res.code === 0) {
           this.total =Number(res.data.count);
-          this.list = res.data.list;
+          this.list = res.data.list.map(res=>{
+            if(res.roleList){
+              var e=res.roleList.map(item=>{
+                return item.roleid
+              })
+              var c=res.roleList.map(item=>{
+                return item.roleName
+              })
+            } else {
+              var e=[]
+              var c=[]
+            }
+
+
+            return {
+              ...res,
+              roleId:e,
+              role:c.toString()
+            }
+          });
         }
       });
       this.showModel=false

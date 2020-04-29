@@ -7,6 +7,11 @@ module.exports = {
     //首页
     GET_HOME_DATA: '/admin/home/data',
     GET_ECHAT_DATA: '/admin/home/pdata',
+  GET_HOME_TOP: '/home/top',
+  GET_MID_TOP: '/home/centre',
+  GET_MID_BANK: '/home/bank',
+    GET_HOME_USER:"/home/user",
+
 
     //基本信息修改
     SET_UPDATA_PASSWORD:'/person/update/password',
@@ -95,6 +100,8 @@ module.exports = {
 
     GET_MEASUREHOME:'/make/loadMake',//约量房
     PUT_MEASUREHOME_STATE:'/make/updateMake',//改状态
+
+  GIVE_POINT:'/user/addIntegral',//改状态
 
 
 

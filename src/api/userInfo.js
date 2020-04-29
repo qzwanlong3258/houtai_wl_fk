@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { GET_MEMBER_LIST ,GET_TESTONETEST_LIST,ADD_TESTONETEST, UPDATE_TESTONETEST,DELETE_TESTONETEST,ADD_TESTONETEST_ITEM,UPDATE_TESTONETEST_ITEM,DELETE_TESTONETEST_ITEM,GET_USER_INFORLOG,POST_USER_INFORLOG,
   GET_USER_LIST ,GET_USER_INVITE, GET_MEMBER_STATUS,GET_MEASUREHOME,
-  PUT_MEASUREHOME_STATE
+  PUT_MEASUREHOME_STATE,GIVE_POINT
 } from '@/assets/constants/api'
 
 //获取用户列表接口
@@ -129,6 +129,13 @@ export function putMeasureHome(data) {
     data
   })
 }
-
+//赠送积分
+export function givePoint(data) {
+  return request({
+    method: 'POST',
+    url: GIVE_POINT,
+    data
+  })
+}
 
 

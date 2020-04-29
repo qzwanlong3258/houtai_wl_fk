@@ -4,8 +4,8 @@
       class="palyer-dialog"
       :visible.sync="status"
       @beforeClose="beforeClose"
-      :width="500"
-      :height="420"
+      :width="600"
+      :height="520"
     >
 
       <div class="title-tip">设置成员</div>
@@ -69,7 +69,7 @@
         />
       </div>
 
-      <div class="change-ps-input" style="border: none">
+      <div class="change-ps-input" style="border: none" v-if="this.params.id">
         <span class="role-tip">角色：</span>
         <el-select v-model="params.roleId" multiple size="small" placeholder="请选择" class="select-box">
           <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>
@@ -77,7 +77,7 @@
       </div>
       <el-button
         @click="saveSetting"
-        style="margin-left: 140px;position: fixed;bottom: 30px;"
+        style="margin-left: 190px;position: fixed;bottom: 30px;"
         type="info"
         class="dialog-btn"
       >确定</el-button>
@@ -119,6 +119,7 @@ export default {
         username: "",
         password: "",
         avatarUrl:'',
+        email:'',
         roleId: "",
         // role: "",
         // addName: ""
@@ -160,7 +161,12 @@ export default {
     getRoleList: function() {
       getAdminRole().then(res => {
         if (res.code === 0) {
-          this.roleList = res.data.list;
+          this.roleList = res.data.list.map(res=>{
+            return {
+              id:res.id.toString(),
+              role:res.role
+            }
+          });
         }
       });
     },
@@ -176,22 +182,38 @@ export default {
             this.$message.success("编辑成功");
             this.$emit("updateList");
             this.status = !this.status;
+            this.params.roleId=[]
           }
         });
       } else {
+
         //添加
-        setAdminAdd(this.params).then(res => {
+        let e={
+          nickName: this.params.nickName,
+          phone: this.params.phone,
+          username: this.params.username,
+          password: this.params.password,
+          avatarUrl:this.params.avatarUrl,
+          email:this.params.email,
+        }
+        setAdminAdd(e).then(res => {
           if (res.code === 0) {
             this.$message.success("添加成功");
             this.$emit("updateList");
             this.status = !this.status;
+            this.params.roleId=[]
           }
         });
       }
     }
   },
   created() {
-    this.params = this.contentList
+    if(this.contentList.id){
+      this.params = this.contentList
+    }
+    // console.log(this.params)
+    // console.log(this.contentList)
+
     this.getRoleList();
     this.status = this.modelStatus;
   },
