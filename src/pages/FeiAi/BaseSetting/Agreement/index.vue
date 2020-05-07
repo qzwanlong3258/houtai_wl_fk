@@ -2,7 +2,7 @@
   <div class="app-container">
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
-      <span style="margin-top: 5px">首页主题管理</span>
+      <span style="margin-top: 5px">协议管理</span>
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
@@ -15,12 +15,12 @@
             <img  @click="$imageViewer" :src="scope.row.img"  min-width="20" height="40"  >
           </template>
         </el-table-column>
-        <el-table-column label="链接" align="center">
+        <el-table-column label="协议名" align="center">
           <template slot-scope="scope">{{scope.row.url}}</template>
         </el-table-column>
-        <el-table-column label="分类" align="center">
-          <template slot-scope="scope">{{scope.row.type==1?'轮播图':'广告位'}}</template>
-        </el-table-column>
+<!--        <el-table-column label="分类" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.type==1?'轮播图':'广告位'}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="showModelEvent(scope.row)">编辑</el-button>
@@ -112,11 +112,11 @@ export default {
         if (res.code === 0) {
           this.total = res.data.total;
           let e=[]
-           res.data.list.map(res=>{
-             if(res.type==1||res.type==2){
-               e.push(res)
-             }
-           });
+          res.data.list.map(res=>{
+            if(res.type==4){
+              e.push(res)
+            }
+          });
           this.list=e
         }
       });

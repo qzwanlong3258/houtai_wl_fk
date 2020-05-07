@@ -79,6 +79,18 @@ export default new Router({
           name: '首页主题管理',
           component: () => import('@/pages/FeiAi/BaseSetting/HomeStyle'),
           meta: { auth: true, description:'首页主题管理',title:'首页主题管理',icon: 'iconrenshengjieduan'},
+        },
+        {
+          path: 'agreement',
+          name: '协议管理',
+          component: () => import('@/pages/FeiAi/BaseSetting/Agreement'),
+          meta: { auth: true, description:'协议管理',title:'协议管理',icon: 'iconrenshengjieduan'},
+        },
+        {
+          path: 'document',
+          name: '产品管理',
+          component: () => import('@/pages/FeiAi/BaseSetting/Document'),
+          meta: { auth: true, description:'产品管理',title:'产品管理',icon: 'iconrenshengjieduan'},
         }
       ]
     },
