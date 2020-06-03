@@ -7,21 +7,21 @@
             <div class="total-frame">
               <i class="iconfont icondingdan total-icon"></i>
               <div class="total-title">今日贷款笔数</div>
-              <div class="total-value">{{top.toDayCount}}</div>
+              <div class="total-value">{{parseInt(top.toDayCount) }}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjinqian total-icon"></i>
               <div class="total-title">今日贷款总额</div>
-              <div class="total-value">￥{{top.toDayloanMoney}}</div>
+              <div class="total-value">￥{{parseInt(top.toDayloanMoney) }}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjifen1 total-icon"></i>
               <div class="total-title">贷款总额</div>
-              <div class="total-value">{{top.loanMoney}}</div>
+              <div class="total-value">{{parseInt(top.loanMoney) }}</div>
             </div>
           </el-col>
         </el-row>
@@ -331,6 +331,11 @@ export default {
     // this.getTopData()
     // this.upUser()
   },
+  // filters:{
+  //   num(val){
+  //     return parseInt(val)
+  //   }
+  // },
   methods: {
     getList(){
       getHomeTop().then(res=>{

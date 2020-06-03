@@ -36,12 +36,39 @@
 
       </div>
       <div class="change-ps-input">
+        <span class="role-tip">链接类型：</span>
+        <div style="margin-top: 20px;display: flex" class="input-box">
+          <el-radio v-model="pictextType" label="1"  size="small">文字</el-radio>
+          <el-radio v-model="pictextType" label="2"  size="small">图片</el-radio>
+        </div>
+      </div>
+      <div class="change-ps-input">
         <span class="role-tip">链接：</span>
+        <el-input class="input-box" style="width: 196px" type="text" readonly v-if="pictextType==2">
+          <template slot="prepend" style="background: #ffffff">
+            <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
+            <img v-if="params.url"  @click="$imageViewer" :src="params.url"  min-width="20" height="26"  >
+          </template>
+          <template slot="append">
+
+            <el-upload
+              ref="upload"
+              action="https://jsonplaceholder.typicode.com/posts/"
+              :show-file-list="false"
+              :on-success="handleAvatarSuccess"
+              :before-upload="(file)=> beforeAvatarUpload(file,'url')"
+              :auto-upload="true">
+              <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>
+            </el-upload>
+          </template>
+
+        </el-input>
         <el-input
           class="input-box"
           type="text"
           v-model="params.url"
           placeholder="请输入路由"
+          v-if="pictextType==1"
         />
       </div>
 
@@ -94,11 +121,11 @@
         status: true,
         params: {
           url: "",
-          name: "",
-          icon:"",
-          type:1
+          img: "",
+          type:'1'
 
-        }
+        },
+        pictextType:'1'
 
       };
     },
@@ -106,29 +133,43 @@
       handleAvatarSuccess(res, file) {
 
       },
-      beforeAvatarUpload(file) {
-        const isJPG = file.type === 'image/jpeg';
-        const isLt2M = file.size / 1024 / 1024 < 2;
-
-        if (!isJPG) {
-          this.$message.error('上传图片只能是 JPG 格式!');
+      beforeAvatarUpload(file,name) {
+        var testmsg=file.name.substring(file.name.lastIndexOf('.')+1)
+        const extension = testmsg === 'jpg'
+        const extension2 = testmsg === 'png'
+        const extension3 = testmsg === 'jpeg'
+        const isLt2M = file.size / 1024 / 1024 < 10
+        if(!extension && !extension2 && !extension3) {
+          this.$message({
+            message: '上传文件只能是 jpg、png格式!',
+            type: 'warning'
+          });
         }
-        if (!isLt2M) {
-          this.$message.error('上传图片大小不能超过 2MB!');
+        if(!isLt2M) {
+          this.$message({
+            message: '上传文件大小不能超过 10MB!',
+            type: 'warning'
+          });
         }
 
         let fd = new FormData();
         fd.append('file',file);//传文件
         // fd.append('id',this.srid);//传其他参数
         uploadPic(fd).then(res=>{
-          this.params.img=res.data
+          if(name=='url'){
+            this.params.url=res.data
+          } else {
+            this.params.img=res.data
+          }
+          this.$forceUpdate()
+
           console.log(res)
         })
         // axios.post(`${axios.defaults.baseURL}/ftp/upload`,fd).then(function(res){
         //   // alert('成功');
         //   console.log(res)
         // })
-        return isJPG && isLt2M;
+        return testmsg && isLt2M;
         // return false  //屏蔽了action的默认上传
 
       },
@@ -166,7 +207,16 @@
       }
     },
     created() {
-      this.params = this.contentList
+      if(this.contentList.id){
+        this.params = this.contentList
+        var testmsg=this.contentList.url.substring(this.contentList.url.lastIndexOf('.')+1)
+        const extensio = testmsg === 'jpg'
+        const extensio2 = testmsg === 'png'
+        if(extensio || extensio2) {
+          this.pictextType='2'
+        }
+      }
+
       // this.getRoleList();
       this.status = this.modelStatus;
     },
@@ -181,7 +231,7 @@
     display: flex;
     justify-content: center;
     .role-tip {
-      width: 60px;
+      width: 100px;
       text-align: right;
     }
     span {

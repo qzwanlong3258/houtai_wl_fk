@@ -1,7 +1,7 @@
 import request from '@/utils/request'
 import { GET_MEMBER_LIST ,GET_TESTONETEST_LIST,ADD_TESTONETEST, UPDATE_TESTONETEST,DELETE_TESTONETEST,ADD_TESTONETEST_ITEM,UPDATE_TESTONETEST_ITEM,DELETE_TESTONETEST_ITEM,GET_USER_INFORLOG,POST_USER_INFORLOG,
   GET_USER_LIST ,GET_USER_INVITE, GET_MEMBER_STATUS,GET_MEASUREHOME,
-  PUT_MEASUREHOME_STATE,GIVE_POINT
+  PUT_MEASUREHOME_STATE,GIVE_POINT,POST_POINT_RECORD,GET_TESTONETEST_LIST_RECORD
 } from '@/assets/constants/api'
 
 //获取用户列表接口
@@ -11,6 +11,14 @@ export function getMemberList(data) {
         url: `${GET_MEMBER_LIST}?pageSize=${data.pageSize}&pageNum=${data.pageNum}&realname=${data.realname}&invitor=${data.invitor}&sex=${data.sex}`,
     })
 }
+//获取测一测问题记录
+export function getTestOneTestRecord(data) {
+  return request({
+    method: 'GET',
+    url:  `${GET_TESTONETEST_LIST_RECORD}?size=${data.pageSize}&page=${data.pageNum}`,
+  })
+}
+
 //获取测一测问题
 export function getTestOneTest(data) {
   return request({
@@ -138,4 +146,12 @@ export function givePoint(data) {
   })
 }
 
+//赠送积分
+export function postPointRecord(data) {
+  return request({
+    method: 'POST',
+    url: POST_POINT_RECORD,
+    data
+  })
+}
 

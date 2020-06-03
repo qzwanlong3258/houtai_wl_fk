@@ -31,10 +31,10 @@
           <template slot-scope="scope">{{scope.row.money}}</template>
         </el-table-column>
         <el-table-column label="开始时间" align="center" width="180">
-          <template slot-scope="scope">{{scope.row.bdate|Time}}</template>
+          <template slot-scope="scope">{{scope.row.bdate|time}}</template>
         </el-table-column>
         <el-table-column label="结束时间" align="center" width="180">
-          <template slot-scope="scope">{{scope.row.edate|Time}}</template>
+          <template slot-scope="scope">{{scope.row.edate|time}}</template>
         </el-table-column>
         <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
@@ -67,7 +67,7 @@
 </template>
 <script>
 import ChangeModel from "./components/add";
-import { getRecommendCenter} from "@/api/market";
+import { getRecommendCenter,deleteRecommendCenter} from "@/api/market";
 const contentList = {
   name:"",
   img:"",
@@ -131,7 +131,7 @@ export default {
       var y = time.getFullYear();
       var m = time.getMonth() + 1;
       var d = time.getDate();
-      var h = time.getHours() - 1;
+      var h = time.getHours();
       var mm = time.getMinutes();
       var s = time.getSeconds();
       return y + '-' + timeAdd0(m) + '-' + timeAdd0(d) + ' ' + timeAdd0(h) + ':' + timeAdd0(mm) + ':' + timeAdd0(s);
@@ -139,7 +139,7 @@ export default {
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
-        this.contentList = row;
+        this.contentList = {...row};
         this.contentList.bdate = this.time(row.bdate)
         this.contentList.edate = this.time(row.edate)
       } else {
@@ -176,7 +176,7 @@ export default {
         type: "warning"
       })
         .then(() => {
-          setAdminDelete({ id: row.id }).then(res => {
+          deleteRecommendCenter({ id: row.id }).then(res => {
             if (res.code === 0) {
               this.getList();
               this.$message.success("删除成功");

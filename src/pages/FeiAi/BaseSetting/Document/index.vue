@@ -15,7 +15,7 @@
             <img  @click="$imageViewer" :src="scope.row.img"  min-width="20" height="40"  >
           </template>
         </el-table-column>
-        <el-table-column label="链接" align="center">
+        <el-table-column label="链接" align="center" show-overflow-tooltip>
           <template slot-scope="scope">{{scope.row.url}}</template>
         </el-table-column>
 <!--        <el-table-column label="分类" align="center">-->
@@ -56,7 +56,8 @@ import { getHomeStyle, deleteHomeStyle } from "@/api/baseSetting";
 const contentList = {
   id: "",
   img: "",
-  url: ""
+  url: "",
+  type: ''
 };
 export default {
   name: "userList",
@@ -88,13 +89,14 @@ export default {
       this.contentList = {
         id: "",
         img: "",
-        url: ""
+        url: "",
+        type: ''
       };
     },
     showModelEvent: function(row) {
       this.changeShowModel();
       if (row) {
-        this.contentList = row;
+        this.contentList = {...row};
       } else {
         this.contentList = {
           id: "",

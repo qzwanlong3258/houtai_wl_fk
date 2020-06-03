@@ -7,43 +7,63 @@
       :width="500"
       :height="420"
     >
-      <div class="title-tip">设置按钮</div>
+      <div class="title-tip">优惠券</div>
       <div class="change-ps-input">
-        <span class="role-tip">名称：</span>
-        <el-input class="input-box" type="text" v-model="params.name" placeholder="请输入图标名称" />
+        <span class="role-tip">描述：</span>
+        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入图标名称" />
       </div>
       <div class="change-ps-input">
-        <span class="role-tip">图片：</span>
-        <el-input class="input-box" style="width: 196px" type="text" readonly >
-          <template slot="prepend" style="background: #ffffff">
-<!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
-            <img v-if="params.icon"  @click="$imageViewer" :src="params.icon"  min-width="20" height="26"  >
-          </template>
-          <template slot="append">
-
-            <el-upload
-              ref="upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="beforeAvatarUpload"
-              :auto-upload="true">
-              <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>
-            </el-upload>
-          </template>
-
-        </el-input>
-
+        <span class="role-tip">开始时间：</span>
+        <el-date-picker
+          v-model="params.begin"
+          format="yyyy-MM-dd "
+          value-format="yyyy-MM-dd "
+          type="date"
+          placeholder="选择开始时间">
+        </el-date-picker>
       </div>
       <div class="change-ps-input">
-        <span class="role-tip">路由：</span>
-        <el-input
-          class="input-box"
-          type="text"
-          v-model="params.url"
-          placeholder="请输入路由"
-        />
+        <span class="role-tip">结束时间：</span>
+        <el-date-picker
+          v-model="params.end"
+          format="yyyy-MM-dd "
+          value-format="yyyy-MM-dd "
+          type="date"
+          placeholder="选择结束时间">
+        </el-date-picker>
       </div>
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">图片：</span>-->
+<!--        <el-input class="input-box" style="width: 196px" type="text" readonly >-->
+<!--          <template slot="prepend" style="background: #ffffff">-->
+<!--&lt;!&ndash;            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />&ndash;&gt;-->
+<!--            <img v-if="params.icon"  @click="$imageViewer" :src="params.icon"  min-width="20" height="26"  >-->
+<!--          </template>-->
+<!--          <template slot="append">-->
+
+<!--            <el-upload-->
+<!--              ref="upload"-->
+<!--              action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--              :show-file-list="false"-->
+<!--              :on-success="handleAvatarSuccess"-->
+<!--              :before-upload="beforeAvatarUpload"-->
+<!--              :auto-upload="true">-->
+<!--              <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>-->
+<!--            </el-upload>-->
+<!--          </template>-->
+
+<!--        </el-input>-->
+
+<!--      </div>-->
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">路由：</span>-->
+<!--        <el-input-->
+<!--          class="input-box"-->
+<!--          type="text"-->
+<!--          v-model="params.url"-->
+<!--          placeholder="请输入路由"-->
+<!--        />-->
+<!--      </div>-->
 <!--      <div class="change-ps-input">-->
 <!--        <span class="role-tip">密码：</span>-->
 <!--        <el-input-->
@@ -71,7 +91,7 @@
 
 <script>
   import LoveDialog from "@/components/NoLoveDialog";
-  import {  addButton, updateButton  } from "@/api/baseSetting";
+  import {  addCoupon, putCoupon  } from "@/api/shopManage";
   import { uploadPic } from "@/api/uploadPic";
   import axios from "axios"
   export default {
@@ -91,9 +111,10 @@
       return {
         status: true,
         params: {
-          url: "",
-          name: "",
-          icon:""
+          begin:'',
+          end:'',
+          describe:'',
+          img:''
 
         },
 
@@ -133,7 +154,7 @@
         //   // alert('成功');
         //   console.log(res)
         // })
-        return testmsg && isLt2M;
+        return isJPG && isLt2M;
         // return false  //屏蔽了action的默认上传
 
       },
@@ -149,9 +170,9 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
-        if (this.params.id) {
+        if (this.contentList.describe) {
           //编辑
-          updateButton(this.params).then(res => {
+          putCoupon(this.params).then(res => {
             if (res.code === 0) {
               this.$message.success("编辑成功");
               this.$emit("updateList");
@@ -160,7 +181,9 @@
           });
         } else {
           //添加
-          addButton(this.params).then(res => {
+          this.params.did=this.params.uuid
+
+          addCoupon(this.params).then(res => {
             if (res.code === 0) {
               this.$message.success("添加成功");
               this.$emit("updateList");
@@ -171,12 +194,12 @@
       }
     },
     created() {
-      if(this.contentList.id){
-        let e ={
-          name:this.contentList.bname,
-          ...this.contentList
-        }
-        this.params = e
+      if(this.contentList.describe){
+
+        this.params = this.contentList
+      } else {
+        console.log(this.contentList.uuid)
+        this.params.uuid=this.contentList.uuid
       }
 
       console.log(this.contentList)
@@ -194,7 +217,7 @@
     display: flex;
     justify-content: center;
     .role-tip {
-      width: 60px;
+      width: 120px;
       text-align: right;
     }
     span {

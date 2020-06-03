@@ -15,7 +15,7 @@
             <img  @click="$imageViewer" :src="scope.row.img"  min-width="20" height="40"  >
           </template>
         </el-table-column>
-        <el-table-column label="链接" align="center">
+        <el-table-column label="链接" align="center" show-overflow-tooltip>
           <template slot-scope="scope">{{scope.row.url}}</template>
         </el-table-column>
         <el-table-column label="分类" align="center">

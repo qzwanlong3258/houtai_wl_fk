@@ -120,6 +120,12 @@ export default new Router({
           meta: { auth: true, description:'测一测',title:'测一测',icon: 'icontuijian'},
         },
         {
+          path: 'testonetestrecord',
+          name: '测一测记录',
+          component: () => import('@/pages/FeiAi/UserInfor/TestOneTestRecord'),
+          meta: { auth: true, description:'测一测记录',title:'测一测记录',icon: 'icontuijian'},
+        },
+        {
           path: 'inviteInfo',
           name: '邀请信息',
           component: () => import('@/pages/FeiAi/UserInfor/InviteInfo'),
@@ -213,6 +219,12 @@ export default new Router({
           name: '装企审核',
           component: () => import('@/pages/FeiAi/ShopManage/ShopCheck'),
           meta: { auth: true, description:'装企审核',title:'装企审核',icon: 'iconqianzi'},
+        },
+        {
+          path: 'coupon',
+          name: '优惠券',
+          component: () => import('@/pages/FeiAi/ShopManage/coupon'),
+          meta: { auth: true, description:'优惠券',title:'优惠券',icon: 'iconqianzi'},
         }
       ]
     },

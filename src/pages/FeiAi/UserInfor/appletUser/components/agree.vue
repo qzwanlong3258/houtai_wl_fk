@@ -25,7 +25,7 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { givePoint } from "@/api/userInfo";
+import { givePoint,postPointRecord } from "@/api/userInfo";
 export default {
   components: {
     LoveDialog
@@ -48,7 +48,12 @@ export default {
     beforeClose: function() {
       this.$emit("closeStatus");
     },
-    saveSetting: function(){
+    saveSetting:  function(){
+      postPointRecord({
+        money : this.point.toString(),
+        userid : this.agreeId,
+        msg : `管理员送你${this.point.toString()}积分`
+      })
       givePoint({
         id: this.agreeId,
         integral: this.point.toString(),

@@ -83,6 +83,7 @@ module.exports = {
     //用户管理
     GET_MEMBER_LIST: '/member/list',  //获取用户列表接口
     GET_TESTONETEST_LIST: '/test/loadTest',  //获取测一测问题
+    GET_TESTONETEST_LIST_RECORD: '/test/loadUserTest',  //获取测一测问题记录
     ADD_TESTONETEST:'/test/insertTest',//增加问题
     UPDATE_TESTONETEST:'/test/updateTest',//修改问题
     DELETE_TESTONETEST:'/test/deleteTest',//删除问题
@@ -101,7 +102,10 @@ module.exports = {
     GET_MEASUREHOME:'/make/loadMake',//约量房
     PUT_MEASUREHOME_STATE:'/make/updateMake',//改状态
 
-  GIVE_POINT:'/user/addIntegral',//改状态
+  GIVE_POINT:'/user/addIntegral',//送积分
+  POST_POINT_RECORD:'/user/insertIncome',//送积分
+
+
 
 
 
@@ -163,6 +167,9 @@ module.exports = {
   DET_GOOD:'/goods/deleteGoods',
   GET_GOOD_DETAIL:'/goods/loadGoodsDetails',
 
+  GET_COUPON:'/decorate/loadDecorateCoupons',
+  ADD_COUPON:'/decorate/createCoupons',
+  PUT_COUPON:'/decorate/updateCoupons'
 
 
 }
