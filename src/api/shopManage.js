@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { GET_SHOP ,POST_SHOP,GET_COUPON,ADD_COUPON,PUT_COUPON} from '@/assets/constants/api'
+import { GET_SHOP ,POST_SHOP,GET_COUPON,ADD_COUPON,PUT_COUPON,GET_LABLE,POST_LABLE} from '@/assets/constants/api'
 
 //获取装企
 export function getShop(data) {
@@ -32,7 +32,7 @@ export function getCoupon(data) {
   })
 }
 
-//审核
+//增加
 export function addCoupon(data) {
   return request({
     method: 'POST',
@@ -40,11 +40,27 @@ export function addCoupon(data) {
     data
   })
 }
-//审核
+//修改
 export function putCoupon(data) {
   return request({
     method: 'POST',
     url: PUT_COUPON,
+    data
+  })
+}
+//标签
+export function getLable(data) {
+  return request({
+    method: 'GET',
+    url:  `${GET_LABLE}?uuid=${data.uuid}`,
+  })
+}
+
+//修改标签
+export function postLable(data) {
+  return request({
+    method: 'POST',
+    url: POST_LABLE,
     data
   })
 }

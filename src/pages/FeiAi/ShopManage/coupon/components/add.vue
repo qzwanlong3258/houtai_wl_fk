@@ -5,261 +5,394 @@
       :visible.sync="status"
       @beforeClose="beforeClose"
       :width="500"
-      :height="420"
+      :height="350"
     >
-      <div class="title-tip">设置城市</div>
-      <div class="change-ps-input">
-        <span class="role-tip">城市名：</span>
-        <el-input class="input-box" type="text" v-model="params.cname" placeholder="请输入城市名" />
-      </div>
-<!--      <div class="change-ps-input">-->
-<!--        <span class="role-tip">电话：</span>-->
-<!--        <el-input class="input-box" type="text" v-model="params.phone" placeholder="请输入成员电话" />-->
-<!--      </div>-->
-      <div class="change-ps-input" style="margin-top: 30px">
-<!--        <div class="title" style="margin-left: 115px;">按钮：</div>-->
-        <span class="role-tip">按钮：</span>
-        <div style="display: flex;flex-wrap: wrap" class="input-box">
-          <div :class="[item.click?'clickTrue':'clickFalse']" style="display: flex;margin-bottom: 2px"  v-for="(item,index) in buttonList" :key="index"  closable @click="clickSearch($event,item.id)">
-            <img :src="item.icon"  alt="" width="20" height="20" >
-            <!--          {{item.name}}-->
-                      <i class="el-icon-close" v-if="item.click"></i>
+      <div class="title-tip" style="margin-bottom: 5px">设置标签</div>
+      <div style="padding: 0 100px">
+<!--        <div style="margin-bottom: 15px;padding-bottom: 20px;" class="card">-->
+<!--          <div class="change-ps-input" >-->
+<!--            <span class="role-tip">内容：</span>-->
+<!--            <el-input class="input-box" type="text" v-model="params.content" size="mini" placeholder="请输入内容" />-->
+<!--          </div>-->
+<!--        </div>-->
+        <div style="margin-bottom: 15px;padding-bottom: 30px;position: relative" class="card"
+             v-for="(item , index) in lableTwo"
+        >
+          <i class="el-icon-circle-plus-outline iconjia" @click="addBtnOne"></i>
+          <i class="el-icon-remove-outline iconjian" @click="deleteBtnOne(index)" ></i>
+          <div class="change-ps-input" >
+            <handling-title title="带图标签"></handling-title>
           </div>
+          <div class="change-ps-input">
+            <span class="role-tip">名称：</span>
+            <el-input class="input-box" type="text" v-model="item.content" size="mini" placeholder="请输入内容" />
+          </div>
+          <div class="change-ps-input" style="margin: 10px 0">
+            <span class="role-tip">图片：</span>
+            <el-input class="input-box" size="mini" style="width: 196px" type="text" readonly >
+              <template slot="prepend" style="background: #ffffff">
+                <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
+                <img v-if="item.img"  @click="$imageViewer" :src="item.img"  min-width="20" height="22"  >
+              </template>
+              <template slot="append">
+
+                <el-upload
+                  ref="upload"
+                  action="https://jsonplaceholder.typicode.com/posts/"
+                  :show-file-list="false"
+                  :on-success="handleAvatarSuccess"
+                  :before-upload="(file)=> beforeAvatarUpload(file,index)"
+                  :auto-upload="true">
+                  <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>
+                </el-upload>
+              </template>
+
+            </el-input>
+
+          </div>
+<!--          <div class="change-ps-input">-->
+<!--            <span class="role-tip">分数：</span>-->
+<!--            <el-input class="input-box" type="number" v-model="item.score" size="mini" placeholder="请输入分数" />-->
+<!--          </div>-->
+
+        </div>
+
+
+
+        <div style="margin-bottom: 15px;padding-bottom: 30px;position: relative" class="card"
+             v-for="(item , index) in lableOne"
+        >
+          <i class="el-icon-circle-plus-outline iconjia" @click="addBtn"></i>
+          <i class="el-icon-remove-outline iconjian" @click="deleteBtn(index)" ></i>
+          <div class="change-ps-input" >
+            <handling-title title="标签"></handling-title>
+          </div>
+          <div class="change-ps-input">
+            <span class="role-tip">名称：</span>
+            <el-input class="input-box" type="text" v-model="item.content" size="mini" placeholder="请输入内容" />
+          </div>
+          <!--          <div class="change-ps-input" style="margin: 10px 0">-->
+          <!--            <span class="role-tip">图片：</span>-->
+          <!--            <el-input class="input-box" size="mini" style="width: 196px" type="text" readonly >-->
+          <!--              <template slot="prepend" style="background: #ffffff">-->
+          <!--                &lt;!&ndash;            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />&ndash;&gt;-->
+          <!--                <img v-if="item.img"  @click="$imageViewer" :src="item.img"  min-width="20" height="22"  >-->
+          <!--              </template>-->
+          <!--              <template slot="append">-->
+
+          <!--                <el-upload-->
+          <!--                  ref="upload"-->
+          <!--                  action="https://jsonplaceholder.typicode.com/posts/"-->
+          <!--                  :show-file-list="false"-->
+          <!--                  :on-success="handleAvatarSuccess"-->
+          <!--                  :before-upload="(file)=> beforeAvatarUpload(file,index)"-->
+          <!--                  :auto-upload="true">-->
+          <!--                  <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>-->
+          <!--                </el-upload>-->
+          <!--              </template>-->
+
+          <!--            </el-input>-->
+
+          <!--          </div>-->
+<!--          <div class="change-ps-input">-->
+<!--            <span class="role-tip">分数：</span>-->
+<!--            <el-input class="input-box" type="number" v-model="item.score" size="mini" placeholder="请输入分数" />-->
+<!--          </div>-->
+
         </div>
 
       </div>
-<!--      <div class="change-ps-input">-->
-<!--        <span class="role-tip">密码：</span>-->
-<!--        <el-input-->
-<!--          class="input-box"-->
-<!--          type="text"-->
-<!--          v-model="params.password"-->
-<!--          placeholder="请输入登录密码"-->
-<!--        />-->
-<!--      </div>-->
-<!--      <div class="change-ps-input" style="border: none">-->
-<!--        <span class="role-tip">角色：</span>-->
-<!--        <el-select v-model="params.roleId" size="small" placeholder="请选择" class="select-box">-->
-<!--          <el-option v-for="item in roleList" :key="item.id" :label="item.role" :value="item.id"></el-option>-->
-<!--        </el-select>-->
-<!--      </div>-->
+
+
+
+      <!--      <el-button-->
+      <!--        @click="saveSetting"-->
+      <!--        style="margin-left: 140px;position: fixed;bottom: 30px;"-->
+      <!--        type="info"-->
+      <!--        class="dialog-btn"-->
+      <!--      >确定</el-button>-->
       <el-button
         @click="saveSetting"
-        style="margin-left: 140px;position: fixed;bottom: 30px;"
-        type="info"
-        class="dialog-btn"
+        class="test-btn"
+        type="primary"
+        size="mini"
       >确定</el-button>
     </love-dialog>
   </div>
 </template>
 
 <script>
-import LoveDialog from "@/components/NoLoveDialog";
-import {  addCity,getButtonList,updateCity} from "@/api/baseSetting";
-export default {
-  components: {
-    LoveDialog
-  },
-  props: {
-    modelStatus: {
-      type: Boolean
+  import LoveDialog from "@/components/NoLoveDialog";
+  import {  postLable } from "@/api/shopManage";
+  import { uploadPic } from "@/api/uploadPic";
+  export default {
+    components: {
+      LoveDialog
     },
-    contentList: {
-      type: Object,
-      default: {}
-    }
-  },
-  data() {
-    return {
-      buttonList:[],
-      status: true,
-      params: {
-        cname:''
+    props: {
+      modelStatus: {
+        type: Boolean
       },
-      searchArray: []
-    };
-  },
-  methods: {
-    clickSearch($event,id) {
-      if ($event.currentTarget.className == "clickFalse") {
-        this.buttonList.find(item => item.id == id).click=true
-        this.searchArray.push(id);
-        // console.log(this.buttonList)
-
-        // $event.currentTarget.firstElementChild.removeAttribute("hidden");
-      } else {
-        // $event.currentTarget.className = "clickFalse";
-        // $event.currentTarget.firstElementChild.setAttribute("hidden", "hidden");
-        this.buttonList.find(item => item.id == id).click=false
-        // console.log(this.buttonList)
-        let index = -1;
-        for (var i = 0; i < this.searchArray.length; i++) {
-          if (
-            this.searchArray[i] === id
-          ) {
-            index = i
-            break;
-          }
-        }
-        this.searchArray.splice(index, 1);
+      contentList: {
+        type: Object,
+        default: {}
       }
     },
-    //得到角色列表
-    getButList: function() {
-      getButtonList().then( res=>{
-        if (res.code === 0) {
-          console.log(res)
-          this.buttonList = res.data.list.map(res=>{
-            return {
-              click:false,
-              ...res
-            }
+    data() {
+      return {
+        status: true,
+
+        lableOne:[  {
+          type: "1",
+          content: ""
+        }],
+        lableTwo:[{
+          img: "",
+          type: "2",
+          content: ""
+        },],
+        uuid:'',
+        roleList: []
+      };
+    },
+    methods: {
+      addBtn () {
+        let obj =  {
+          type: "1",
+          content: ""
+        }
+        console.log(obj)
+        this.lableOne.push(obj)
+      },
+      deleteBtn (i) {
+        if (i === 0) {
+          this.lableOne.shift()
+          this.lableOne.unshift({
+            type: "1",
+            content: ""
           })
-          if (this.params.id &&this.params.button) {
-            let arry=this.params.button.split(",")
-            console.log(arry)
-            for (let i =0;i<arry.length;i++){
-              this.buttonList.find(item => item.id == arry[i]).click=true
-            }
-
-          }
-
-
-          // console.log(this.buttonList)
+        } else {
+          this.$confirm(`是否确定删除该选项？`, '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.lableOne.splice(i, 1)
+          }).catch(fail => {
+            if (fail !== 'cancel') this.commonError()
+          })
         }
-      })
-    },
-    beforeClose: function() {
-      this.$emit("closeStatus");
-    },
-    saveSetting() {
-      if (this.params.id) {
-        //编辑
-        this.params.button=this.searchArray.toString()
+      },
+      addBtnOne () {
+        let obj = {
+          img: "",
+          type: "2",
+          content: ""
+        }
+        console.log(obj)
+        this.lableTwo.push(obj)
+      },
+      deleteBtnOne (i) {
+        if (i === 0) {
+          this.lableTwo.shift()
+          this.lableTwo.unshift({
+            img: "",
+            type: "2",
+            content: ""
+          })
+        } else {
+          this.$confirm(`是否确定删除该选项？`, '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.lableTwo.splice(i, 1)
+          }).catch(fail => {
+            if (fail !== 'cancel') this.commonError()
+          })
+        }
+      },
+      handleAvatarSuccess(res, file) {
+
+      },
+      beforeAvatarUpload(file,i) {
+        var testmsg=file.name.substring(file.name.lastIndexOf('.')+1)
+        const extension = testmsg === 'jpg'
+        const extension2 = testmsg === 'png'
+        const extension3 = testmsg === 'jpeg'
+        const isLt2M = file.size / 1024 / 1024 < 10
+        if(!extension && !extension2 && !extension3) {
+          this.$message({
+            message: '上传文件只能是 jpg、png格式!',
+            type: 'warning'
+          });
+        }
+        if(!isLt2M) {
+          this.$message({
+            message: '上传文件大小不能超过 10MB!',
+            type: 'warning'
+          });
+        }
+
+        let fd = new FormData();
+        fd.append('file',file);//传文件
+        // fd.append('id',this.srid);//传其他参数
+        uploadPic(fd).then(res=>{
+          this.lableTwo[i].img=res.data
+          console.log(res)
+        })
+        // axios.post(`${axios.defaults.baseURL}/ftp/upload`,fd).then(function(res){
+        //   // alert('成功');
+        //   console.log(res)
+        // })
+        return isJPG && isLt2M;
+        // return false  //屏蔽了action的默认上传
+
+      },
+      //得到角色列表
+
+      beforeClose: function() {
+        this.$emit("closeStatus");
+      },
+      saveSetting() {
+        let c = this.lableOne.concat(this.lableTwo);
         let e={
-          uuid:this.params.id,
-          button:this.params.button,
-          cname:this.params.cname
+          uuid: this.uuid,
+          volume: c
         }
-
-        updateCity(e).then(res => {
-          if (res.code === 0) {
-
-            this.$message.success("编辑成功");
-            this.$emit("updateList");
-            this.status = !this.status;
-          }
-        });
-        // setAdminExit(this.params).then(res => {
-        //   if (res.code === 0) {
-        //     this.$message.success("编辑成功");
-        //     this.$emit("updateList");
-        //     this.status = !this.status;
+        postLable(e).then(res => {
+              if (res.code === 0) {
+                this.$message.success("编辑成功");
+                this.$emit("updateList");
+                this.status = !this.status;
+              }
+            });
+        // if (this.params.id) {
+        //   //编辑
+        //   updateTestOneTest(this.params).then(res => {
+        //     if (res.code === 0) {
+        //       this.$message.success("编辑成功");
+        //       this.$emit("updateList");
+        //       this.status = !this.status;
+        //     }
+        //   });
+        // } else {
+        //   //添加
+        //   if(this.params.choose.length<2){
+        //     this.$message.error('一个问题至少要有两个选项！')
+        //     return
         //   }
-        // });
-      } else {
-        //添加
-        console.log(this.params)
-        this.params.button=this.searchArray.toString()
-        addCity(this.params).then(res => {
-          if (res.code === 0) {
-            this.$message.success("添加成功");
-            this.$emit("updateList");
-            this.status = !this.status;
+        //   console.log(this.params)
+        //   addTestOneTest(this.params).then(res => {
+        //     if (res.code === 0) {
+        //       this.$message.success("添加成功");
+        //       this.$emit("updateList");
+        //       this.status = !this.status;
+        //     }
+        //   });
+        // }
+      }
+    },
+    created() {
+      this.uuid=this.contentList.uuid
+      if(this.contentList.lable.length>0){
+        let a=[]
+        let b=[]
+        // console.log(this.contentList)
+
+        this.contentList.lable.map(res=>{
+          if(res.type == '1'){
+            a.push(res)
+          } else {
+            b.push(res)
           }
-        });
-      }
-    }
-  },
-  created() {
-
-    if (this.contentList.id) {
-      this.params = this.contentList
-      if(this.params.button){
-        this.searchArray = this.params.button.split(",")
+        })
+        this.lableTwo = b
+        this.lableOne = a
+        // console.log(b)
+        // console.log(a)
       }
 
-      // console.log(this.params)
-      // console.log(this.searchArray)
-    }
 
-    this.getButList();
-    this.status = this.modelStatus;
-  },
-  mounted() {}
-};
+
+      // this.getRoleList();
+      this.status = this.modelStatus;
+    },
+    mounted() {}
+  };
 </script>
 <style lang="scss" scoped>
-.change-ps-input {
-  width: 90%;
-  height: 48px;
-  margin: 10px 0;
-  display: flex;
-  justify-content: center;
-  .role-tip {
-    width: 60px;
-    text-align: right;
+  .test-btn{
+    /*width: 50px;*/
+    height: 55px;
+    border-radius: 50%;
+    text-align: center;
+    position: fixed;
+    right: 20px;
+    top: 45%;
+
   }
-  span {
-    line-height: 59px;
+  .iconjia{
+    color: #409EFF;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 30%;
+
   }
-  .input-box {
-    width: 223px;
-    margin-top: 10px;
+  .iconjian{
+    color: #409EFF;
+    font-size: 20px;
+    position: absolute;
+    right: 10px;
+    top: 70%;
   }
-  .select-box {
-    margin-top: 10px;
-    width: 196px;
+  .change-ps-input {
+    width: 90%;
+    height: 30px;
+    /*margin: 10px 0;*/
+    display: flex;
+    justify-content: center;
+    .role-tip {
+      width: 60px;
+      text-align: right;
+    }
+    span {
+      line-height: 59px;
+    }
+    .input-box {
+      width: 196px;
+      margin-top: 10px;
+    }
+    .select-box {
+      margin-top: 10px;
+      width: 196px;
+    }
   }
-}
-.setting-perssion {
-  width: 90%;
-  margin: 10px 5%;
-  .content-box {
-    margin-bottom: 20px;
-    transition: all, 0.6s;
-    .cloumn-content {
-      display: flex;
-      display: -webkit-flex;
-      margin-top: 20px;
-      .content-title {
-        margin-left: 32px;
-      }
-      .check-box {
-        margin-right: 84px;
-        .box-detail {
-          margin-left: 64px;
+  .card {
+    border: 1.5px solid #11A983;
+    border-radius: 10px;
+  }
+  .setting-perssion {
+    width: 90%;
+    margin: 10px 5%;
+    .content-box {
+      margin-bottom: 20px;
+      transition: all, 0.6s;
+      .cloumn-content {
+        display: flex;
+        display: -webkit-flex;
+        margin-top: 20px;
+        .content-title {
+          margin-left: 32px;
+        }
+        .check-box {
+          margin-right: 84px;
+          .box-detail {
+            margin-left: 64px;
+          }
         }
       }
     }
-  }
-}
-/*多选效果*/
-.clickFalse {
-  border: 0px;
-  border-radius: 5px;
-  background: transparent;
-  display: inline;
-  margin-right: 20px;
-  padding: 10px 24px 10px 10px;
-
-}
-.clickFalse:hover,
-.clickTrue:hover {
-  cursor: pointer;
-}
-.clickTrue,
-.clickFalse:visited {
-  border-radius: 5px;
-  display: inline;
-  margin-right: 20px;
-  padding: 10px;
-  color: white;
-  background: #337ab7;
-  border: 0;
-}
-  .title{
-    white-space:nowrap;
-    margin-top: 10px;
   }
 </style>

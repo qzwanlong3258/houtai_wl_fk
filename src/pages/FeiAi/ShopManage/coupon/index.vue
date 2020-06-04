@@ -43,6 +43,11 @@
         <el-table-column label="头像" align="center">
           <template slot-scope="scope"> <img :src="scope.row.logo" class="head-photo" alt=""  ></template>
         </el-table-column>
+              <el-table-column label="标签" align="center">
+                <template slot-scope="scope">
+                  <el-button size="mini" @click="viewDetail(scope.row)">查看</el-button>
+                </template>
+              </el-table-column>
 
 
 
@@ -69,9 +74,9 @@
                 style="width: 100%"
 
               >
-                <el-table-column label="编号" align="center">
-                  <template slot-scope="btnScope">{{btnScope.row.vid}}</template>
-                </el-table-column>
+<!--                <el-table-column label="编号" align="center">-->
+<!--                  <template slot-scope="btnScope">{{btnScope.row.vid}}</template>-->
+<!--                </el-table-column>-->
                 <el-table-column label="描述" align="center">
                   <template slot-scope="btnScope">{{btnScope.row.describe}}</template>
                 </el-table-column>
@@ -91,7 +96,7 @@
                 <el-table-column label="操作"  width="300" align="center">
                   <template slot-scope="btnScope">
                     <el-button  size="mini" type="text"  @click="showModelEventButton(btnScope.row,scope.row.uuid)">编辑</el-button>
-                    <el-button  size="mini" type="text" @click="handleDelete(btnScope.row)">删除</el-button>
+<!--                    <el-button  size="mini" type="text" @click="handleDelete(btnScope.row)">删除</el-button>-->
 <!--                    <el-button size="mini" type="text" @click="showModelEvent(scope.row)">编辑</el-button>-->
 <!--                    <el-button size="mini" type="text" @click="handleDelete(scope.row)">删除</el-button>-->
                   </template>
@@ -134,13 +139,9 @@
 <script>
 import ChangeModel from "./components/add";
 import ChangeModelButton from "./components/addbutton";
-import { getCoupon } from "@/api/shopManage";
+import { getCoupon ,getLable} from "@/api/shopManage";
 
-const contentList = {
-  id: "",
-  button: "",
-  cname:''
-};
+const contentList = [];
 const contentListButton = {
 
   begin:'',
@@ -175,6 +176,13 @@ export default {
     this.getList();
   },
   methods: {
+    //标签按钮
+    viewDetail(row){
+      this.changeShowModel();
+      this.contentList=row
+
+    },
+
 
     getRowKeys(row) {
             return row.id
@@ -200,17 +208,7 @@ export default {
     },
     closeStatus: function() {
       this.changeShowModel();
-      this.contentList = {
-        id: "",
-        cname:'',
-        button: "",
-        // phone: "",
-        // userName: "",
-        // password: "",
-        // roleId: "",
-        // role: "",
-        // addName: ""
-      };
+      this.contentList = [];
     },
     closeStatusButton: function() {
       this.changeShowModelButton();
@@ -267,39 +265,50 @@ export default {
       //   };
       // }
     },
-    getCouponList(e){
+   async getCouponList(e){
 
       console.log(e)
-      this.list=e.map(res=>{
+
+       let arry =[]
+      e.map(async res=>{
+        var lable = (await getLable({uuid:res.uuid} )).data.list
+        console.log(lable)
         if(res.volume){
         let volume = res.volume.split(',')
 
-        console.log(volume)
+        // console.log(volume)
         var b=[]
         volume.map(reso=>{
           let qa=reso.split(';')
           let qaz=qa.map(re=>{
             return re.split(':')
           })
-          console.log(qaz)
+          // console.log(qaz)
           let e=new Object()
           qaz.map(res=>{
             e[res[0]]=res[1]
           })
-          console.log(e)
+          // console.log(e)
 
           let num= e.describe.replace(/[^0-9]/ig,"")
           e.num=num
           b.push(e)
         })
         }
-
-        return{
+        arry.push({
           expansion:false,
           ...res,
-          volume:b
-        }
+          volume:b,
+          lable:lable
+        })
+
+        // return{
+        //   expansion:false,
+        //   ...res,
+        //   volume:b
+        // }
       })
+     this.list=arry
       console.log(this.list)
     },
     getList() {

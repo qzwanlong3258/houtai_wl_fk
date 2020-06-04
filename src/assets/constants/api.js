@@ -169,7 +169,11 @@ module.exports = {
 
   GET_COUPON:'/decorate/loadDecorateCoupons',
   ADD_COUPON:'/decorate/createCoupons',
-  PUT_COUPON:'/decorate/updateCoupons'
+  PUT_COUPON:'/decorate/updateCoupons',
+
+  GET_LABLE:'/decorate/loadDecorateVolume',
+  POST_LABLE:'/decorate/updateDecorateVolume'
+
 
 
 }
