@@ -3,7 +3,7 @@
     title="装企审核"
     :close-on-click-modal="false"
     :visible.sync="visible"
-    width="48%"
+    width="52%"
     top="180px"
     class="corpContact-detail">
     <div v-loading="!submitAble">
@@ -37,9 +37,15 @@
 
         <tr>
           <td class="zebra-table-label" width="150">营业执照图片</td>
-          <td><div class="pre-font"> <img :src="dataForm.businesslicense" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"> <img :src="dataForm.businesslicense" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
           <td class="zebra-table-label" width="150">店铺照片</td>
-          <td><div class="pre-font"><img :src="dataForm.storePhotos" @click="$imageViewer" alt="" width="40" height="40" ></div></td>
+          <td><div class="pre-font"><img :src="dataForm.storePhotos" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
+        </tr>
+        <tr>
+          <td class="zebra-table-label" width="150">logo</td>
+          <td><div class="pre-font"> <img :src="dataForm.logo" @click="$imageViewer" alt=""  min-width="20" height="40" ></div></td>
+          <td class="zebra-table-label" width="150">详情图片</td>
+          <td><div class="pre-font"><img :src="dataForm.details" @click="$imageViewer" alt="" min-width="20" height="40" ></div></td>
         </tr>
 
 <!--        <tr>-->

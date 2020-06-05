@@ -228,6 +228,7 @@ export default {
 
       if (row) {
         //
+        this.contentListButton.uuid=row.vid
         this.contentListButton.begin = row.begin;
         this.contentListButton.end = row.end;
         this.contentListButton.describe = row.describe;
@@ -235,6 +236,7 @@ export default {
 
         // console.log(this.contentList)
       }else {
+        this.contentListButton=contentListButton
         this.contentListButton.uuid=uuid
       }
     },

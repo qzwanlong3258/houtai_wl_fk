@@ -302,9 +302,9 @@
 
         this.contentList.lable.map(res=>{
           if(res.type == '1'){
-            a.push(res)
+            a.push({...res})
           } else {
-            b.push(res)
+            b.push({...res})
           }
         })
         this.lableTwo = b
