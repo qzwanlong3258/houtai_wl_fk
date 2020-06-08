@@ -1,5 +1,5 @@
 import request from '@/utils/request'
-import { GET_SHOP ,POST_SHOP,GET_COUPON,ADD_COUPON,PUT_COUPON,GET_LABLE,POST_LABLE} from '@/assets/constants/api'
+import { GET_SHOP ,POST_SHOP,GET_COUPON,ADD_COUPON,PUT_COUPON,GET_LABLE,POST_LABLE,PUT_SHOP_MANAGE} from '@/assets/constants/api'
 
 //获取装企
 export function getShop(data) {
@@ -64,3 +64,14 @@ export function postLable(data) {
     data
   })
 }
+//修改标签
+export function putShopManage(data) {
+  return request({
+    method: 'POST',
+    url: PUT_SHOP_MANAGE,
+    data
+  })
+}
+
+
+

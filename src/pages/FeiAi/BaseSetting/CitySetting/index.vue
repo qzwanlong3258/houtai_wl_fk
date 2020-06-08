@@ -18,11 +18,9 @@
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
-        <el-table-column label="姓名" align="center">
+        <el-table-column label="城市名" align="center">
           <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
-
-
         <el-table-column label="操作" width="300" align="center">
           <template slot-scope="scope">
             <el-button size="mini" @click="showModelEvent(scope.row)">编辑</el-button>
@@ -55,7 +53,7 @@
                 <el-table-column label="图片" align="center">
                   <template slot-scope="btnScope">
                     <img :src="buttonList.find(item => item.id == btnScope.row.id).icon"  alt="" min-width="20" height="40" >
-                    </template>
+                  </template>
                 </el-table-column>
                 <el-table-column label="路由" align="center">
                   <template slot-scope="btnScope">{{buttonList.find(item => item.id == btnScope.row.id).url}}</template>

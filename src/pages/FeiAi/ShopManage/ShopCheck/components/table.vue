@@ -28,6 +28,11 @@
       <el-table-column label="公司地址" align="center" show-overflow-tooltip>
         <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.address}}</span> </template>
       </el-table-column>
+      <el-table-column label="标签" align="center">
+        <template slot-scope="scope">
+          <el-button size="mini" @click="changeShop(scope.row)">编辑</el-button>
+        </template>
+      </el-table-column>
 
       <el-table-column :label="status == 0?'操作':'状态'" width="200" align="center" fixed="right">
         <template slot-scope="scope">
@@ -39,6 +44,7 @@
 <!--          <div v-if="status == 2">不通过</div>-->
 
           <el-tag v-if="status == 1" size="mini" type="success">通过</el-tag>
+
           <el-tag v-if="status == 2" size="mini"  type="danger">不通过</el-tag>
         </template>
       </el-table-column>
@@ -46,6 +52,14 @@
     <love-detail v-if="showModel" :modelStatus="showModel" @closeStatus="closeStatus" :tableList="tableList" />
     <love-refuse v-if="refuseModel" :modelStatus="refuseModel" @closeStatus="closeRefuseStatus" :refuseId="refuseId"  @refuseUpdateList="updataList" />
     <love-agree v-if="agreeModel" :modelStatus="agreeModel" @closeStatus="closeAgressStatus" :agreeId="agreeId" @agreenUpdateList="updataList"/>
+    <change-model
+      v-if="showShopModel"
+      ref="showShopModel"
+      :modelStatus="showShopModel"
+      @updateList="updataList"
+      @closeStatus="closeShopStatus"
+      :contentList="contentList"
+    />
     <check-details ref="checkDetails"></check-details>
   </div>
 </template>
@@ -55,7 +69,25 @@ import LoveDetail from "./detail";
 import LoveRefuse from "./refuse";
 import LoveAgree from "./agree";
 import { postShop } from "@/api/shopManage";
+import ChangeModel from "./add";
 import CheckDetails from './index-details'
+const contentList = {
+  uuid: "",
+  name: "",
+  address: "",
+  describe: "",
+  range: "",
+  way: "",
+  style: "",
+  juridicalPerson: "",
+  businesslicenseCode: "",
+  businesslicense: "",
+  storePhotos: "",
+  createNumber: "",
+  level: "",
+  logo: "",
+  details: ""
+};
 const tableList = [
   {
     name: "编号",
@@ -178,6 +210,7 @@ export default {
   data() {
     return {
       showModel: false,
+      showShopModel: false,
       tableList,
       refuseModel: false,
       refuseId: 0,
@@ -189,16 +222,47 @@ export default {
     LoveDetail,
     LoveRefuse,
     LoveAgree,
-    CheckDetails
+    CheckDetails,
+    ChangeModel
   },
   methods: {
+    //修改装企详情
+    closeShopStatus: function() {
+      this.changeShopShowModel();
+      this.contentList = {
+        uuid: "",
+        name: "",
+        address: "",
+        describe: "",
+        range: "",
+        way: "",
+        style: "",
+        juridicalPerson: "",
+        businesslicenseCode: "",
+        businesslicense: "",
+        storePhotos: "",
+        createNumber: "",
+        level: "",
+        logo: "",
+        details: ""
+      };
+    },
+    changeShop(row){
+      this.changeShopShowModel()
+      if(row){
+        this.contentList={...row}
+      }
+    },
     toDetail:function(e) {
       this.$refs.checkDetails.init(e)
     },
-     updataList: function(data) {
+    updataList: function(data) {
       if (data.isUpdataList) {
         this.$emit("pupdataList");
       }
+    },
+    changeShopShowModel: function() {
+      this.showShopModel = !this.showShopModel;
     },
     changeShowModel: function() {
       this.showModel = !this.showModel;

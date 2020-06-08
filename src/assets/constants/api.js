@@ -172,8 +172,8 @@ module.exports = {
   PUT_COUPON:'/decorate/updateCoupons',
 
   GET_LABLE:'/decorate/loadDecorateVolume',
-  POST_LABLE:'/decorate/updateDecorateVolume'
+  POST_LABLE:'/decorate/updateDecorateVolume',
 
-
+  PUT_SHOP_MANAGE:"/decorate/updateDecorate"
 
 }
