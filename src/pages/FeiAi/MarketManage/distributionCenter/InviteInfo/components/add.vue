@@ -7,7 +7,7 @@
       :width="500"
       :height="390"
     >
-      <div class="title-tip">设置银行</div>
+      <div class="title-tip">设置邀请信息</div>
       <div class="change-ps-input">
         <span class="role-tip">银行名称：</span>
         <el-input type="text" class="input-box" v-model="params.name" placeholder="请输入银行名称" />

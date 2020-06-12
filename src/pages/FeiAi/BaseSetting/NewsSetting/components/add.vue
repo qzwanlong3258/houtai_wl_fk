@@ -91,6 +91,10 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting() {
+      if(!this.params.content){
+        this.alertMessage('请输入内容')
+        return;
+      }
       if (this.params.id) {
         //编辑
         updateNews(this.params).then(res => {

@@ -224,6 +224,22 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting() {
+      if(!this.params.name){
+        this.alertMessage('请输入商品名称')
+        return;
+      }
+      if(!this.params.price){
+        this.alertMessage('请输入商品价格')
+        return;
+      }
+      if(!this.params.originalPrice){
+        this.alertMessage('请输入商品原价')
+        return;
+      }
+      if(!this.params.count){
+        this.alertMessage('请输入商品库存')
+        return;
+      }
       if (this.params.id) {
         //编辑
         let e={

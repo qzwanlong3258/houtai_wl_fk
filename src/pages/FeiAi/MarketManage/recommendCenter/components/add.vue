@@ -65,7 +65,7 @@
           class="input-box"
           type="text"
           v-model="params.count"
-          placeholder="请输入活动描述"
+          placeholder="请输入邀请数量"
         />
       </div>
       <div class="change-ps-input">
@@ -213,6 +213,36 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+
+        if(!this.params.name){
+          this.alertMessage('请输入活动名称')
+          return;
+        }
+        if(!this.params.roleid){
+          this.alertMessage('请选择角色')
+          return;
+        }
+        if(!this.params.money){
+          this.alertMessage('请输入奖励积分')
+          return;
+        }
+        if(!this.params.describe){
+          this.alertMessage('请输入活动描述')
+          return;
+        }
+        if(!this.params.count){
+          this.alertMessage('请输入邀请数量')
+          return;
+        }
+        if(!this.params.bdate){
+          this.alertMessage('请选择开始时间')
+          return;
+        }
+        if(!this.params.edate){
+          this.alertMessage('请选择结束时间')
+          return;
+        }
+
         if (this.params.id) {
           //编辑
           putRecommendCenter(this.params).then(res => {

@@ -17,6 +17,12 @@ import VueAreaLinkage from 'vue-area-linkage'
 // 图片放大
 import imageViewer from './components/vue-imageViewer-master/index'
 import handlingTitle from '@/components/handlingTitle/index'
+
+import fun from './utils/fun.js'
+Vue.use(fun);
+
+
+
 Vue.component('handlingTitle', handlingTitle)
 Vue.use(imageViewer)
 
@@ -24,6 +30,8 @@ Vue.use(VueAreaLinkage)
 Vue.config.productionTip = false
 Vue.prototype.$pca = pca;
 Vue.prototype.$pcaa = pcaa;
+
+
 Vue.use(ElementUI)
 Vue.use(VCharts)
 Vue.use(vuescroll,{

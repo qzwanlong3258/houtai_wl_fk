@@ -6,14 +6,6 @@
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
-<!--      "password": "123123",密码 <string>-->
-<!--      "create_time": 1587920548000,创建时间 <number>-->
-<!--      "avatarUrl": "https://wx.qlogo.cn/mmopen/vi_32/gwVXwVRiczoXicb4CbtQprTPibB1ekaMibT0cZ6Lz1MiccWaXuBeQdwrJsMPRA2NKlpYOMrnEmTy16y3PsPnrbPo8SQ/132",头像 <string>-->
-<!--      "phone": "123",手机号 <string>-->
-<!--      "nickName": "测试用11",昵称 <string>-->
-<!--      "id": 15,用户id <number>-->
-<!--      "email": "email123",邮箱 <string>-->
-<!--      "username": "admin1"登录名 <string>-->
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>

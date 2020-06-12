@@ -100,6 +100,14 @@
       };
     },
     methods: {
+      //弹出信息
+  //     alertMessage(action){
+  //   this.$message({
+  //     message: action,
+  //     type: 'warning',
+  //   });
+  // },
+
       handleAvatarSuccess(res, file) {
 
       },
@@ -149,6 +157,20 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+
+         console.log(this)
+        if(!this.params.name){
+          this.alertMessage('请输入名称')
+          return;
+        }
+        if(!this.params.icon){
+          this.alertMessage('请选择图片')
+          return;
+        }
+        // if(!this.params.url){
+        //   this.alertMessage('请选择路由')
+        //   return;
+        // }
         if (this.params.id) {
           //编辑
           updateButton(this.params).then(res => {

@@ -7,14 +7,14 @@
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" :row-key="getRowKeys" row-click="toggleRowExpansion" border>
-        <el-table-column prop="cangku_name" align="center" width="50" label=" ">
-          <template slot-scope="scope">
-            <span
-              id="linkspan"
-              @click="toogleExpand(scope.row)"
-            >{{scope.row.expansion ? '收起' : '展开'}}</span>
-          </template>
-        </el-table-column>
+<!--        <el-table-column prop="cangku_name" align="center" width="50" label=" ">-->
+<!--          <template slot-scope="scope">-->
+<!--            <span-->
+<!--              id="linkspan"-->
+<!--              @click="toogleExpand(scope.row)"-->
+<!--            >{{scope.row.expansion ? '收起' : '展开'}}</span>-->
+<!--          </template>-->
+<!--        </el-table-column>-->
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
@@ -85,6 +85,43 @@
         :total="total"
       ></el-pagination>
     </div>-->
+<!--   按钮-->
+    <el-card class="layout-title" style="margin-top: 20px" shadow="never">
+      <i class="el-icon-tickets" style="margin-top: 5px"></i>
+      <span style="margin-top: 5px">按钮管理</span>
+      <el-button class="btn-add" @click="showModelEventButton()" size="mini">添加</el-button>
+    </el-card>
+    <div class="table-container">
+      <el-table ref="userList" style="width: 100%" :data="buttonList" v-loading="listLoading" border>
+
+<!--        bname: "设计师认证"-->
+<!--        icon: "https://www.feiaizn.com/images/20200528163828_shejishi.png"-->
+<!--        id: 27-->
+<!--        url: "/pages/todoChild/Designer/index"-->
+        <el-table-column label="编号" align="center">
+          <template slot-scope="scope">{{scope.row.id}}</template>
+        </el-table-column>
+        <el-table-column label="名称" align="center">
+          <template slot-scope="scope">{{scope.row.bname}}</template>
+        </el-table-column>
+        <el-table-column label="图片" align="center">
+          <template slot-scope="scope">
+            <img :src="scope.row.icon"  alt="" min-width="20" height="40" >
+          </template>
+        </el-table-column>
+        <el-table-column label="路由" align="center">
+          <template slot-scope="scope">{{scope.row.url}}</template>
+        </el-table-column>
+        <el-table-column label="操作" width="200" align="center">
+          <template slot-scope="scope">
+            <el-button size="mini" @click="showModelEventButton(scope.row)">编辑</el-button>
+            <el-button size="mini" type="danger" @click="handleDeleteButton(scope.row)">删除</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+    </div>
+
+
     <change-model
       v-if="showModel"
       ref="showModel"
@@ -228,7 +265,7 @@ export default {
       console.log(row)
       if (row) {
         //
-        this.contentListButton = row;
+        this.contentListButton = {...row};
         // this.contentListButton.name = row.bname
 
         // console.log(this.contentList)

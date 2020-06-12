@@ -174,6 +174,18 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting() {
+      if(!this.params.nickName){
+        this.alertMessage('请输入成员姓名')
+        return;
+      }
+      if(!this.params.username){
+        this.alertMessage('请输入用户名')
+        return;
+      }
+      if(!this.params.password){
+        this.alertMessage('请输入密码')
+        return;
+      }
       if (this.params.id) {
         //编辑
         this.params.role=this.params.roleId.toString()

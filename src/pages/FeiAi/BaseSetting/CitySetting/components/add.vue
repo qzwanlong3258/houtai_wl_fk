@@ -133,6 +133,10 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting() {
+      if(!this.params.cname){
+        this.alertMessage('请输入城市名')
+        return;
+      }
       if (this.params.id) {
         //编辑
         this.params.button=this.searchArray.toString()

@@ -147,6 +147,10 @@ export default {
       this.contentList.bankAddress = e;
     },
     saveSetting() {
+      if(!this.params.name){
+        this.alertMessage('请输入银行名称')
+        return;
+      }
       // this.params.bankAddress = JSON.stringify(this.params.bankAddress);
       if (this.params.id) {
         //编辑

@@ -147,6 +147,10 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+        if(!this.params.img){
+          this.alertMessage('请选择图片')
+          return;
+        }
         if (this.params.id) {
           //编辑
           // updateButton(this.params).then(res => {

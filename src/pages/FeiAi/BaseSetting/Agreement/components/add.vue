@@ -47,7 +47,7 @@
         <el-input class="input-box" style="width: 196px" type="text" readonly v-if="pictextType==2">
           <template slot="prepend" style="background: #ffffff">
             <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
-            <img v-if="params.url"  @click="$imageViewer" :src="params.img"  min-width="20" height="26"  >
+            <img v-if="params.img"  @click="$imageViewer" :src="params.img"  min-width="20" height="26"  >
           </template>
           <template slot="append">
 
@@ -185,6 +185,14 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+        if(!this.params.img){
+          this.alertMessage('请输入名称')
+          return;
+        }
+        if(!this.params.url){
+          this.alertMessage('请输入链接')
+          return;
+        }
         if (this.params.id) {
           //编辑
           updateHomeStyle(this.params).then(res => {

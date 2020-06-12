@@ -66,8 +66,8 @@ ImageViewer.install = Vue => {
 
     // 挂载触发方法
     Vue.prototype.$imageViewer = (e) => {
-        // instance.currentImg = e.currentTarget.currentSrc;
-        // instance.visible = true;
+        instance.currentImg = e.currentTarget.currentSrc;
+        instance.visible = true;
     }
 
 }

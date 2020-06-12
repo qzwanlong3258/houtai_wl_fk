@@ -37,39 +37,39 @@
       </div>
       <div class="change-ps-input">
         <span class="role-tip">公司地址：</span>
-        <el-input class="input-box" type="text" v-model="params.address" placeholder="请输入图标名称" />
+        <el-input class="input-box" type="text" v-model="params.address" placeholder="请输入公司地址" />
       </div>
       <div class="change-ps-input">
         <span class="role-tip">装企描述：</span>
-        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入图标名称" />
+        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入装企描述" />
       </div>
       <div class="change-ps-input">
         <span class="role-tip">星级：</span>
         <el-input-number class="input-box" v-model="params.level"  :min="1" :max="10" label="请输入星级"></el-input-number>
       </div>
-      <div class="change-ps-input">
-        <span class="role-tip">营业执照：</span>
-        <el-input class="input-box" style="width: 196px" type="text" readonly >
-          <template slot="prepend" style="background: #ffffff">
-            <!--            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />-->
-            <img v-if="params.businesslicense"  @click="$imageViewer" :src="params.businesslicense"  min-width="20" height="26"  >
-          </template>
-          <template slot="append">
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">营业执照：</span>-->
+<!--        <el-input class="input-box" style="width: 196px" type="text" readonly >-->
+<!--          <template slot="prepend" style="background: #ffffff">-->
+<!--            &lt;!&ndash;            <img v-if="dataForm.objId" :src="$http.adornUrl(`/api-base/base/mongo/file/showImage/${dataForm.objId + $http.appendUrlAccessToken()}`)"  min-width="20" height="26" />&ndash;&gt;-->
+<!--            <img v-if="params.businesslicense"  @click="$imageViewer" :src="params.businesslicense"  min-width="20" height="26"  >-->
+<!--          </template>-->
+<!--          <template slot="append">-->
 
-            <el-upload
-              ref="upload"
-              action="https://jsonplaceholder.typicode.com/posts/"
-              :show-file-list="false"
-              :on-success="handleAvatarSuccess"
-              :before-upload="(file)=> beforeAvatarUpload(file,'businesslicense')"
-              :auto-upload="true">
-              <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>
-            </el-upload>
-          </template>
+<!--            <el-upload-->
+<!--              ref="upload"-->
+<!--              action="https://jsonplaceholder.typicode.com/posts/"-->
+<!--              :show-file-list="false"-->
+<!--              :on-success="handleAvatarSuccess"-->
+<!--              :before-upload="(file)=> beforeAvatarUpload(file,'businesslicense')"-->
+<!--              :auto-upload="true">-->
+<!--              <el-button slot="trigger" size="mini" type="primary" >浏览</el-button>-->
+<!--            </el-upload>-->
+<!--          </template>-->
 
-        </el-input>
+<!--        </el-input>-->
 
-      </div>
+<!--      </div>-->
       <div class="change-ps-input">
         <span class="role-tip">店铺照片：</span>
         <el-input class="input-box" style="width: 196px" type="text" readonly >
@@ -253,6 +253,57 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+
+        if(!this.params.name){
+          this.alertMessage('请输入公司名称')
+          return;
+        }
+        if(!this.params.businesslicenseCode){
+          this.alertMessage('请输入营业执照编号')
+          return;
+        }
+
+        if(!this.params.juridicalPerson){
+          this.alertMessage('请输入法人姓名')
+          return;
+        }
+        if(!this.params.createNumber){
+          this.alertMessage('请输入注册资金')
+          return;
+        }
+        if(!this.params.businesslicenseCode){
+          this.alertMessage('请输入营业执照编号')
+          return;
+        }
+        if(!this.params.address){
+          this.alertMessage('请输入地址')
+          return;
+        }
+        if(!this.params.describe){
+          this.alertMessage('请输入装企描述')
+          return;
+        }
+        if(!this.params.level){
+          this.alertMessage('请选择星级')
+          return;
+        }
+        if(!this.params.storePhotos){
+          this.alertMessage('请选择店铺照片')
+          return;
+        }
+        if(!this.params.businesslicense){
+          this.alertMessage('请选择营业执照')
+          return;
+        }
+        if(!this.params.logo){
+          this.alertMessage('请选择logo')
+          return;
+        }
+        if(!this.params.details){
+          this.alertMessage('请选择详情图')
+          return;
+        }
+
         putShopManage(this.params).then(res => {
           if (res.code === 0) {
             this.$message.success("编辑成功");

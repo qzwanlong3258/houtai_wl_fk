@@ -4,7 +4,7 @@
       <el-table-column label="编号" align="center" show-overflow-tooltip>
         <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.id}}</span> </template>
       </el-table-column>
-      <el-table-column label="贷款人" align="center" show-overflow-tooltip>
+      <el-table-column label="微信号" align="center" show-overflow-tooltip>
         <template slot-scope="scope" ><span @click="toDetail(scope.row)">{{scope.row.userName}}</span> </template>
       </el-table-column>
       <el-table-column label="城市" align="center" show-overflow-tooltip>

@@ -255,6 +255,20 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+        for(let i=0;i<this.lableTwo.length;i++){
+          if(!this.lableTwo[i].content||!this.lableTwo[i].img){
+            this.alertMessage('请补全标签信息')
+            return;
+          }
+        }
+        for(let i=0;i<this.lableOne.length;i++){
+          if(!this.lableOne[i].content){
+            this.alertMessage('请补全标签信息')
+            return;
+          }
+        }
+
+
         let c = this.lableOne.concat(this.lableTwo);
         let e={
           uuid: this.uuid,

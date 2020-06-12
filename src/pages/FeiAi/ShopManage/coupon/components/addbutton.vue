@@ -10,7 +10,7 @@
       <div class="title-tip">优惠券</div>
       <div class="change-ps-input">
         <span class="role-tip">描述：</span>
-        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入图标名称" />
+        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入优惠卷描述" />
       </div>
       <div class="change-ps-input">
         <span class="role-tip">开始时间：</span>
@@ -170,6 +170,18 @@
         this.$emit("closeStatus");
       },
       saveSetting() {
+        if(!this.params.describe){
+          this.alertMessage('请输入优惠卷描述')
+          return;
+        }
+        if(!this.params.begin){
+          this.alertMessage('请选择开始时间')
+          return;
+        }
+        if(!this.params.end){
+          this.alertMessage('请选择结束时间')
+          return;
+        }
         if (this.contentList.describe) {
           //编辑
           putCoupon(this.params).then(res => {
