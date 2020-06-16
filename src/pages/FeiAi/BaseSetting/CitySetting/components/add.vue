@@ -95,7 +95,7 @@ export default {
         let index = -1;
         for (var i = 0; i < this.searchArray.length; i++) {
           if (
-            this.searchArray[i] === id
+            this.searchArray[i] == id
           ) {
             index = i
             break;
@@ -140,6 +140,7 @@ export default {
       if (this.params.id) {
         //编辑
         this.params.button=this.searchArray.toString()
+        console.log( this.params.button)
         let e={
           uuid:this.params.id,
           button:this.params.button,

@@ -39,10 +39,10 @@
         <span class="role-tip">公司地址：</span>
         <el-input class="input-box" type="text" v-model="params.address" placeholder="请输入公司地址" />
       </div>
-      <div class="change-ps-input">
-        <span class="role-tip">装企描述：</span>
-        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入装企描述" />
-      </div>
+<!--      <div class="change-ps-input">-->
+<!--        <span class="role-tip">装企描述：</span>-->
+<!--        <el-input class="input-box" type="text" v-model="params.describe" placeholder="请输入装企描述" />-->
+<!--      </div>-->
       <div class="change-ps-input">
         <span class="role-tip">星级：</span>
         <el-input-number class="input-box" v-model="params.level"  :min="1" :max="10" label="请输入星级"></el-input-number>
@@ -279,10 +279,10 @@
           this.alertMessage('请输入地址')
           return;
         }
-        if(!this.params.describe){
-          this.alertMessage('请输入装企描述')
-          return;
-        }
+        // if(!this.params.describe){
+        //   this.alertMessage('请输入装企描述')
+        //   return;
+        // }
         if(!this.params.level){
           this.alertMessage('请选择星级')
           return;
