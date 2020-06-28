@@ -58,9 +58,18 @@ export default {
               }
             });
           }
-        });
+        }).catch((err) => this.requestFailed(err))
+
+        ;
       }
-    }
+    },
+    requestFailed(err) {
+      this.$notify.error({
+        title: '错误',
+        message: ((err.response || {}).data || {}).message ||
+          "请求出现错误，请稍后再试",
+      });
+    },
   }
 };
 </script>

@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="贷款面签"
+    title="贷款预审"
     :close-on-click-modal="false"
     :visible.sync="visible"
     width="60%"
@@ -28,41 +28,82 @@
 
       <table class="zebra-table zebra-table-space" style="margin-bottom: -2px;">
         <thead>
-<!--        <handling-title title="申请人信息"></handling-title>-->
-       <handling-title title=" 贷款信息 "></handling-title>
+        <!--        <handling-title title="申请人信息"></handling-title>-->
+        <handling-title title=" 贷款信息 "></handling-title>
 
         <tr>
           <td class="zebra-table-label" width="150">贷款人姓名</td>
-          <td><div class="zebra-table-scoll">{{dataForm.loanerName ? dataForm.loanerName : '—'}}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.loanerName ? dataForm.loanerName : '—'}}</div>
+          </td>
           <td class="zebra-table-label" width="150">订单id</td>
-          <td><div class="zebra-table-scoll">{{dataForm.id ? dataForm.id : '—'}}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.id ? dataForm.id : '—'}}</div>
+          </td>
         </tr>
         <tr>
           <td class="zebra-table-label" width="150">身份证号码</td>
-          <td><div class="zebra-table-scoll">{{dataForm.idCard ? dataForm.idCard : '—'}}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.idCard ? dataForm.idCard : '—'}}</div>
+          </td>
           <td class="zebra-table-label" width="150">婚姻状态</td>
-          <td><div class="zebra-table-scoll">{{dataForm.marryStatus|marry }}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.marryStatus|marry }}</div>
+          </td>
         </tr>
-
         <tr>
-          <td class="zebra-table-label" width="150">城市</td>
-          <td><div class="zebra-table-scoll">{{dataForm.cityName ? dataForm.cityName : '—'}}</div></td>
-          <td class="zebra-table-label" width="150">地址</td>
-          <td><div class="zebra-table-scoll">{{dataForm.address ? dataForm.address : '—'}}</div></td>
+          <td class="zebra-table-label" width="150">工作单位性质</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.workunit|workunit}}</div>
+          </td>
+          <td class="zebra-table-label" width="150">期数</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.term }}期</div>
+          </td>
         </tr>
+        <tr>
+          <td class="zebra-table-label" width="150">申请金额</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.loanMoney}}元</div>
+          </td>
+          <td class="zebra-table-label" width="150">家庭月收入</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.familyMonthIncome }}元</div>
+          </td>
+        </tr>
+        <!--        <tr>-->
+        <!--          <td class="zebra-table-label" width="150">城市</td>-->
+        <!--          <td>-->
+        <!--            <div class="zebra-table-scoll">{{dataForm.cityName ? dataForm.cityName : '—'}}</div>-->
+        <!--          </td>-->
+        <!--          <td class="zebra-table-label" width="150">地址</td>-->
+        <!--          <td>-->
+        <!--            <div class="zebra-table-scoll">{{dataForm.address ? dataForm.address : '—'}}</div>-->
+        <!--          </td>-->
+        <!--        </tr>-->
         <tr>
           <td class="zebra-table-label" width="150">创建时间</td>
-          <td><div class="zebra-table-scoll">{{dataForm.lastTime|Time}}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.lastTime|Time}}</div>
+          </td>
           <td class="zebra-table-label" width="150">状态</td>
-          <td><div class="zebra-table-scoll">{{dataForm.state|faceStatusName}}</div></td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.state|statusName}}</div>
+          </td>
         </tr>
 
         <tr>
           <td class="zebra-table-label" width="150">联系电话</td>
-          <td colspan="3"><div class="zebra-table-scoll">{{dataForm.phone ? dataForm.phone : '—'}}</div></td>
+          <td colspan="3">
+            <div class="zebra-table-scoll">{{dataForm.phone ? dataForm.phone : '—'}}</div>
+          </td>
         </tr>
-
-
+        <tr>
+          <td class="zebra-table-label" width="150">地址</td>
+          <td colspan="3">
+            <div class="zebra-table-scoll">{{dataForm.address ? dataForm.address : '—'}}</div>
+          </td>
+        </tr>
 
 
         </thead>
@@ -76,13 +117,13 @@
 </template>
 
 <script>
-  import { getCheckListDetail } from "@/api/checkSettingBohai";
+  import {getCheckListDetail} from '@/api/checkSettingBohai'
+
   export default {
     components: {},
     data () {
       return {
-        dataForm: {
-        },
+        dataForm: {},
         // thisRunningWater:[],
         // spouseRunningWater:[],
         visible: false, // 显示弹窗控件，默认false不显示，true显示
@@ -94,13 +135,12 @@
       init (e) {
         this.visible = true
 
-
         this.$nextTick(() => {
           // this.$refs.replyData.resetFields()
           let DOM = document.getElementsByClassName('corpContact-detail')[0]
           DOM.getElementsByClassName('el-dialog__body')[0].scrollTop = 0
         })
-        this.dataForm=e
+        this.dataForm = e
         // let e ={}
         // e.uuid=uuid
         // e.state=state
@@ -124,8 +164,6 @@
         // });
       },
 
-
-
     }
   }
 </script>
@@ -144,7 +182,7 @@
     // padding: 4px 12px;
     border-right: 1px solid #eeeeee;
     border-bottom: 1px solid #eeeeee;
-    word-break:break-all;
+    word-break: break-all;
   }
 
   .zebra-table.zebra-table-space {
@@ -156,34 +194,40 @@
     border-top: 1px solid #eeeeee;
     border-left: 1px solid #eeeeee;
   }
+
   .zebra-table-scoll {
     padding: 4px 12px;
     height: 34px;
     line-height: 34px;
     overflow-y: auto;
   }
+
   .zebra-table .zebra-table-label {
     // background: #f6f6f6;
     padding: 4px 12px;
     text-align: right;
     width: 150px;
   }
+
   .el-date-editor.el-input, .el-date-editor.el-input__inner {
     width: 100%;
   }
+
   .pre-font {
     padding: 4px 12px;
     font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "\5FAE\8F6F\96C5\9ED1", Arial, sans-serif;
     margin: 0;
     word-break: break-all;
-    white-space:pre-wrap;
-    white-space:-moz-pre-wrap;
-    white-space:-o-pre-wrap;
-    word-wrap:break-word;
+    white-space: pre-wrap;
+    white-space: -moz-pre-wrap;
+    white-space: -o-pre-wrap;
+    word-wrap: break-word;
   }
+
   .incident-handling-title {
     padding: 10px 0px;
   }
+
   .upload-handle-form {
     line-height: 0px;
   }
@@ -195,10 +239,12 @@
     overflow-y: auto;
     padding: 20px 50px;
   }
+
   .corpContact-detail .el-dialog__header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.08);
     min-Height: 22px;
   }
+
   .corpContact-detail .dialog__footer {
     min-Height: 22px;
   }

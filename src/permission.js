@@ -8,6 +8,7 @@ if (window.sessionStorage.getItem("router")) {
     var permissionRouter = store.state.routers.router
 }
 export default router.beforeEach((to,from,next)=>{
+    // console.log(permissionRouter)
     permissionRouter.forEach(function(item){
         item.children && item.children.forEach(function(value){
             item.path && value.path && whiteList.indexOf(`${item.path}/${value.path}`)===-1 && whiteList.push(`${item.path}/${value.path}`)

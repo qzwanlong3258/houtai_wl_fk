@@ -25,7 +25,7 @@
       </div>
     </el-card>
     <div class="table-container">
-      <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
+      <el-table ref="userList" style="width: 100%" :data="list" height="440" v-loading="listLoading" border>
         <el-table-column label="用户id" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
@@ -66,18 +66,18 @@
 <!--        </el-table-column>-->
       </el-table>
     </div>
-    <div class="pagination-container">
-      <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        layout="total, sizes,prev, pager, next,jumper"
-        :page-size="listQuery.size"
-        :page-sizes="[5,10,15]"
-        :current-page.sync="listQuery.page"
-        :total="total"
-      ></el-pagination>
-    </div>
+<!--    <div class="pagination-container">-->
+<!--      <el-pagination-->
+<!--        background-->
+<!--        @size-change="handleSizeChange"-->
+<!--        @current-change="handleCurrentChange"-->
+<!--        layout="total, sizes,prev, pager, next,jumper"-->
+<!--        :page-size="listQuery.size"-->
+<!--        :page-sizes="[5,10,15]"-->
+<!--        :current-page.sync="listQuery.page"-->
+<!--        :total="total"-->
+<!--      ></el-pagination>-->
+<!--    </div>-->
     <change-model
       v-if="showModel"
       :modelStatus="showModel"
@@ -208,7 +208,7 @@ export default {
     handleResetSearch(){
       this.listQuery = {
         page: 1,
-        size: 5,
+        size: 500,
         name: '',
       }
       this.getList()
@@ -262,7 +262,12 @@ export default {
           //   });
           //
           // console.log(this.list)
-          this.list = res.data.list;
+          this.list = []
+            res.data.list.map(res=>{
+              if(Number(res.applyCount)>0){
+                this.list.push(res)
+              }
+            })
         }
       });
     },

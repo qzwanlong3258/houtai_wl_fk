@@ -89,6 +89,27 @@ Vue.filter('marry', function (value) {
     return "离婚";
   }
 })
+/**
+ * 工作单位性质 0'公务员事业单位', 1'一般职员', 2'个体户', 3'企业法人', 4'自由职业', 5'其他'
+ */
+
+Vue.filter('workunit', function (value) {
+  if (value == 0) {
+    return "公务员事业单位";
+  } else if (value == 1) {
+    return "一般职员";
+  } else if (value == 2) {
+    return "个体户";
+  } else if (value == 3) {
+    return "企业法人";
+  } else if (value == 4) {
+    return "自由职业";
+  } else if (value == 5) {
+    return "其他";
+  }
+})
+
+
 
 
 /**

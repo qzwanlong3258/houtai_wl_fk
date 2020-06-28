@@ -18,8 +18,8 @@
       <!--      <el-table-column label="邀请人" align="center">-->
       <!--        <template slot-scope="scope">{{scope.row.invitor}}</template>-->
       <!--      </el-table-column>-->
-      <el-table-column label="面签城市" align="center">
-        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.cityName}}</span></template>
+      <el-table-column label="期数" align="center">
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.term}}</span></template>
       </el-table-column>
       <el-table-column label="贷款日期" align="center" width="160">
         <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.lastTime|Time}}</span></template>

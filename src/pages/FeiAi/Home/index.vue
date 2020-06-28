@@ -7,21 +7,21 @@
             <div class="total-frame">
               <i class="iconfont icondingdan total-icon"></i>
               <div class="total-title">今日贷款笔数</div>
-              <div class="total-value">{{parseInt(top.toDayCount) }}</div>
+              <div class="total-value">{{ top.toDayCount?parseInt(top.toDayCount):0 }}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjinqian total-icon"></i>
               <div class="total-title">今日贷款总额</div>
-              <div class="total-value">￥{{parseInt(top.toDayloanMoney) }}</div>
+              <div class="total-value">￥{{top.toDayloanMoney?parseInt(top.toDayloanMoney):0 }}</div>
             </div>
           </el-col>
           <el-col :span="6">
             <div class="total-frame">
               <i class="iconfont iconjifen1 total-icon"></i>
               <div class="total-title">贷款总额</div>
-              <div class="total-value">{{parseInt(top.loanMoney) }}</div>
+              <div class="total-value">{{top.loanMoney?parseInt(top.loanMoney):0 }}</div>
             </div>
           </el-col>
         </el-row>
@@ -33,19 +33,19 @@
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">待预审贷款申请</span>
-                <span style="float: right" class="color-danger">({{midTop.stayPre}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPre?midTop.stayPre:0}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">已通过贷款申请</span>
-                <span style="float: right" class="color-danger">({{midTop.stayPreOK}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPreOK?midTop.stayPreOK:0}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">未通过贷款申请</span>
-                <span style="float: right" class="color-danger">({{midTop.stayPreNO}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayPreNO?midTop.stayPreNO:0}})</span>
               </div>
             </el-col>
           </el-row>
@@ -56,7 +56,7 @@
                 <span
                   style="float: right"
                   class="color-danger"
-                >({{midTop.stayPreOK}})</span>
+                >({{midTop.stayPreOK?midTop.stayPreOK:0}})</span>
               </div>
             </el-col>
             <el-col :span="8">
@@ -65,13 +65,13 @@
                 <span
                   style="float: right"
                   class="color-danger"
-                >({{midTop.stayVisaOK}})</span>
+                >({{midTop.stayVisaOK?midTop.stayVisaOK:0}})</span>
               </div>
             </el-col>
             <el-col :span="8">
               <div class="un-handle-item">
                 <span class="font-medium">贷款面签失败数</span>
-                <span style="float: right" class="color-danger">({{midTop.stayVisaNO}})</span>
+                <span style="float: right" class="color-danger">({{midTop.stayVisaNO?midTop.stayVisaNO:0}})</span>
               </div>
             </el-col>
           </el-row>

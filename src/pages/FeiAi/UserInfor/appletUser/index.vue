@@ -48,7 +48,7 @@
 <!--      "applyName": "可乐加冰",邀请人昵称 <string>-->
 <!--      "email": "email123",邮箱 <string>-->
 <!--      "username": "admin1"登录名 <string>-->
-      <el-table ref="appletUser" style="width: 100%" :data="list" v-loading="listLoading" border>
+      <el-table ref="appletUser" style="width: 100%" :data="list" v-loading="listLoading" height="550" border>
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
@@ -85,18 +85,18 @@
         </el-table-column>
       </el-table>
     </div>
-    <div class="pagination-container">
-      <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        layout="total, sizes,prev, pager, next,jumper"
-        :page-size="listQuery.pageSize"
-        :page-sizes="[5,10,15]"
-        :current-page.sync="listQuery.pageNum"
-        :total="total"
-      ></el-pagination>
-    </div>
+<!--    <div class="pagination-container">-->
+<!--      <el-pagination-->
+<!--        background-->
+<!--        @size-change="handleSizeChange"-->
+<!--        @current-change="handleCurrentChange"-->
+<!--        layout="total, sizes,prev, pager, next,jumper"-->
+<!--        :page-size="listQuery.pageSize"-->
+<!--        :page-sizes="[5,10,15]"-->
+<!--        :current-page.sync="listQuery.pageNum"-->
+<!--        :total="total"-->
+<!--      ></el-pagination>-->
+<!--    </div>-->
     <love-agree v-if="agreeModel" :modelStatus="agreeModel" @closeStatus="closeAgressStatus" :agreeId="agreeId" @agreenUpdateList="getList"/>
   </div>
 </template>
@@ -121,7 +121,7 @@ export default {
         invitor: '',
         sex: '',
         pageNum: 1,
-        pageSize: 5
+        pageSize: 500
       },
       options: [
         {
@@ -152,12 +152,27 @@ export default {
       this.agreeId = row.id;
       },
     getList(){
+      this.list = []
       getAdminList(this.listQuery).then(res=>{
         if(res.code === 0) {
           this.total =Number(res.data.count)
-          this.list = res.data.list
+          res.data.list.map(res=>{
+            if(!res.username){
+              this.list.push(res)
+            }
+          })
         }
       })
+      // getAdminList(this.listQuery).then(res=>{
+      //   if(res.code === 0) {
+      //     this.total =Number(res.data.count)
+      //     res.data.list.map(res=>{
+      //       if(!res.username){
+      //         this.list.push(res)
+      //       }
+      //     })
+      //   }
+      // })
       this.agreeModel=false
     },
     handleSizeChange(val) {

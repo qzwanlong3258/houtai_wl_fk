@@ -6,7 +6,7 @@
       <el-button class="btn-add" @click="showModelEvent()" size="mini">添加</el-button>
     </el-card>
     <div class="table-container">
-      <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
+      <el-table ref="userList" style="width: 100%" height="440" :data="list" v-loading="listLoading" border>
         <el-table-column label="编号" align="center">
           <template slot-scope="scope">{{scope.row.id}}</template>
         </el-table-column>
@@ -47,18 +47,18 @@
         </el-table-column>
       </el-table>
     </div>
-    <div class="pagination-container">
-      <el-pagination
-        background
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        layout="total, sizes,prev, pager, next,jumper"
-        :page-size="listQuery.pageSize"
-        :page-sizes="[5,10,15]"
-        :current-page.sync="listQuery.pageNum"
-        :total="total"
-      ></el-pagination>
-    </div>
+<!--    <div class="pagination-container">-->
+<!--      <el-pagination-->
+<!--        background-->
+<!--        @size-change="handleSizeChange"-->
+<!--        @current-change="handleCurrentChange"-->
+<!--        layout="total, sizes,prev, pager, next,jumper"-->
+<!--        :page-size="listQuery.pageSize"-->
+<!--        :page-sizes="[5,10,15]"-->
+<!--        :current-page.sync="listQuery.pageNum"-->
+<!--        :total="total"-->
+<!--      ></el-pagination>-->
+<!--    </div>-->
     <change-model
       v-if="showModel"
       :modelStatus="showModel"
@@ -94,7 +94,7 @@ export default {
       listLoading: false,
       listQuery: {
         pageNum: 1,
-        pageSize: 5
+        pageSize: 500
       },
       showModel: false,
       contentList
@@ -130,29 +130,32 @@ export default {
       }
     },
     getList() {
+      this.list=[]
 
       getAdminList(this.listQuery).then(res => {
         if (res.code === 0) {
           this.total =Number(res.data.count);
-          this.list = res.data.list.map(res=>{
-            if(res.roleList){
-              var e=res.roleList.map(item=>{
-                return item.roleid
-              })
-              var c=res.roleList.map(item=>{
-                return item.roleName
-              })
-            } else {
-              var e=[]
-              var c=[]
-            }
+           res.data.list.map(res=>{
+             if(res.username){
+               if(res.roleList){
+                 var e=res.roleList.map(item=>{
+                   return item.roleid
+                 })
+                 var c=res.roleList.map(item=>{
+                   return item.roleName
+                 })
+               } else {
+                 var e=[]
+                 var c=[]
+               }
+               this.list.push({
+                 ...res,
+                 roleId:e,
+                 role:c.toString()
+               })
+             }
 
 
-            return {
-              ...res,
-              roleId:e,
-              role:c.toString()
-            }
           });
         }
       });

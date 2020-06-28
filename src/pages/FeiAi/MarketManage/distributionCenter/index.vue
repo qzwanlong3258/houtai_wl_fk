@@ -16,7 +16,7 @@
           <InviteInfo   v-show="name == '推广业绩'"></InviteInfo>
           <Post   v-show="name == '专属海报'"></Post>
           <Good   v-show="name == '推广商品'"></Good>
-<!--          <component ref="componentref" :is="item.component" v-for="(item, i) in items" :key="item.label" v-show="tabIndex == i" :parentApi="item.parentApi" :label="item.label"></component>-->
+<!--<component ref="componentref" :is="item.component" v-for="(item, i) in items" :key="item.label" v-show="tabIndex == i" :parentApi="item.parentApi" :label="item.label"></component>-->
         </el-col>
       </el-row>
 

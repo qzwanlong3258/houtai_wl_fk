@@ -28,11 +28,17 @@
           </div>
         </div>
       </div>
+<!--      <el-button-->
+<!--        @click="saveSetting"-->
+<!--        style="margin-left: 300px;position: fixed;bottom: 30px;"-->
+<!--        type="info"-->
+<!--        class="dialog-btn"-->
+<!--      >确定</el-button>-->
       <el-button
         @click="saveSetting"
-        style="margin-left: 300px;position: fixed;bottom: 30px;"
-        type="info"
-        class="dialog-btn"
+        class="test-btn"
+        type="primary"
+        size="mini"
       >确定</el-button>
     </love-dialog>
   </div>
@@ -70,6 +76,7 @@ export default {
     getPerList: function() {
       getPermission().then(res => {
         if (res.code === 0) {
+          console.log(res)
           this.permissionList = res.data.permission;
         }
       });
@@ -84,7 +91,7 @@ export default {
           parentList.forEach(value=>{
             value.children.length && value.children.forEach(child=>{
               if(child.id === item){
-                tempList.push(child.pid)
+                tempList.push(value.id)
               }
             })
           })
@@ -92,10 +99,13 @@ export default {
         return Array.from(new Set(tempList))
       },
       saveSetting () {
+      console.log(this.permissionList)
+        console.log(this.params.permission)
         const choosePermission =  this.getParentId({
           parentList: this.permissionList,
           childrenList: this.params.permission
         })
+        console.log(choosePermission)
         if (this.params.id) {
           //编辑
           setRoleExit({
@@ -134,6 +144,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .test-btn{
+    /*width: 50px;*/
+    height: 55px;
+    border-radius: 50%;
+    text-align: center;
+    position: fixed;
+    right: 20px;
+    top: 45%;
+
+  }
 .change-ps-input {
   width: 90%;
   height: 48px;

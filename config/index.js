@@ -13,8 +13,8 @@ module.exports = {
     proxyTable: {
       '/yunliuyan': {
        // target: 'http://192.168.5.2:8800',
-       target: 'https://www.feiaizn.com:8088',
-       // target: 'https://192.168.3.25:8088',
+       // target: 'https://www.feiaizn.com:8088',
+       target: 'https://192.168.3.25:8088',
        //  target : "http://47.104.232.184:8088",
         changeOrigin: true,
         "secure": false,
