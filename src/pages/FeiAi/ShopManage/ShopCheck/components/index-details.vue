@@ -10,7 +10,7 @@
       <table class="zebra-table zebra-table-space" style="margin-bottom: -2px;">
         <thead>
         <tr>
-          <td class="zebra-table-label" width="150">贷款人</td>
+          <td class="zebra-table-label" width="150">昵称</td>
           <td><div class="zebra-table-scoll">{{dataForm.userName ? dataForm.userName : '—'}}</div></td>
           <td class="zebra-table-label" width="150">城市</td>
           <td><div class="zebra-table-scoll">{{dataForm.cityName ? dataForm.cityName : '—'}}</div></td>

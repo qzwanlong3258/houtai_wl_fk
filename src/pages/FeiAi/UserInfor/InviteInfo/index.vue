@@ -32,7 +32,7 @@
         <el-table-column label="昵称" align="center">
           <template slot-scope="scope">{{scope.row.nickName}}</template>
         </el-table-column>
-        <el-table-column label="注册时间" align="center">
+        <el-table-column label="创建时间" align="center">
           <template slot-scope="scope">{{scope.row.create_time|time}}</template>
         </el-table-column>
         <el-table-column label="邀请人"  align="center">
@@ -262,7 +262,12 @@ export default {
           //   });
           //
           // console.log(this.list)
-          this.list = res.data.list;
+          this.list = []
+          res.data.list.map(res=>{
+            if(Number(res.applyCount)>0){
+              this.list.push(res)
+            }
+          })
         }
       });
     },

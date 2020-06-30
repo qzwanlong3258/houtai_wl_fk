@@ -63,6 +63,9 @@
         <el-table-column label="积分" align="center">
           <template slot-scope="scope">{{scope.row.integral}}</template>
         </el-table-column>
+        <el-table-column label="创建时间" align="center" width="160">
+          <template slot-scope="scope">{{scope.row.create_time|time}}</template>
+        </el-table-column>
               <el-table-column label="赠送积分" align="center">
                 <template slot-scope="scope">
                   <el-button size="mini" @click="agree(scope.row)">赠送</el-button>
