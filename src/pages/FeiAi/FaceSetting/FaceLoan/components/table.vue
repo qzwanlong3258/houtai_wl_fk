@@ -1,8 +1,17 @@
 <template>
   <div class="table-container">
     <el-table ref="loanSetting" style="width: 100%" :data="list" border>
-      <el-table-column label="编号" align="center">
-        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.id}}</span></template>
+<!--      <el-table-column label="编号" align="center">-->
+<!--        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.id}}</span></template>-->
+<!--      </el-table-column>-->
+      <el-table-column
+        width="50" label="序号" align="center">
+        <template slot-scope="scope">
+          <span >
+              {{(page * size - size) + scope.$index + 1}}
+            <!-- <icon-svg name="admin"></icon-svg> -->
+            </span>
+        </template>
       </el-table-column>
       <el-table-column label="贷款人" align="center">
         <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanerName}}</span></template>
@@ -198,7 +207,15 @@ export default {
     status: {
       type: Number,
       default: 0
-    }
+    },
+    size: {
+      type: Number,
+      required: true
+    },
+    page: {
+      type: Number,
+      required: true
+    },
   },
   data() {
     return {

@@ -6,9 +6,16 @@ const app = {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
     },
-    device: 'desktop'
+    device: 'desktop',
+    loanTotal:0,
+    shopTotal:0
   },
   mutations: {
+    setState(state,opt){
+      for(let [key,val] of Object.entries(opt)){
+        state[key] = val;
+      }
+    },
     TOGGLE_SIDEBAR: state => {
       if (state.sidebar.opened) {
         Cookies.set('sidebarStatus', 1)

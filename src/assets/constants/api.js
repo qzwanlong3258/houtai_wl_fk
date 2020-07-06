@@ -166,6 +166,9 @@ module.exports = {
   PUT_GOOD:'/goods/updateGoods',
   DET_GOOD:'/goods/deleteGoods',
   GET_GOOD_DETAIL:'/goods/loadGoodsDetails',
+  GET_ORDER:'/userOrder/loadOrder',
+  SENT_ORDER:'/userOrder/sendOrder',
+
 
   GET_COUPON:'/decorate/loadDecorateCoupons',
   ADD_COUPON:'/decorate/createCoupons',

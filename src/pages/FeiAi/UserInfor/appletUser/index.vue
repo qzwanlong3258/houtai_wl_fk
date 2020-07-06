@@ -49,9 +49,13 @@
 <!--      "email": "email123",邮箱 <string>-->
 <!--      "username": "admin1"登录名 <string>-->
       <el-table ref="appletUser" style="width: 100%" :data="list" v-loading="listLoading" height="550" border>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          type="index"
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="微信头像" align="center">
           <template slot-scope="scope">
             <img class="avatar-box" :src="scope.row.avatarUrl" />

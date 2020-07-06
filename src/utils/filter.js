@@ -108,7 +108,21 @@ Vue.filter('workunit', function (value) {
     return "其他";
   }
 })
+/**
+ * 订单状态
+ */
 
+Vue.filter('orderState', function (value) {
+  if (value == 2) {
+    return "待发货";
+  } else if (value == 3) {
+    return "待收货";
+  } else if (value == 4) {
+    return "完成";
+  } else if (value == 5) {
+    return "退换";
+  }
+})
 
 
 

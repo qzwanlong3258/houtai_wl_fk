@@ -17,8 +17,12 @@
         </el-table-column>
         <el-table-column
           type="index"
-          label="编号" align="center">
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column-->
+<!--          type="index"-->
+<!--          label="编号" align="center">-->
+<!--        </el-table-column>-->
 <!--        <el-table-column label="编号" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.tid}}</template>-->
 <!--        </el-table-column>-->

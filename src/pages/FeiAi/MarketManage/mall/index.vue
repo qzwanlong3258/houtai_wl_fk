@@ -7,9 +7,18 @@
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.id}}</div></template>
+        <el-table-column
+          width="50" label="序号" align="center">
+          <template slot-scope="scope">
+          <span >
+              {{(listQuery.pageNum * listQuery.pageSize - listQuery.pageSize) + scope.$index + 1}}
+            <!-- <icon-svg name="admin"></icon-svg> -->
+            </span>
+          </template>
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.id}}</div></template>-->
+<!--        </el-table-column>-->
         <el-table-column label="商品名称" align="center">
           <template slot-scope="scope"><div @click="toDetail(scope.row)">{{scope.row.name}}</div></template>
         </el-table-column>
@@ -51,6 +60,7 @@
         :total="total"
       ></el-pagination>
     </div>
+    <Order></Order>
     <change-model
       v-if="showModel"
       :modelStatus="showModel"
@@ -65,6 +75,7 @@
 import ChangeModel from "./components/add";
 import { getGood, detGood } from "@/api/market";
 import CheckDetails from './components/index-details'
+import Order from './components/order'
 const contentList = {
   id: "",
   name: "",
@@ -80,7 +91,8 @@ export default {
   name: "userList",
   components: {
     ChangeModel,
-    CheckDetails
+    CheckDetails,
+    Order
   },
   data() {
     return {

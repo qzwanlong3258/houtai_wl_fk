@@ -15,9 +15,13 @@
 <!--            >{{scope.row.expansion ? '收起' : '展开'}}</span>-->
 <!--          </template>-->
 <!--        </el-table-column>-->
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          type="index"
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="城市名" align="center">
           <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>
@@ -44,6 +48,7 @@
                 style="width: 100%"
 
               >
+
                 <el-table-column label="编号" align="center">
                   <template slot-scope="btnScope">{{btnScope.row.id}}</template>
                 </el-table-column>
@@ -98,9 +103,13 @@
 <!--        icon: "https://www.feiaizn.com/images/20200528163828_shejishi.png"-->
 <!--        id: 27-->
 <!--        url: "/pages/todoChild/Designer/index"-->
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          type="index"
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="名称" align="center">
           <template slot-scope="scope">{{scope.row.bname}}</template>
         </el-table-column>

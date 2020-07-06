@@ -34,9 +34,13 @@
             >{{scope.row.expansion ? '收起' : '展开'}}</span>
           </template>
         </el-table-column>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          type="index"
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="姓名" align="center">
           <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>

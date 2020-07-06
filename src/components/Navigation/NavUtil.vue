@@ -2,8 +2,12 @@
   <div class="nav-util" @mouseleave="toggle=false">
     <ul class="clearfix">
       <li>
-        <div class="tips">0</div>
-        <span class="iconfont iconlingdang"></span>
+        <div class="tips">{{loanTotal}}</div>
+        <span class="iconfont iconlingdang" title="预审待审核"> </span>
+      </li>
+      <li>
+        <div class="tips">{{shopTotal}}</div>
+        <span class="iconfont iconlingdang"> </span>
       </li>
       <li>
         <div @mouseenter="toggle=true">
@@ -29,14 +33,36 @@
 </template>
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { getCheckList } from "@/api/checkSetting";
+import { getShopOne } from "@/api/shopManage";
 export default {
   data() {
     return {
       toggle: false,
       userInfo: {},
+      listQuery: {
+        state: 1,
+        name: "",
+        pageNum: 1,
+        pageSize: 5,
+
+      },
+      listQueryShop:{
+        name: "",
+        pageNum: 1,
+        pageSize: 5,
+        state:1
+      }
     };
   },
   computed: {
+    loanTotal(){
+      console.log(this.$store.state.loanTotal)
+      return this.$store.state.app.loanTotal
+    },
+    shopTotal(){
+      return this.$store.state.app.shopTotal
+    }
 
   },
   methods: {
@@ -52,11 +78,28 @@ export default {
     },
     goUserInfoView: function(){
       this.$router.push({ path: "/baseInfo" });
+    },
+    getList(){
+      getCheckList(this.listQuery).then(res => {
+        if (res.code === 0) {
+          this.$store.commit('setState',{
+            loanTotal:Number(res.data.count)
+          })
+        }
+      });
+      getShopOne(this.listQueryShop).then(res => {
+        if (res.code === 0) {
+          this.$store.commit('setState',{
+            shopTotal:Number(res.data.count)
+          })
+        }
+      });
     }
   },
   created(){
 
     this.userInfo = JSON.parse(sessionStorage.getItem('user'))
+    this.getList()
     console.log(this.userInfo)
   }
 };

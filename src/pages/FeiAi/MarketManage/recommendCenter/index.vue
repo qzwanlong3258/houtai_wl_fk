@@ -7,9 +7,18 @@
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          width="50" label="序号" align="center">
+          <template slot-scope="scope">
+          <span >
+              {{(listQuery.pageNum * listQuery.pageSize - listQuery.pageSize) + scope.$index + 1}}
+            <!-- <icon-svg name="admin"></icon-svg> -->
+            </span>
+          </template>
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="活动名称" align="center">
           <template slot-scope="scope">{{scope.row.name}}</template>
         </el-table-column>

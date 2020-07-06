@@ -16,8 +16,13 @@
           </template>
         </el-table-column>
         <el-table-column
-          type="index"
-          label="编号" align="center">
+          width="50" label="序号" align="center">
+          <template slot-scope="scope">
+          <span >
+              {{(listQuery.pageNum * listQuery.pageSize - listQuery.pageSize) + scope.$index + 1}}
+            <!-- <icon-svg name="admin"></icon-svg> -->
+            </span>
+          </template>
         </el-table-column>
 
         <el-table-column label="城市" align="center">

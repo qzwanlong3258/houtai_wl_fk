@@ -60,7 +60,7 @@
     </el-card>
     <el-tabs type="border-card" @tab-click="tabClickEvent">
       <el-tab-pane v-for="(item,index) in statusList" :key="index" :label="item.label">
-        <love-table v-if="list.length" :list="list" :status="item.id" @pupdataList="getList" />
+        <love-table v-if="list.length" :list="list" :status="item.id" @pupdataList="getList" :size="listQuery.pageSize" :page="listQuery.pageNum" />
         <div class="pagination-container">
           <el-pagination
             background
@@ -135,6 +135,9 @@ export default {
       if(this.date.length == 0){
         getCheckList(this.listQuery).then(res => {
           if (res.code === 0) {
+            this.$store.commit('setState',{
+              loanTotal:Number(res.data.count)
+            })
             this.total =Number(res.data.count) ;
             this.list = res.data.list;
           }
@@ -144,6 +147,9 @@ export default {
         this.listQuery.edate =this.date[1]
         getCheckListAll(this.listQuery).then(res => {
           if (res.code === 0) {
+            this.$store.commit('setState',{
+              loanTotal:Number(res.data.count)
+            })
             this.total = res.data.total;
             this.list = res.data.list;
           }
@@ -184,6 +190,7 @@ export default {
         pageNum: 1,
         pageSize: 5
       };
+      this.date =[]
       this.getList()
     }
   }

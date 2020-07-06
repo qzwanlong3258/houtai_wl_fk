@@ -26,9 +26,18 @@
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" :data="list" v-loading="listLoading" border>
-        <el-table-column label="用户id" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          width="50" label="序号" align="center">
+          <template slot-scope="scope">
+          <span >
+              {{(listQuery.page * listQuery.size - listQuery.size) + scope.$index + 1}}
+            <!-- <icon-svg name="admin"></icon-svg> -->
+            </span>
+          </template>
         </el-table-column>
+<!--        <el-table-column label="用户id" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="昵称" align="center">
           <template slot-scope="scope">{{scope.row.nickName}}</template>
         </el-table-column>

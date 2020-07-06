@@ -7,9 +7,13 @@
     </el-card>
     <div class="table-container">
       <el-table ref="userList" style="width: 100%" height="500" :data="list" v-loading="listLoading" border>
-        <el-table-column label="编号" align="center">
-          <template slot-scope="scope">{{scope.row.id}}</template>
+        <el-table-column
+          type="index"
+          width="50" label="序号" align="center">
         </el-table-column>
+<!--        <el-table-column label="编号" align="center">-->
+<!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
+<!--        </el-table-column>-->
         <el-table-column label="图片" align="center">
           <template slot-scope="scope"><img   @click="$imageViewer" :src="scope.row.img"  min-width="20" height="40"  ></template>
         </el-table-column>

@@ -48,7 +48,7 @@
     </el-card>
     <el-tabs type="border-card" @tab-click="tabClickEvent">
       <el-tab-pane v-for="(item,index) in statusList" :key="index" :label="item.label">
-        <love-table :list="list" :status="item.id" @pupdataList="getList" />
+        <love-table :list="list" :status="item.id" @pupdataList="getList" :size="listQuery.pageSize" :page="listQuery.pageNum"/>
         <div class="pagination-container">
           <el-pagination
             background
@@ -114,6 +114,9 @@ export default {
       if(this.listQuery.cid){
         getShop(this.listQuery).then(res => {
           if (res.code === 0) {
+            this.$store.commit('setState',{
+              shopTotal:Number(res.data.count)
+            })
             this.total = Number(res.data.count) ;
             // this.listQuery.pageSize = res.data.list.length
             this.list = res.data.list;
@@ -126,6 +129,9 @@ export default {
           pageSize: this.listQuery.pageSize,
           state:this.listQuery.state
         }).then(res=>{
+          this.$store.commit('setState',{
+            shopTotal:Number(res.data.count)
+          })
           this.total =Number(res.data.count);
           // this.listQuery.pageSize = res.data.list.length
           this.list = res.data.list;
