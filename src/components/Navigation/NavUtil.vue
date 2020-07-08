@@ -7,7 +7,7 @@
       </li>
       <li>
         <div class="tips">{{shopTotal}}</div>
-        <span class="iconfont iconlingdang"> </span>
+        <span class="iconfont iconlingdang" title="装企待审核"> </span>
       </li>
       <li>
         <div @mouseenter="toggle=true">

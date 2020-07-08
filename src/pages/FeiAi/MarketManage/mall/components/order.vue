@@ -48,10 +48,10 @@
             id: 4,
             label: "完成"
           },
-          {
-            id: 5,
-            label: "退换"
-          }
+          // {
+          //   id: 5,
+          //   label: "退换"
+          // }
 
         ],
         list: [],
@@ -80,7 +80,11 @@
       },
       //切换tab
       tabClickEvent(tab, e) {
-        this.listQuery.state = Number(tab.index)+2
+        this.listQuery ={
+          state:  Number(tab.index)+2,
+          pageNum: 1,
+          pageSize: 5
+        }
         // if(tab.index == 0){
         //   this.listQuery.state =2
         // }

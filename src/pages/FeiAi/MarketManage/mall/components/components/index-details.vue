@@ -20,7 +20,7 @@
         <!--        <handling-title title="申请人信息"></handling-title>-->
         <handling-title title=" 订单信息 "></handling-title>
         <tr>
-          <td class="zebra-table-label" width="150">商品id</td>
+          <td class="zebra-table-label" width="150">订单id</td>
           <td>
             <div class="zebra-table-scoll">{{dataForm.uuid ? dataForm.uuid : '—'}}</div>
           </td>
