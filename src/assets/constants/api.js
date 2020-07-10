@@ -177,6 +177,9 @@ module.exports = {
   GET_LABLE:'/decorate/loadDecorateVolume',
   POST_LABLE:'/decorate/updateDecorateVolume',
 
-  PUT_SHOP_MANAGE:"/decorate/updateDecorate"
+  PUT_SHOP_MANAGE:"/decorate/updateDecorate",
+
+  //导出
+   ORDER_OUT:'/order/orderExport'
 
 }

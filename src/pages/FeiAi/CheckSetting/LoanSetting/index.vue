@@ -3,6 +3,19 @@
     <el-card class="layout-title" shadow="never">
       <i class="el-icon-tickets" style="margin-top: 5px"></i>
       <span style="margin-top: 5px">贷款预审</span>
+      <div  class="button">
+        <el-date-picker
+                      v-model="dateOut"
+                      size="mini"
+                      type="datetimerange"
+                      range-separator="至"
+                      format="yyyy-MM-dd HH:mm:ss"
+                      value-format="yyyy-MM-dd HH:mm:ss"
+                      start-placeholder="开始日期"
+                      end-placeholder="结束日期">
+                    </el-date-picker>
+        <el-button class="btn-add"  type="primary" icon="el-icon-printer" @click="print()" size="mini">打印</el-button>
+      </div>
     </el-card>
     <el-card class="filter-container" shadow="never">
       <div>
@@ -81,10 +94,12 @@
 <script>
 import LoveTable from "./components/table";
 import { getCheckList,getCheckListAll } from "@/api/checkSetting";
+import {orderOut} from "@/api/out"
 export default {
   data() {
     return {
        date:[],
+       dateOut:[],
        produceType: [
         {
           id: 1,
@@ -130,8 +145,17 @@ export default {
     this.getList();
   },
   methods: {
+    print(){
+      orderOut({
+        state:this.listQuery.state,
+        bdate:this.dateOut[0]?this.dateOut[0]:"",
+        edate:this.dateOut[1]?this.dateOut[1]:"",
+      }).then(res=>{
+        // console.log(res)
+        window.open(res, '_self')
+      })
+    },
     getList() {
-
       if(this.date.length == 0){
         getCheckList(this.listQuery).then(res => {
           if (res.code === 0) {
@@ -207,12 +231,29 @@ export default {
   font-weight: bold;
   height: 60px;
   margin-bottom: 24px;
-  button {
+  position: relative;
+  .button {
     position: absolute;
     right: 3%;
+    top: 35%;
   }
+}
+.ctrlbtn-list {
+  margin-bottom: 6px;
+  height: 30px;
+}
+.ctrlbtn-list-float {
+  margin-left: 10px;
+  float: right;
+  font-size: 12px;
+  line-height: 1;
 }
 </style>
 
-
+<style>
+  /*.dateGloab{*/
+  /*  position: absolute;*/
+  /*  right: 10%;*/
+  /*}*/
+</style>
 

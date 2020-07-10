@@ -71,16 +71,16 @@
             <div class="zebra-table-scoll">{{dataForm.familyMonthIncome }}元</div>
           </td>
         </tr>
-<!--        <tr>-->
-<!--          <td class="zebra-table-label" width="150">城市</td>-->
-<!--          <td>-->
-<!--            <div class="zebra-table-scoll">{{dataForm.cityName ? dataForm.cityName : '—'}}</div>-->
-<!--          </td>-->
-<!--          <td class="zebra-table-label" width="150">地址</td>-->
-<!--          <td>-->
-<!--            <div class="zebra-table-scoll">{{dataForm.address ? dataForm.address : '—'}}</div>-->
-<!--          </td>-->
-<!--        </tr>-->
+        <tr>
+          <td class="zebra-table-label" width="150">学历</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.level ? dataForm.level : '—'}}</div>
+          </td>
+          <td class="zebra-table-label" width="150">装修类型</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.decoType ? dataForm.decoType : '—'}}</div>
+          </td>
+        </tr>
         <tr>
           <td class="zebra-table-label" width="150">创建时间</td>
           <td>

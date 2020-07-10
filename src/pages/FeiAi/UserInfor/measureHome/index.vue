@@ -77,7 +77,7 @@
                 </el-table-column>
                 <el-table-column label="状态" align="center">-->
                             <template slot-scope="btnScope"><div >
-                              <el-tag v-if="btnScope.row.state == 1" size="mini" type="warning">待预约</el-tag>
+                              <el-tag v-if="btnScope.row.state == 1" size="mini" type="warning">待量房</el-tag>
                               <el-tag v-if="btnScope.row.state == 2" size="mini" type="success">通过</el-tag>
                               <el-tag v-if="btnScope.row.state == 3" size="mini" type="danger">不通过</el-tag>
                             </div></template>

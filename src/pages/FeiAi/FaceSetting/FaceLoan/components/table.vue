@@ -5,7 +5,7 @@
 <!--        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.id}}</span></template>-->
 <!--      </el-table-column>-->
       <el-table-column
-        width="50" label="序号" align="center">
+        width="50" label="申请编号" align="center">
         <template slot-scope="scope">
           <span >
               {{(page * size - size) + scope.$index + 1}}
@@ -13,8 +13,29 @@
             </span>
         </template>
       </el-table-column>
-      <el-table-column label="贷款人" align="center">
+      <el-table-column label="申请时间" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.lastTime|Time}}</span></template>
+      </el-table-column>
+      <el-table-column label="姓名" align="center">
         <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.loanerName}}</span></template>
+      </el-table-column>
+      <el-table-column label="身份证号码" align="center" width="200" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.idCard}}</span></template>
+      </el-table-column>
+      <el-table-column label="手机号码" align="center" width="200" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.phone}}</span></template>
+      </el-table-column>
+      <el-table-column label="学历" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.level}}</span></template>
+      </el-table-column>
+      <el-table-column label="婚姻状态" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.marryStatus|marry}}</span></template>
+      </el-table-column>
+      <el-table-column label="工作单位性质" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.workunit|workunit}}</span></template>
+      </el-table-column>
+      <el-table-column label="月收入" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.familyMonthIncome}}</span></template>
       </el-table-column>
       <!--      <el-table-column label="详情信息" align="center">-->
       <!--        <template slot-scope="scope">-->
@@ -27,11 +48,14 @@
       <!--      <el-table-column label="邀请人" align="center">-->
       <!--        <template slot-scope="scope">{{scope.row.invitor}}</template>-->
       <!--      </el-table-column>-->
-      <el-table-column label="期数" align="center">
+      <el-table-column label="申请周期" align="center" show-overflow-tooltip>
         <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.term}}</span></template>
       </el-table-column>
-      <el-table-column label="贷款日期" align="center" width="160">
-        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.lastTime|Time}}</span></template>
+      <el-table-column label="装修类型" align="center" width="160" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.decoType}}</span></template>
+      </el-table-column>
+      <el-table-column label="详细地址" align="center" width="200" show-overflow-tooltip>
+        <template slot-scope="scope"><span @click="toDetail(scope.row)">{{scope.row.address}}</span></template>
       </el-table-column>
       <!--      <el-table-column v-if="status == 2" label="面签银行" align="center">-->
       <!--        <template slot-scope="scope">{{scope.row.bank}}</template>-->
@@ -59,7 +83,7 @@
       <!--      <el-table-column label="操作人" align="center">-->
       <!--        <template slot-scope="scope">{{scope.row.precheckDoer}}</template>-->
       <!--      </el-table-column>-->
-      <el-table-column label="操作" width="200" align="center">
+      <el-table-column label="操作" width="200" align="center" fixed="right">
         <template slot-scope="scope">
           <div v-if="status == 1">
             <el-button size="mini" @click="agree(scope.row.id)">通过</el-button>
