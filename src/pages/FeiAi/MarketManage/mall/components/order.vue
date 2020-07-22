@@ -73,6 +73,9 @@
       getList() {
 
         getOrder(this.listQuery).then(res=>{
+          this.$store.commit('setState',{
+            orderTotal:Number(res.data.count)
+          })
           this.total =Number(res.data.count) ;
           this.list = res.data.list;
         })

@@ -10,6 +10,10 @@
         <span class="iconfont iconlingdang" title="装企待审核"> </span>
       </li>
       <li>
+        <div class="tips">{{orderTotal}}</div>
+        <span class="iconfont iconlingdang" title="订单待发货"> </span>
+      </li>
+      <li>
         <div @mouseenter="toggle=true">
           <img
             class="head-photo"
@@ -35,6 +39,7 @@
 import { mapGetters, mapActions } from "vuex";
 import { getCheckList } from "@/api/checkSetting";
 import { getShopOne } from "@/api/shopManage";
+import { getOrder } from "@/api/order";
 export default {
   data() {
     return {
@@ -52,6 +57,11 @@ export default {
         pageNum: 1,
         pageSize: 5,
         state:1
+      },
+      listQueryOrder: {
+        state: 2,
+        pageNum: 1,
+        pageSize: 5
       }
     };
   },
@@ -62,6 +72,9 @@ export default {
     },
     shopTotal(){
       return this.$store.state.app.shopTotal
+    },
+    orderTotal(){
+      return this.$store.state.app.orderTotal
     }
 
   },
@@ -94,6 +107,11 @@ export default {
           })
         }
       });
+      getOrder(this.listQueryOrder).then(res=>{
+        this.$store.commit('setState',{
+          orderTotal:Number(res.data.count)
+        })
+      })
     }
   },
   created(){

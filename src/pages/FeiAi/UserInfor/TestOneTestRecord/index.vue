@@ -28,7 +28,7 @@
         <el-table-column label="城市" align="center">
           <template slot-scope="scope">{{scope.row.cityName}}</template>
         </el-table-column>
-        <el-table-column label="手机号" align="center">
+        <el-table-column label="手机号码" align="center">
           <template slot-scope="scope">{{scope.row.phone?scope.row.phone:'-'}}</template>
         </el-table-column>
         <el-table-column label="头像" align="center">

@@ -61,7 +61,7 @@
             <img class="avatar-box" :src="scope.row.avatarUrl" />
           </template>
         </el-table-column>
-        <el-table-column label="微信名" align="center">
+        <el-table-column label="昵称" align="center">
           <template slot-scope="scope">{{scope.row.nickName}}</template>
         </el-table-column>
         <el-table-column label="积分" align="center">
@@ -81,7 +81,7 @@
 <!--        <el-table-column label="住址" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.address}}</template>-->
 <!--        </el-table-column>-->
-        <el-table-column label="联系方式" align="center">
+        <el-table-column label="手机号码" align="center">
           <template slot-scope="scope">{{scope.row.phone}}</template>
         </el-table-column>
 <!--        <el-table-column label="贷款次数" align="center">-->

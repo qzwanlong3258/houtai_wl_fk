@@ -83,7 +83,7 @@
       <!--      <el-table-column label="操作人" align="center">-->
       <!--        <template slot-scope="scope">{{scope.row.precheckDoer}}</template>-->
       <!--      </el-table-column>-->
-      <el-table-column label="操作" width="200" align="center" fixed="right">
+      <el-table-column :label="status != 1?'状态':'操作'" width="200" align="center" fixed="right">
         <template slot-scope="scope">
           <div v-if="status == 1">
             <el-button size="mini" @click="agree(scope.row.id)">通过</el-button>

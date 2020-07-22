@@ -39,7 +39,7 @@
         <el-table-column label="创建时间" align="center">
           <template slot-scope="scope">{{scope.row.create_time|time}}</template>
         </el-table-column>
-        <el-table-column label="邀请人"  align="center">
+        <el-table-column label="邀请人数量（用户、客户、设计师）"  align="center">
           <template slot-scope="scope"> {{scope.row.applyName?scope.row.applyName:"无"}}</template>
         </el-table-column>
         <el-table-column label="" :render-header="renderHeader" align="center">

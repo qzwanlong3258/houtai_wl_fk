@@ -17,7 +17,7 @@
         </el-table-column>
         <el-table-column
           type="index"
-          width="50" label="编号" align="center">
+          width="50" label="序号" align="center">
         </el-table-column>
 <!--        <el-table-column label="编号" align="center">-->
 <!--          <template slot-scope="scope">{{scope.row.id}}</template>-->
@@ -34,7 +34,7 @@
         <el-table-column label="小区名称" align="center">
           <template slot-scope="scope">{{scope.row.communityName}}</template>
         </el-table-column>
-        <el-table-column label="装修面积" align="center">
+        <el-table-column label="房屋面积（㎡）" align="center">
           <template slot-scope="scope">{{scope.row.area}} m²</template>
         </el-table-column>
 
@@ -69,7 +69,7 @@
 <!--                <el-table-column label="编号" align="center">-->
 <!--                  <template slot-scope="btnScope">{{btnScope.row.makeid}}</template>-->
 <!--                </el-table-column>-->
-                <el-table-column label="装修公司名称" align="center">
+                <el-table-column label="预约装企" align="center">
                   <template slot-scope="btnScope">{{btnScope.row.decorateName}}</template>
                 </el-table-column>
                 <el-table-column label="预约时间" align="center">
