@@ -146,6 +146,28 @@ export default new Router({
       ]
     },
     {
+      path: '/carLoan',
+      name: '车位分期',
+      component: Layout,
+      redirect: '/carLoan/loanSetting',
+      meta: { auth: true, description:'车位分期',title:'车位分期',icon: 'icondkw_daikuan-'},
+      children: [
+        {
+          path: 'loanSetting',
+          name: '贷款预审',
+          component: () => import('@/pages/FeiAi/carLoan/CheckSetting/LoanSetting'),
+          meta: { auth: true, description:'贷款预审',title:'贷款预审',icon: 'iconqianzi'},
+        },
+        {
+          path: 'faceLoan',
+          name: '贷款面签',
+          component: () => import('@/pages/FeiAi/carLoan/FaceSetting/FaceLoan'),
+          meta: { auth: true, description:'贷款面签',title:'贷款面签',icon: 'iconqianzi'},
+        }
+
+      ]
+    },
+    {
       path: '/checkSetting',
       name: '审批管理',
       component: Layout,
