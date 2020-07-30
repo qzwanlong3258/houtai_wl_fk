@@ -72,6 +72,16 @@
           </td>
         </tr>
         <tr>
+          <td class="zebra-table-label" width="150">个人月收入</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.credicardCount}}元</div>
+          </td>
+          <td class="zebra-table-label" width="150">家庭月支出</td>
+          <td>
+            <div class="zebra-table-scoll">{{dataForm.credicardMonthMoney}}元</div>
+          </td>
+        </tr>
+       <!-- <tr>
           <td class="zebra-table-label" width="150">学历</td>
           <td>
             <div class="zebra-table-scoll">{{dataForm.level ? dataForm.level : '—'}}</div>
@@ -80,7 +90,7 @@
           <td>
             <div class="zebra-table-scoll">{{dataForm.decoType ? dataForm.decoType : '—'}}</div>
           </td>
-        </tr>
+        </tr>-->
         <tr>
           <td class="zebra-table-label" width="150">创建时间</td>
           <td>
@@ -88,7 +98,7 @@
           </td>
           <td class="zebra-table-label" width="150">状态</td>
           <td>
-            <div class="zebra-table-scoll">{{dataForm.state|statusName}}</div>
+            <div class="zebra-table-scoll">{{dataForm.state|carStatusName}}</div>
           </td>
         </tr>
 

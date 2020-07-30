@@ -24,7 +24,7 @@
 </template>
 <script>
 import LoveDialog from "@/components/NoLoveDialog";
-import { getFailDesign } from "@/api/facesign";
+import { getFailList } from "@/api/checkSetting";
 export default {
   components: {
     LoveDialog
@@ -50,14 +50,20 @@ export default {
       this.$emit("closeStatus");
     },
     saveSetting: function() {
-      getFailDesign({reason:this.reason,orderId:this.refuseId,state:10}).then(res=>{
+      let param = {
+        id: this.refuseId,
+        error: this.reason,
+        state:10
+      };
+      getFailList(param).then(res=>{
         if(res.code === 0){
           this.status = !this.status
-          this.$message.success('提交成功')
           this.$emit("refuseUpdateList",{isUpdataList: !this.isUpdataList});
+          this.$message.success('提交成功')
         }
       });
     }
+
   },
   mounted(){
     this.status = this.modelStatus

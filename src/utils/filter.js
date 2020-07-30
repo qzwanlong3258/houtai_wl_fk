@@ -50,6 +50,48 @@ Vue.filter('statusName', function (value) {
         return "未通过";
     }
 })
+/**
+ * 预审状态样式枚举 1:待预审；2：已通过；3：未通过
+ */
+Vue.filter('carStatusColor', function (value) {
+  if (value == 6) {
+    return "color-warning";
+  } else if (value == 7) {
+    return "color-success";
+  } else if (value == 8) {
+    return "color-danger";
+  } else if (value == 9) {
+    return "color-success";
+  } else if (value == 10) {
+    return "color-danger";
+  }
+})
+
+/**
+ * 预审状态样式枚举 1:待预审；2：已通过；3：未通过
+ */
+Vue.filter('carStatusName', function (value) {
+  if (value == 6) {
+    return "待审核";
+  } else if (value == 7) {
+    return "已通过";
+  } else if (value == 8) {
+    return "未通过";
+  }
+})
+/**
+ * 预审状态样式枚举 1:待预审；2：已通过；3：未通过
+ */
+Vue.filter('carFaceStatusName', function (value) {
+  if (value == 7) {
+    return "待完成";
+  } else if (value == 9) {
+    return "面签成功";
+  } else if (value == 10) {
+    return "面签失败";
+  }
+})
+
 
 /**
  * 面签状态枚举:1待完成 2面签成功3面签失败

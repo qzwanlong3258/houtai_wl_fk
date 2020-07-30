@@ -83,7 +83,7 @@
       <!--      </el-table-column>-->
       <el-table-column v-if="status == 7" label="面签状态" align="center">
         <template slot-scope="scope">
-          <span :class="scope.row.state | statusColor">{{scope.row.state|faceStatusName}}</span>
+          <span :class="scope.row.state | carStatusColor">{{scope.row.state|carFaceStatusName}}</span>
         </template>
       </el-table-column>
       <!--      <el-table-column label="操作人" align="center">-->
@@ -91,7 +91,7 @@
       <!--      </el-table-column>-->
       <el-table-column :label="status != 7?'状态':'操作'" width="200" align="center" fixed="right">
         <template slot-scope="scope">
-          <div v-if="status == 1">
+          <div v-if="status == 7">
             <el-button size="mini" @click="agree(scope.row.id)">通过</el-button>
             <el-button size="mini" type="danger" @click="refuse(scope.row.id)">不通过</el-button>
           </div>
@@ -326,10 +326,11 @@ export default {
       // this.agreeId = id;
       getPassDesign({
         id: id,
-        state: 4,
+        state: 9,
       }).then(res=>{
         if(res.code === 0){
           this.$message.success('提交成功')
+          this.$emit('pupdataList')
         }
       })
     }

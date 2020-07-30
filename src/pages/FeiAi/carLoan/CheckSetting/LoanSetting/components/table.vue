@@ -106,7 +106,7 @@
 <!--      </el-table-column>-->
       <el-table-column v-if="status == 6" label="预审状态" align="center">
         <template slot-scope="scope">
-          <span :class="scope.row.state | statusColor">{{scope.row.state|statusName}}</span>
+          <span :class="scope.row.state | carStatusColor">{{scope.row.state|carStatusName}}</span>
         </template>
       </el-table-column>
 <!--      <el-table-column label="操作人" align="center">-->
