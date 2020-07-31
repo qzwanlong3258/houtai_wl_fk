@@ -200,7 +200,7 @@ export default {
         console.log(this.params)
         let e= {
           ...this.params,
-          type:'1'
+          type:'2'
         }
         addTestOneTest(e).then(res => {
           if (res.code === 0) {

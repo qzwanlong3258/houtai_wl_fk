@@ -15,7 +15,7 @@ export function getMemberList(data) {
 export function getTestOneTestRecord(data) {
   return request({
     method: 'GET',
-    url:  `${GET_TESTONETEST_LIST_RECORD}?size=${data.pageSize}&page=${data.pageNum}`,
+    url:  `${GET_TESTONETEST_LIST_RECORD}?size=${data.pageSize}&page=${data.pageNum}&type=${data.type}`,
   })
 }
 
@@ -23,7 +23,7 @@ export function getTestOneTestRecord(data) {
 export function getTestOneTest(data) {
   return request({
     method: 'GET',
-    url: GET_TESTONETEST_LIST,
+    url: `${GET_TESTONETEST_LIST}?type=${data.type}`,
   })
 }
 

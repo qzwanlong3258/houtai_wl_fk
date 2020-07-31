@@ -163,7 +163,19 @@ export default new Router({
           name: '贷款面签',
           component: () => import('@/pages/FeiAi/carLoan/FaceSetting/FaceLoan'),
           meta: { auth: true, description:'贷款面签',title:'贷款面签',icon: 'iconqianzi'},
-        }
+        },
+        {
+          path: 'testonetest',
+          name: '测一测',
+          component: () => import('@/pages/FeiAi/carLoan/TestOneTest'),
+          meta: { auth: true, description:'测一测',title:'测一测',icon: 'icontuijian'},
+        },
+        {
+          path: 'testonetestrecord',
+          name: '测一测记录',
+          component: () => import('@/pages/FeiAi/carLoan/TestOneTestRecord'),
+          meta: { auth: true, description:'测一测记录',title:'测一测记录',icon: 'icontuijian'},
+        },
 
       ]
     },

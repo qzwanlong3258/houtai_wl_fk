@@ -221,7 +221,8 @@ export default {
     getList() {
       let data = {
         pageSize: this.listQuery.pageSize,
-        pageNum: this.listQuery.pageNum
+        pageNum: this.listQuery.pageNum,
+        type:'1'
       };
       getTestOneTest(data).then(res => {
         if (res.code === 0) {

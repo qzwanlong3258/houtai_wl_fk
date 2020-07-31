@@ -198,11 +198,7 @@ export default {
           return
         }
         console.log(this.params)
-        let e= {
-          ...this.params,
-          type:'1'
-        }
-        addTestOneTest(e).then(res => {
+        addTestOneTest(this.params).then(res => {
           if (res.code === 0) {
             this.$message.success("添加成功");
             this.$emit("updateList");
