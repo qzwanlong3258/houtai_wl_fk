@@ -159,9 +159,9 @@ export default {
       if(this.date.length == 0){
         getCheckList(this.listQuery).then(res => {
           if (res.code === 0) {
-            // this.$store.commit('setState',{
-            //   loanTotal:Number(res.data.count)
-            // })
+            this.$store.commit('setState',{
+              carLoanTotal:Number(res.data.count)
+            })
             this.total =Number(res.data.count) ;
             this.list = res.data.list;
           }

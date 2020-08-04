@@ -9,7 +9,8 @@ const app = {
     device: 'desktop',
     loanTotal:0,
     shopTotal:0,
-    orderTotal:0
+    orderTotal:0,
+    carLoanTotal:0
   },
   mutations: {
     setState(state,opt){

@@ -3,7 +3,11 @@
     <ul class="clearfix">
       <li>
         <div class="tips">{{loanTotal}}</div>
-        <span class="iconfont iconlingdang" title="预审待审核"> </span>
+        <span class="iconfont iconlingdang" title="装修分期预审待审核"> </span>
+      </li>
+      <li>
+        <div class="tips">{{carLoanTotal}}</div>
+        <span class="iconfont iconlingdang" title="车位分期预审待审核"> </span>
       </li>
       <li>
         <div class="tips">{{shopTotal}}</div>
@@ -52,6 +56,13 @@ export default {
         pageSize: 5,
 
       },
+      carListQuery: {
+        state: 6,
+        name: "",
+        pageNum: 1,
+        pageSize: 5,
+
+      },
       listQueryShop:{
         name: "",
         pageNum: 1,
@@ -66,6 +77,9 @@ export default {
     };
   },
   computed: {
+    carLoanTotal(){
+      return this.$store.state.app.carLoanTotal
+    },
     loanTotal(){
       console.log(this.$store.state.loanTotal)
       return this.$store.state.app.loanTotal
@@ -97,6 +111,13 @@ export default {
         if (res.code === 0) {
           this.$store.commit('setState',{
             loanTotal:Number(res.data.count)
+          })
+        }
+      });
+      getCheckList(this.listQuery).then(res => {
+        if (res.code === 0) {
+          this.$store.commit('setState',{
+            carLoanTotal:Number(res.data.count)
           })
         }
       });
